@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Droid Hospital</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="login">Login</string>
+    <string name="login_field">Email</string>
+    <string name="password">Senha</string>
+    <string name="rooms">Quartos</string>
+    <string name="name">Nome</string>
+    <string name="general_info">Dados Gerais</string>
+    <string name="applications_made">Aplicações Efetuadas</string>
+    <string name="applications_todo">Aplicações Pendentes</string>
+    <string name="date_of_entrance">Data de Entrada:</string>
+    <string name="age">Idade:</string>
+    <string name="smoker">Fumante:</string>
+    <string name="weight">Peso:</string>
+    <string name="allergies">Alergias:</string>
+    <string name="wheight_measure">KG</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="nova_prescricao">Nova Prescrição</string>
+    <string name="title_activity_nova_prescricao">NovaPrescricaoActivity</string>
+
+</resources>

@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+
+    <TextView
+        android:id="@+id/anamnese_pacient_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/anamnese_pacient_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/anamnese_pacient_name_label"
+        android:text="Jose da Silva"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    
+    <ExpandableListView
+        android:id="@+id/anamnese_expandablelistview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/anamnese_pacient_name" >
+    </ExpandableListView>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/anamnese_expandablelistview"
+        android:onClick="novaPrescricao"
+        android:text="@string/nova_prescricao" 
+        android:gravity="center"
+        />
+</RelativeLayout>
