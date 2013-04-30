@@ -23,4 +23,19 @@
     <string name="nova_prescricao">Nova Prescrição</string>
     <string name="title_activity_nova_prescricao">NovaPrescricaoActivity</string>
 
+     <string name="leito">Leito</string>
+    <string name="paciente">Paciente</string>
+    <string name="titulo_prescricao">Prescrição</string>
+    <string name="botao_incluir">Incluir</string>
+    <string name="principio">Princípio</string>
+	<string name="referencia">Referência</string>
+    <string name="laboratorio">Laboratório</string>
+	<string name="concentracao">Concentr.</string>
+    <string name="posologia">Posologia</string>
+	<string name="hora_inicial">Hora Inicial</string>
+    <string name="qtd_aplicacoes">Qtd Aplic.</string>
+	<string name="intervalo">Intervalo</string>
+	<string name="not_connected">Houve um erro na conecção com o Servidor</string>
+	<string name="nenhum_medicamento_encontrado">Nenhum medicamento encontrado</string>
+	
 </resources>

@@ -25,7 +25,7 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 			
 			
 			Intent intent = getIntent();
-			long id = intent.getLongExtra(ListaQuartosActivity.ID_VALUE, 0);
+			long id = intent.getLongExtra(ListaLeitosActivity.ID_VALUE, 0);
 			
 			if(id == 0) {
 				Toast.makeText(getApplicationContext(), "Quarto not found", Toast.LENGTH_LONG).show();

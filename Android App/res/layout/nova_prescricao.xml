@@ -1,0 +1,275 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/margem_vertical"
+    android:paddingLeft="@dimen/margem_horizontal"
+    android:paddingRight="@dimen/margem_horizontal"
+    android:paddingTop="@dimen/margem_vertical"
+    tools:context=".NovaPrescricaoActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/margem_vertical"
+        android:paddingLeft="@dimen/margem_horizontal"
+        android:paddingRight="@dimen/margem_horizontal"
+        android:paddingTop="@dimen/margem_vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margem_vertical" >
+
+            <TextView
+                android:id="@+id/leito_textView"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:text="@string/leito" />
+
+            <TextView
+                android:id="@+id/paciente_textView"
+                android:layout_width="234dp"
+                android:layout_height="match_parent"
+                android:text="@string/paciente" />
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/margem_vertical" >
+
+            <TextView
+                android:id="@+id/descricao_leito_textView"
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:text="@string/leito"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/descricao_paciente_textView"
+                android:layout_width="232dp"
+                android:layout_height="match_parent"
+                android:text="@string/paciente"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            
+        </LinearLayout>
+        
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/titulo_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_alignRight="@+id/linearLayout1"
+        android:layout_below="@+id/linearLayout1"
+        android:text="@string/titulo_prescricao"
+	    android:paddingBottom="@dimen/margem_vertical"
+	    android:paddingLeft="@dimen/margem_horizontal"
+	    android:paddingRight="@dimen/margem_horizontal"
+	    android:paddingTop="@dimen/margem_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/titulo_textView"
+        android:layout_below="@+id/titulo_textView"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/margem_vertical"
+        android:paddingLeft="@dimen/margem_horizontal"
+        android:paddingRight="@dimen/margem_horizontal"
+        android:paddingTop="@dimen/margem_vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="@string/principio"
+                android:textSize="@dimen/text_size" />
+
+            <EditText
+                android:id="@+id/principio_edit_text"
+                android:layout_width="202dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/edit_size" >
+            </EditText>
+
+            <ImageButton
+                android:id="@+id/search_button"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:onClick="listaMedicamentos"
+                android:src="@android:drawable/ic_menu_search" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView15"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="@string/referencia"
+                android:textSize="@dimen/text_size" />
+
+            <EditText
+                android:id="@+id/referencia_edit_text"
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                
+                android:textSize="@dimen/edit_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView07"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="@string/laboratorio"
+                android:textSize="@dimen/text_size" />
+
+            <EditText
+                android:id="@+id/laboratorio_edit_text"
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                
+                android:textSize="@dimen/edit_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView06"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="@string/concentracao"
+                android:textSize="@dimen/text_size" />
+
+            <EditText
+                android:id="@+id/concentracao_edit_text"
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                
+                android:textSize="@dimen/edit_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView05"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="@string/posologia"
+                android:textSize="@dimen/text_size" />
+
+            <EditText
+                android:id="@+id/posologia_edit_text"
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                
+                android:textSize="@dimen/edit_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="@string/hora_inicial"
+                android:textSize="@dimen/text_size" />
+
+            <EditText
+                android:id="@+id/hora_inicial_edit_text"
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                
+                android:textSize="@dimen/edit_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="@string/qtd_aplicacoes"
+                android:textSize="@dimen/text_size" />
+
+            <EditText
+                android:id="@+id/qtd_aplicacoes_edit_text"
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                
+                android:textSize="@dimen/edit_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="@string/intervalo"
+                android:textSize="@dimen/text_size" />
+
+            <EditText
+                android:id="@+id/intervalo_edit_text"
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/edit_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/LinearLayout01"
+        android:layout_alignParentBottom="true"
+        android:onClick="incluiPrescricao"
+        android:text="@string/botao_incluir" />
+
+</RelativeLayout>

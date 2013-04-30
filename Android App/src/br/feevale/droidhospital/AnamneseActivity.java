@@ -20,7 +20,7 @@ public class AnamneseActivity extends Activity {
 		setContentView(R.layout.anamnese);
 		
 		Intent intent = getIntent();
-		long id = intent.getLongExtra(ListaQuartosActivity.ID_VALUE, 0);
+		long id = intent.getLongExtra(ListaLeitosActivity.ID_VALUE, 0);
 		
 		if(id == 0) {
 			Toast.makeText(getApplicationContext(), "Paciente not found!", Toast.LENGTH_LONG).show();
