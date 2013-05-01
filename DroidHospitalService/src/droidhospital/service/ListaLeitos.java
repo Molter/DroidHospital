@@ -24,13 +24,14 @@ public class ListaLeitos extends Transacao {
 
 			StringBuilder sbQuery = new StringBuilder();
 			
-			sbQuery.append( "SELECT * FROM Leitos WHERE idLeito IN ( " );
-			sbQuery.append( "  SELECT DISTINCT idLeito FROM Atendimentos WHERE data_saida IS NULL " );
-			sbQuery.append( ");" );
+			sbQuery.append( "SELECT * FROM leitos Order By quarto, leito;" );
+			//sbQuery.append( "  SELECT DISTINCT idLeito FROM Atendimentos WHERE data_saida IS NULL " );
+			//sbQuery.append( ");" );
 			
 	        ResultSet resultSet = null;
 	        Conexao cnx = new Conexao();
 	        
+	        System.out.println(sbQuery.toString());
 	        try {
 	        
 				Query q = new Query( cnx );

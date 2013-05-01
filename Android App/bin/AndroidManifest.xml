@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="br.feevale.droidhospital.ListaQuartosActivity"
+            android:name="br.feevale.droidhospital.ListaLeitosActivity"
             android:label="@string/rooms" >
         </activity>
         <activity
@@ -35,7 +35,7 @@
             android:name="br.feevale.droidhospital.AnamneseActivity"
             android:label="@string/rooms" >
         </activity>
-        AnamneseActivity
+        
         <activity
             android:name="br.feevale.droidhospital.NovaPrescricaoActivity"
             android:label="@string/title_activity_nova_prescricao" >

@@ -39,7 +39,8 @@ public class LeitosAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Leito leito = leitos.get(position);
-		String nomeLeito = leito.getLeito();
+		
+		String nomeLeito = leito.getQuarto() + " " +  leito.getLeito();
 			
 		LayoutInflater inflater = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 		View layout = inflater.inflate(R.layout.quarto, null);
