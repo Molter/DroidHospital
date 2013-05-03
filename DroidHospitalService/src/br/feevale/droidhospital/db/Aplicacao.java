@@ -12,6 +12,10 @@ public class Aplicacao extends Interpretador {
 	private Date horaPrevisto;
 	private Date horaAplicado;
 	
+	private String concentracaoMedicamento;
+	private String nomeMedicamento;
+	private String principioAtivo;
+	
 	public Integer getIdAplicacao() {
 		return idAplicacao;
 	}
@@ -54,5 +58,29 @@ public class Aplicacao extends Interpretador {
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getConcentracaoMedicamento() {
+		return concentracaoMedicamento;
+	}
+
+	public void setConcentracaoMedicamento(String concentracaoMedicamento) {
+		this.concentracaoMedicamento = concentracaoMedicamento;
+	}
+
+	public String getNomeMedicamento() {
+		return nomeMedicamento;
+	}
+
+	public void setNomeMedicamento(String nomeMedicamento) {
+		this.nomeMedicamento = nomeMedicamento;
+	}
+
+	public String getPrincipioAtivo() {
+		return principioAtivo;
+	}
+
+	public void setPrincipioAtivo(String principioAtivo) {
+		this.principioAtivo = principioAtivo;
 	}
 }

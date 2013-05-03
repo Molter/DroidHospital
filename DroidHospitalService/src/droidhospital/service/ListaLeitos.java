@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import br.feevale.droidhospital.db.Leito;
+import br.feevale.droidhospital.db.Quarto;
 import droidhospital.util.Conexao;
 import droidhospital.util.Query;
 
 public class ListaLeitos extends Transacao {
 
-	private ArrayList<Leito> leitos;
+	private ArrayList<Quarto> Quartos;
 	
 	@Override
 	public void setDadosRecebidos(Serializable dadosRecebidos) {}
@@ -18,13 +18,13 @@ public class ListaLeitos extends Transacao {
 	@Override
 	public void executaTransacao() {
 
-		leitos = new ArrayList<Leito>();
+		Quartos = new ArrayList<Quarto>();
 		
 		try {
 
 			StringBuilder sbQuery = new StringBuilder();
 			
-			sbQuery.append( "SELECT * FROM leitos Order By quarto, leito;" );
+			sbQuery.append( "select distinct quarto from leitos order by quarto, leito ;" );
 			//sbQuery.append( "  SELECT DISTINCT idLeito FROM Atendimentos WHERE data_saida IS NULL " );
 			//sbQuery.append( ");" );
 			
@@ -42,13 +42,9 @@ public class ListaLeitos extends Transacao {
 				
 				while( resultSet.next() ) {
 					
-					Leito leito = new Leito();
-					
-					leito.setIdLeito( resultSet.getInt( "idLeito" ) );
-					leito.setLeito( resultSet.getString( "leito" ) );
+					Quarto leito = new Quarto();
 					leito.setQuarto( resultSet.getString( "quarto" ) );
-					
-					leitos.add( leito );
+					Quartos.add( leito );
 				}
 	        	
 	        } catch (Exception e) {
@@ -66,6 +62,6 @@ public class ListaLeitos extends Transacao {
 
 	@Override
 	public Serializable getDadosResposta() {
-		return leitos;
+		return Quartos;
 	}
 }

@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="br.feevale.droidhospital.ListaLeitosActivity"
+            android:name="br.feevale.droidhospital.ListaQuartosActivity"
             android:label="@string/rooms" >
         </activity>
         <activity

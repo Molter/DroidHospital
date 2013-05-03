@@ -8,6 +8,7 @@
     <string name="login_field">Email</string>
     <string name="password">Senha</string>
     <string name="rooms">Quartos</string>
+    <string name="room">Quarto</string>
     <string name="name">Nome</string>
     <string name="general_info">Dados Gerais</string>
     <string name="applications_made">Aplicações Efetuadas</string>

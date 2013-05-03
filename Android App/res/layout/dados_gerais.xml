@@ -92,6 +92,7 @@
         android:layout_below="@+id/textView9"
         android:text="Leite, Água, Álcool, Paracetamol, Ferro, Azeite, ETc.."
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="@color/Silver"
         android:textColor="#000000" />
 
     <TextView

@@ -4,25 +4,22 @@ import java.util.ArrayList;
 
 
 public class Aplicacoes {
-	ArrayList<Aplicacao> aplicacoes;
+	ArrayList<AplicacaoFake> aplicacoes;
 	
-	Paciente paciente;
-	
-	public Aplicacoes(long pacienteId) {
-		paciente = Paciente.getPacienteById(pacienteId);
+	public Aplicacoes() {
 		setUpAplicacoes();
 	}
 	
 	private void setUpAplicacoes() {
-		aplicacoes = new ArrayList<Aplicacao>();
+		aplicacoes = new ArrayList<AplicacaoFake>();
 		
-		aplicacoes.add(new Aplicacao(1));
-		aplicacoes.add(new Aplicacao(1));
-		aplicacoes.add(new Aplicacao(1));
-		aplicacoes.add(new Aplicacao(1));
-		aplicacoes.add(new Aplicacao(1));
-		aplicacoes.add(new Aplicacao(1));
-		aplicacoes.add(new Aplicacao(1));
+		aplicacoes.add(new AplicacaoFake());
+		aplicacoes.add(new AplicacaoFake());
+		aplicacoes.add(new AplicacaoFake());
+		aplicacoes.add(new AplicacaoFake());
+		aplicacoes.add(new AplicacaoFake());
+		aplicacoes.add(new AplicacaoFake());
+		aplicacoes.add(new AplicacaoFake());
 	}
 
 	public int countAplicacaoesEfetuadas() {
@@ -45,22 +42,11 @@ public class Aplicacoes {
 		return total;
 	}
 
-	public ArrayList<Aplicacao> getAplicacoes() {
+	public ArrayList<AplicacaoFake> getAplicacoes() {
 		return aplicacoes;
 	}
 
-	public void setAplicacoes(ArrayList<Aplicacao> aplicacoes) {
+	public void setAplicacoes(ArrayList<AplicacaoFake> aplicacoes) {
 		this.aplicacoes = aplicacoes;
 	}
-
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
-	
-	
 }

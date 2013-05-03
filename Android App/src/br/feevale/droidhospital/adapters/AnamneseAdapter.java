@@ -1,5 +1,6 @@
 package br.feevale.droidhospital.adapters;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import br.feevale.droidhospital.R;
+import br.feevale.droidhospital.db.PacienteDescription;
 import br.feevale.droidhospital.pojos.AnamneseParent;
 import br.feevale.droidhospital.pojos.Aplicacoes;
-import br.feevale.droidhospital.pojos.Paciente;
 
 public class AnamneseAdapter implements ExpandableListAdapter {
 
@@ -22,18 +24,20 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	ArrayList<AnamneseParent> parents;
 	LayoutInflater inflater;
 
-	private Paciente paciente;
+	private PacienteDescription pacientDescription;
+	
 	Aplicacoes aplicacoes;
 
-	public AnamneseAdapter(Context context, long pacienteId) {
+	public AnamneseAdapter(Context context, PacienteDescription pacientDescription) {
 		this.context = context;
 		parents = AnamneseParent.anamneseParents;
-		inflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		Toast.makeText(context,String.valueOf( parents.size()), Toast.LENGTH_LONG).show();
+		
+		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		paciente = Paciente.getPacienteById(pacienteId);
-
-		aplicacoes = new Aplicacoes(pacienteId);
+		this.pacientDescription = pacientDescription;
+		//Ramdow Aplicacoes
+		aplicacoes = new Aplicacoes();
 	}
 
 	@Override
@@ -133,8 +137,8 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	private View aplicacoesFuturasView(int childPosition) {
 		// aplicacoes
 		Random r = new Random();
-		int x = r.nextInt(paciente.getPacientes().size());
-
+		int x = r.nextInt(aplicacoes.countAplicacaoesFuturas());
+		
 		View layout = inflater.inflate(R.layout.aplicacoes, null);
 		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
 		data.setText(aplicacoes.getAplicacoes().get(x).getDataHoraAplicacao());
@@ -176,28 +180,26 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	private View configureAnamnese() {
 		View layout = inflater.inflate(R.layout.dados_gerais, null);
 
-		TextView idadeTextView = (TextView) layout
-				.findViewById(R.id.dados_gerais_data_entrada);
-		idadeTextView.setText(String.valueOf(paciente.getDataDeInternacao()));
+		TextView idadeTextView = (TextView) layout.findViewById(R.id.dados_gerais_data_entrada);
+		String myDate = DateFormat.getDateInstance().format(pacientDescription.getDataEntrada());
 
-		TextView idadeExtensoTextView = (TextView) layout
-				.findViewById(R.id.dados_gerais_idade_extenso);
-		idadeExtensoTextView.setText(paciente.getIdade());
+		idadeTextView.setText(myDate);
 
-		TextView pesoTextView = (TextView) layout
-				.findViewById(R.id.dados_gerais_peso);
-		String pesoString = String.valueOf(paciente.getPeso())
-				+ context.getString(R.string.wheight_measure);
+		TextView idadeExtensoTextView = (TextView) layout.findViewById(R.id.dados_gerais_idade_extenso);
+		idadeExtensoTextView.setText(pacientDescription.getIdade());
+
+		TextView pesoTextView = (TextView) layout.findViewById(R.id.dados_gerais_peso);
+		
+		String pesoString = String.valueOf(pacientDescription.getPeso())+ context.getString(R.string.wheight_measure);
 		pesoTextView.setText(pesoString);
 
-		TextView alergiasTextView = (TextView) layout
-				.findViewById(R.id.dados_gerais_alergias);
-		alergiasTextView.setText(paciente.getAlergias());
+		TextView alergiasTextView = (TextView) layout.findViewById(R.id.dados_gerais_alergias);
+		alergiasTextView.setText(pacientDescription.getAlergias());
 
-		TextView fumanteTextView = (TextView) layout
-				.findViewById(R.id.dados_gerais_fumante);
+		TextView fumanteTextView = (TextView) layout.findViewById(R.id.dados_gerais_fumante);
 		String isSmoker;
-		if (paciente.isFumante()) {
+		
+		if (pacientDescription.getFumante().equalsIgnoreCase("S")) {
 			isSmoker = context.getString(R.string.yes);
 		} else {
 			isSmoker = context.getString(R.string.no);

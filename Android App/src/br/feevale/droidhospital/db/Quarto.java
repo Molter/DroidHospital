@@ -1,6 +1,6 @@
 package br.feevale.droidhospital.db;
 
-public class Leito extends Interpretador {
+public class Quarto extends Interpretador {
 	
 	private static final long serialVersionUID = -8134978785938852291L;
 	
