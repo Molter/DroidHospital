@@ -16,7 +16,7 @@ import br.feevale.droidhospital.db.Interpretador;
 public class MainActivity extends Activity {
 
 	public static String DROID_HOSPITAL_LOG_TAG = "br.feevale.droidhospital";
-	public static boolean ONLINE = true;
+	public static boolean ONLINE = false;
 	
 	private EditText loginEditText;
 	private EditText passwordEditText;
