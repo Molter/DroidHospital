@@ -66,11 +66,11 @@ public class NovaPrescricaoActivity extends Activity {
 	}
 	
     public void listaMedicamentos(View v) {
-		//Intent chamaTelaLista = new Intent(getBaseContext(), ListaMedicamentosActivity.class);
-		//startActivity(chamaTelaLista);
+		Intent chamaTelaLista = new Intent(getBaseContext(), ListaMedicamentosActivity.class);
+		startActivity(chamaTelaLista);
     	
     	Toast.makeText(getApplicationContext(), "Chama lista de medicamentos", Toast.LENGTH_LONG).show();
-    	finish();
+    	//finish();
 	}
 
 	public void adicionarPrescricao(View v){

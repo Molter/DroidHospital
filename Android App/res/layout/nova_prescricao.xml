@@ -110,7 +110,7 @@
             </EditText>
 
             <ImageButton
-                android:id="@+id/search_button"
+                android:id="@+id/search_medicacoes"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:onClick="listaMedicamentos"

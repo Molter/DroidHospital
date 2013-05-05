@@ -16,7 +16,6 @@ public class ListaMedicamentosActivity extends Activity implements OnItemClickLi
 	public static final String ID_VALUE = "id";
 	ArrayList<Medicamento> medicamentos;
 	
-	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.medicamentos);

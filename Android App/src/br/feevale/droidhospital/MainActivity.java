@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		//não haverá menu na tela de login
+		//nï¿½o haverï¿½ menu na tela de login
 		
 		// Inflate the menu; this adds items to the action bar if it is present.
 		//getMenuInflater().inflate(R.menu.main, menu);
@@ -53,12 +53,15 @@ public class MainActivity extends Activity {
 		} else {
 
 			Toast.makeText(getApplicationContext(),
-					"Login ou senha inválida", Toast.LENGTH_LONG).show();
+					"Login ou senha invï¿½lida", Toast.LENGTH_LONG).show();
 			// passwordEditText.setText( "" );
 		}
 	}
 
 	private boolean checkLogin(String usuario, String senha) {
+		if (true) {
+			return true;
+		}
 		String[] dados = new String[2];
 
 		dados[0] = usuario;
