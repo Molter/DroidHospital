@@ -4,27 +4,39 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import br.feevale.droidhospital.db.DadosId;
 import br.feevale.droidhospital.db.Quarto;
+import br.feevale.droidhospital.db.Paciente;
 import droidhospital.util.Conexao;
 import droidhospital.util.Query;
 
-public class ListaLeitos extends Transacao {
+public class ListaPacientes extends Transacao {
 
-	private ArrayList<Quarto> Quartos;
+	private ArrayList<Paciente> pacientes;
+	private DadosId dados;
 	
 	@Override
-	public void setDadosRecebidos(Serializable dadosRecebidos) {}
+	public void setDadosRecebidos(Serializable dadosRecebidos) {
+		dados = (DadosId) dadosRecebidos;
+	}
 
 	@Override
 	public void executaTransacao() {
 
-		Quartos = new ArrayList<Quarto>();
+		pacientes = new ArrayList<Paciente>();
 		
 		try {
-
+				
 			StringBuilder sbQuery = new StringBuilder();
 			
-			sbQuery.append( "select distinct quarto from leitos order by quarto, leito ;" );
+			String numeroQuarto = dados.getId();
+			
+			sbQuery.append( " select p.idpessoa, l.quarto, l.leito, p.nome " +
+							" from atendimentos a " +
+							" inner join leitos  l on a.idleito = l.idleito " +
+							" inner join pessoas p on a.idpaciente = p.idpessoa " +
+							" where data_saida is null" +
+							" and l.quarto = " + numeroQuarto);
 			//sbQuery.append( "  SELECT DISTINCT idLeito FROM Atendimentos WHERE data_saida IS NULL " );
 			//sbQuery.append( ");" );
 			
@@ -42,9 +54,14 @@ public class ListaLeitos extends Transacao {
 				
 				while( resultSet.next() ) {
 					
-					Quarto leito = new Quarto();
-					leito.setQuarto( resultSet.getString( "quarto" ) );
-					Quartos.add( leito );
+					Paciente paciente = new Paciente();
+					
+					paciente.setIdPaciente(resultSet.getInt("idpessoa"));
+					paciente.setQuartoPaciente(resultSet.getInt("quarto"));
+					paciente.setLeitoPaciente(resultSet.getString("leito"));
+					paciente.setNomePaciente(resultSet.getString("nome"));
+					
+					pacientes.add( paciente );
 				}
 	        	
 	        } catch (Exception e) {
@@ -62,6 +79,6 @@ public class ListaLeitos extends Transacao {
 
 	@Override
 	public Serializable getDadosResposta() {
-		return Quartos;
+		return pacientes;
 	}
 }

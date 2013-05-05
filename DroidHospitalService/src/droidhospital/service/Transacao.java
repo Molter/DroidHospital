@@ -31,6 +31,14 @@ public abstract class Transacao {
 						
 						transacao = new ListaLeitos();
 						break;
+					case Interpretador.LISTA_PACIENTES:
+						
+						transacao = new ListaPacientes();
+						break;
+					case Interpretador.DADOS_PACIENTE:
+						
+						transacao = new DadosPaciente();
+						break;
 						
 					case Interpretador.LISTA_PESSOAS:
 						

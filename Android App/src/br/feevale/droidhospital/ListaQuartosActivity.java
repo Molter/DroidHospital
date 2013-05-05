@@ -2,59 +2,85 @@ package br.feevale.droidhospital;
 
 import java.util.ArrayList;
 
+import br.feevale.comunicacao.EnviaTransacao;
+import br.feevale.droidhospital.adapters.ListaQuartosAdapter;
+import br.feevale.droidhospital.db.Interpretador;
+import br.feevale.droidhospital.db.Quarto;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import br.feevale.droidhospital.adapters.QuartosAdapter;
-import br.feevale.droidhospital.pojos.Quarto;
 
-public class ListaQuartosActivity extends Activity implements OnItemClickListener {
+public class ListaQuartosActivity extends Activity implements
+		OnItemClickListener {
+
 	public static final String ID_VALUE = "id";
-	ArrayList<Quarto> quartos;
-	
-	
+
+	private ArrayList<Quarto> quartos;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.quartos_layout);
-		
+
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+
 		ListView quartosListView = (ListView) findViewById(R.id.quartos_list_view);
-		
-		setUpQuartos();
-		
-		QuartosAdapter quartosAdapter= new QuartosAdapter(getApplicationContext(), quartos);
-		
+
+		setUpDadosSocket();
+
+		ListaQuartosAdapter quartosAdapter = new ListaQuartosAdapter(
+				getApplicationContext(), quartos);
+
 		quartosListView.setAdapter(quartosAdapter);
-		
+
 		quartosListView.setOnItemClickListener(this);
 	}
 
+	@SuppressWarnings("unchecked")
+	private void setUpDadosSocket() {
+		try {
 
-	private void setUpQuartos() {
-		quartos = Quarto.quartos;
-		ArrayList<Quarto> newQuartos = new ArrayList<Quarto>();
-		String ultimoQuarto = ""; 
-		
-		for (int i = 0; i < quartos.size(); i++) {
-			if(ultimoQuarto != quartos.get(i).getNumero()) {
-				newQuartos.add(quartos.get(i));
-				ultimoQuarto = quartos.get(i).getNumero();
-			}else{
-				ultimoQuarto = quartos.get(i).getNumero();
+			Interpretador interpretador = new Interpretador();
+
+			interpretador.setCdTransacao(Interpretador.LISTA_LEITOS);
+
+			EnviaTransacao enviador = new EnviaTransacao(interpretador);
+
+			try {
+
+				enviador.envia();
+
+				quartos =  (ArrayList<Quarto>) enviador.recebe();
+
+			} finally {
+				enviador.fechaSocket();
 			}
+
+		} catch (Exception e) {
+			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG, getString(R.string.not_connected));
+			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+			finish();
 		}
-		quartos = newQuartos;
 	}
 
-
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-		//Toast.makeText(getApplicationContext(), "Quarto" + String.valueOf(id), Toast.LENGTH_LONG).show();
-		Intent intent = new Intent(getApplicationContext(), ListaPacientesActivity.class);
+	public void onItemClick(AdapterView<?> arg0, View view, int position,
+			long id) {
+		// Toast.makeText(getApplicationContext(), "Quarto" +
+		// String.valueOf(id), Toast.LENGTH_LONG).show();
+		Intent intent = new Intent(getApplicationContext(),
+				ListaPacientesActivity.class);
 		intent.putExtra(ID_VALUE, id);
 		startActivity(intent);
 	}

@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import br.feevale.droidhospital.R;
-import br.feevale.droidhospital.pojos.Paciente;
-import br.feevale.droidhospital.pojos.Quarto;
+import br.feevale.droidhospital.db.Paciente;
 
 public class PacientesAdapter extends BaseAdapter {
 	long idQuarto;
@@ -19,10 +17,9 @@ public class PacientesAdapter extends BaseAdapter {
 	ArrayList<Paciente> pacientes;
 	
 	
-	public PacientesAdapter(Context context, long idQuarto){
+	public PacientesAdapter(Context context, ArrayList<Paciente> pacientes){
 		this.context = context;
-		this.idQuarto = idQuarto;
-		pacientes = Paciente.getPacientesByIdQuarto(idQuarto);
+		this.pacientes = pacientes;
 	}
 	
 	@Override
@@ -37,7 +34,7 @@ public class PacientesAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		return pacientes.get(position).getId();
+		return pacientes.get(position).getIdPaciente();
 	}
 
 	@Override
@@ -50,9 +47,9 @@ public class PacientesAdapter extends BaseAdapter {
 		View layout =  inflater.inflate(R.layout.paciente, null);
 		TextView pacienteTextView = (TextView)layout.findViewById(R.id.paciente_item_text_view);
 		
-		String quartoELeito = paciente.getQuarto().getNumero() + paciente.getQuarto().getLeito();
+		String quartoELeito = paciente.getQuartoPaciente() + " " + paciente.getLeitoPaciente();
 		
-		String nomeELeitoPaciente = quartoELeito +" "+  paciente.getNome();
+		String nomeELeitoPaciente = quartoELeito +" "+  paciente.getNomePaciente();
 		pacienteTextView.setText(nomeELeitoPaciente);
 		
 		return layout;

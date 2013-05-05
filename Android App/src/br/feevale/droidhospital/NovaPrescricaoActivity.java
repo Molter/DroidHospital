@@ -1,6 +1,5 @@
 package br.feevale.droidhospital;
 
-import br.feevale.droidhospital.pojos.Paciente;
 import br.feevale.droidhospital.pojos.Prescricao;
 import android.os.Bundle;
 import android.app.Activity;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 
 public class NovaPrescricaoActivity extends Activity {
 
-	Paciente paciente;
 	EditText edPrincipio;
 	EditText edReferencia;
 	EditText edLaboratorio;
@@ -51,11 +49,10 @@ public class NovaPrescricaoActivity extends Activity {
 	}
 	
 	private void setUpPaciente(long id) {
-		paciente = Paciente.getPacienteById(id);
 		TextView  pacientName = (TextView) findViewById(R.id.descricao_paciente_textView);
 		TextView  numLeito    = (TextView) findViewById(R.id.descricao_leito_textView);
-		pacientName.setText(paciente.getNome());
-		numLeito.setText(paciente.getQuarto().getNumero() + paciente.getQuarto().getLeito());		
+		pacientName.setText("");
+		numLeito.setText("01 a");		
 	}	
 
 	@Override
@@ -75,7 +72,7 @@ public class NovaPrescricaoActivity extends Activity {
 
 	public void adicionarPrescricao(View v){
 
-		Toast.makeText(getApplicationContext(), "Paciente " + paciente.getNome() + " adicionado", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "Paciente João adicionado", Toast.LENGTH_LONG).show();
 		finish();
 		
 		/*

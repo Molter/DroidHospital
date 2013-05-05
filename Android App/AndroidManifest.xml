@@ -39,6 +39,7 @@
             android:name="br.feevale.droidhospital.AnamneseActivity"
             android:label="@string/rooms" >
         </activity>
+        
         <activity
             android:name="br.feevale.droidhospital.NovaPrescricaoActivity"
             android:label="@string/title_activity_nova_prescricao" >

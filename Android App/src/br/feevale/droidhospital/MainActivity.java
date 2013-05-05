@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +15,8 @@ import br.feevale.droidhospital.db.Interpretador;
 
 public class MainActivity extends Activity {
 
+	public static String DROID_HOSPITAL_LOG_TAG = "br.feevale.droidhospital";
+	
 	private EditText loginEditText;
 	private EditText passwordEditText;
 
@@ -44,10 +47,10 @@ public class MainActivity extends Activity {
 		String usuario = loginEditText.getText().toString();
 		String senha = passwordEditText.getText().toString();
 
-		if (checkLogin(usuario, senha)) {
+		if (setUpDadosSocket(usuario, senha)) {
 
 			Intent intent = new Intent(getApplicationContext(),
-					ListaLeitosActivity.class);
+					ListaQuartosActivity.class);
 			startActivity(intent);
 
 		} else {
@@ -58,10 +61,14 @@ public class MainActivity extends Activity {
 		}
 	}
 
+<<<<<<< HEAD
 	private boolean checkLogin(String usuario, String senha) {
 		if (true) {
 			return true;
 		}
+=======
+	private boolean setUpDadosSocket(String usuario, String senha) {
+>>>>>>> 8f5da1dc643066079c469c4fa4a8bb437063235c
 		String[] dados = new String[2];
 
 		dados[0] = usuario;
@@ -87,7 +94,10 @@ public class MainActivity extends Activity {
 			}
 
 		} catch (Exception e) {
+			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG, getString(R.string.not_connected));
+			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
 			e.printStackTrace();
+			//finish();
 		}
 
 		if (tipoUsuario == null) {

@@ -10,6 +10,8 @@ public class Interpretador implements Serializable {
 	public final static int LISTA_LEITOS = 2;
 	public final static int LISTA_PESSOAS = 3;
 	public final static int LISTA_MEDICAMENTOS = 4;
+	public final static int LISTA_PACIENTES = 5;
+	public final static int DADOS_PACIENTE = 6;
 	
 	private Integer cdTransacao;
 	
