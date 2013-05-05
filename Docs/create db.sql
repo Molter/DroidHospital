@@ -1,162 +1,218 @@
+CREATE DATABASE  IF NOT EXISTS `droid_hospital` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `droid_hospital`;
+-- MySQL dump 10.13  Distrib 5.5.16, for Win32 (x86)
+--
+-- Host: localhost    Database: droid_hospital
+-- ------------------------------------------------------
+-- Server version	5.5.24-log
 
-create schema droid_hospital;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
--- ---
--- Globals
--- ---
-
--- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
--- SET FOREIGN_KEY_CHECKS=0;
-
--- ---
--- Table 'pessoas'
--- 
--- ---
-
-DROP TABLE IF EXISTS `pessoas`;
-		
-CREATE TABLE `pessoas` (
-  `idpessoa` INTEGER NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(100) NOT NULL,
-  `cpf` VARCHAR(14) NOT NULL,
-  `endereco` VARCHAR(200) NULL DEFAULT NULL,
-  `numero` VARCHAR(200) NULL DEFAULT NULL,
-  `cidade` VARCHAR(50) NOT NULL,
-  `estado` CHAR(2) NOT NULL,
-  `pais` VARCHAR(20) NOT NULL,
-  `telefone` VARCHAR(20) NULL DEFAULT NULL,
-  `tipo_pessoa` CHAR(1) NULL DEFAULT NULL COMMENT 'M - Médico, E - Enfermeiro, P - Paciente',
-  `especialidade` VARCHAR(40) NULL DEFAULT NULL,
-  `data_nascimento` DATE NOT NULL,
-  `tipo_sanguineo` CHAR(2) NOT NULL,
-  `usuario` VARCHAR(200) NOT NULL,
-  `senha` VARCHAR(32) NOT NULL,
-  `alergias` VARCHAR(500) NULL DEFAULT NULL,
-  PRIMARY KEY (`idpessoa`)
-);
-
--- ---
--- Table 'leitos'
--- 
--- ---
-
-DROP TABLE IF EXISTS `leitos`;
-		
-CREATE TABLE `leitos` (
-  `idleito` INTEGER NOT NULL AUTO_INCREMENT,
-  `quarto` TINYINT(10) NOT NULL,
-  `leito` VARCHAR(10) NULL DEFAULT NULL,
-  PRIMARY KEY (`idleito`)
-);
-
--- ---
--- Table 'atendimentos'
--- 
--- ---
-
-DROP TABLE IF EXISTS `atendimentos`;
-		
-CREATE TABLE `atendimentos` (
-  `idatendimento` INTEGER NOT NULL AUTO_INCREMENT,
-  `idleito` INTEGER NOT NULL,
-  `idpaciente` INTEGER NOT NULL,
-  `fuma` CHAR(1) NOT NULL DEFAULT 'N',
-  `peso` DECIMAL NOT NULL DEFAULT 0,
-  `data_entrada` DATETIME NOT NULL,
-  `data_saida` DATETIME NOT NULL,
-  PRIMARY KEY (`idatendimento`)
-);
-
--- ---
--- Table 'prescricoes'
--- 
--- ---
-
-DROP TABLE IF EXISTS `prescricoes`;
-		
-CREATE TABLE `prescricoes` (
-  `idprescricao` INTEGER NOT NULL AUTO_INCREMENT,
-  `idatendimento` INTEGER NOT NULL,
-  `idmedicamento` INTEGER NOT NULL,
-  `posologia` INTEGER NOT NULL DEFAULT 1,
-  `intervalo_horas` INTEGER NOT NULL,
-  `hora_inicio` TIME NULL DEFAULT NULL,
-  `quantidade_aplicações` INTEGER NOT NULL DEFAULT 1,
-  `idMedico` INTEGER NULL DEFAULT NULL,
-  PRIMARY KEY (`idprescricao`)
-);
-
--- ---
--- Table 'aplicacoes'
--- 
--- ---
+--
+-- Table structure for table `aplicacoes`
+--
 
 DROP TABLE IF EXISTS `aplicacoes`;
-		
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `aplicacoes` (
-  `idaplicacao` INTEGER NOT NULL AUTO_INCREMENT,
-  `idEnfermeiro` INTEGER NULL DEFAULT NULL,
-  `idprescricao` INTEGER NOT NULL,
-  `hora_previsto` TIME NOT NULL,
-  `hora_aplicado` TIME NOT NULL,
-  PRIMARY KEY (`idaplicacao`)
-);
+  `idaplicacao` int(11) NOT NULL AUTO_INCREMENT,
+  `idEnfermeiro` int(11) DEFAULT NULL,
+  `idprescricao` int(11) NOT NULL,
+  `hora_previsto` time NOT NULL,
+  `hora_aplicado` time NOT NULL,
+  PRIMARY KEY (`idaplicacao`),
+  KEY `idEnfermeiro` (`idEnfermeiro`),
+  KEY `idprescricao` (`idprescricao`),
+  CONSTRAINT `aplicacoes_ibfk_1` FOREIGN KEY (`idEnfermeiro`) REFERENCES `pessoas` (`idpessoa`),
+  CONSTRAINT `aplicacoes_ibfk_2` FOREIGN KEY (`idprescricao`) REFERENCES `prescricoes` (`idprescricao`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ---
--- Table 'medicamentos'
--- Referência para a tabela: http://www.anvisa.gov.br/medicamentos/referencia/lmr_a.pdf
--- ---
+--
+-- Dumping data for table `aplicacoes`
+--
+
+LOCK TABLES `aplicacoes` WRITE;
+/*!40000 ALTER TABLE `aplicacoes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aplicacoes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `atendimentos`
+--
+
+DROP TABLE IF EXISTS `atendimentos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `atendimentos` (
+  `idatendimento` int(11) NOT NULL AUTO_INCREMENT,
+  `idleito` int(11) NOT NULL,
+  `idpaciente` int(11) NOT NULL,
+  `fuma` char(1) NOT NULL DEFAULT 'N',
+  `peso` decimal(10,0) NOT NULL DEFAULT '0',
+  `data_entrada` datetime NOT NULL,
+  `data_saida` datetime DEFAULT NULL,
+  PRIMARY KEY (`idatendimento`),
+  KEY `idleito` (`idleito`),
+  KEY `idpaciente` (`idpaciente`),
+  CONSTRAINT `atendimentos_ibfk_1` FOREIGN KEY (`idleito`) REFERENCES `leitos` (`idleito`),
+  CONSTRAINT `atendimentos_ibfk_2` FOREIGN KEY (`idpaciente`) REFERENCES `pessoas` (`idpessoa`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `atendimentos`
+--
+
+LOCK TABLES `atendimentos` WRITE;
+/*!40000 ALTER TABLE `atendimentos` DISABLE KEYS */;
+INSERT INTO `atendimentos` VALUES (1,1,1,'S',100,'2013-05-01 09:20:58',NULL),(2,2,2,'S',90,'2013-05-01 09:20:58',NULL),(3,3,3,'N',87,'2013-05-01 09:20:58',NULL),(4,4,4,'S',42,'2013-05-01 09:20:58',NULL),(5,5,5,'N',88,'2013-05-01 09:20:58',NULL),(6,6,6,'N',69,'2013-05-01 09:20:58',NULL),(7,7,7,'N',37,'2013-05-01 09:20:58',NULL);
+/*!40000 ALTER TABLE `atendimentos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `leitos`
+--
+
+DROP TABLE IF EXISTS `leitos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `leitos` (
+  `idleito` int(11) NOT NULL AUTO_INCREMENT,
+  `quarto` tinyint(10) NOT NULL,
+  `leito` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`idleito`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `leitos`
+--
+
+LOCK TABLES `leitos` WRITE;
+/*!40000 ALTER TABLE `leitos` DISABLE KEYS */;
+INSERT INTO `leitos` VALUES (1,10,'A'),(2,10,'B'),(3,10,'C'),(4,11,'A'),(5,12,'A'),(6,12,'B'),(7,12,'C');
+/*!40000 ALTER TABLE `leitos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `medicamentos`
+--
 
 DROP TABLE IF EXISTS `medicamentos`;
-		
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `medicamentos` (
-  `idmedicamento` INTEGER NOT NULL AUTO_INCREMENT,
-  `farmaco` VARCHAR(200) NULL DEFAULT NULL,
-  `detentor` VARCHAR(200) NULL DEFAULT NULL,
-  `medicamento_referencia` VARCHAR(150) NULL DEFAULT NULL,
-  `concentracao` VARCHAR(15) NULL DEFAULT NULL,
-  `forma_farmaceutica` CHAR(2) NOT NULL,
+  `idmedicamento` int(11) NOT NULL AUTO_INCREMENT,
+  `farmaco` varchar(200) DEFAULT NULL,
+  `detentor` varchar(200) DEFAULT NULL,
+  `medicamento_referencia` varchar(150) DEFAULT NULL,
+  `concentracao` varchar(15) DEFAULT NULL,
+  `forma_farmaceutica` char(2) NOT NULL,
   PRIMARY KEY (`idmedicamento`)
-) COMMENT 'Referência para a tabela: http://www.anvisa.gov.br/medicamen';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='Referência para a tabela: http://www.anvisa.gov.br/medicamen';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ---
--- Foreign Keys 
--- ---
+--
+-- Dumping data for table `medicamentos`
+--
 
-ALTER TABLE `atendimentos` ADD FOREIGN KEY (idleito) REFERENCES `leitos` (`idleito`);
-ALTER TABLE `atendimentos` ADD FOREIGN KEY (idpaciente) REFERENCES `pessoas` (`idpessoa`);
-ALTER TABLE `prescricoes` ADD FOREIGN KEY (idatendimento) REFERENCES `atendimentos` (`idatendimento`);
-ALTER TABLE `prescricoes` ADD FOREIGN KEY (idmedicamento) REFERENCES `medicamentos` (`idmedicamento`);
-ALTER TABLE `prescricoes` ADD FOREIGN KEY (idMedico) REFERENCES `pessoas` (`idpessoa`);
-ALTER TABLE `aplicacoes` ADD FOREIGN KEY (idEnfermeiro) REFERENCES `pessoas` (`idpessoa`);
-ALTER TABLE `aplicacoes` ADD FOREIGN KEY (idprescricao) REFERENCES `prescricoes` (`idprescricao`);
+LOCK TABLES `medicamentos` WRITE;
+/*!40000 ALTER TABLE `medicamentos` DISABLE KEYS */;
+INSERT INTO `medicamentos` VALUES (1,'dipirona','house of death','no one','500mg','cm'),(2,'aspirina','house of death','no one','250mg','dg'),(3,'coristina','house of death','no one','500mg','su'),(4,'charrua','house of death','no one','500mg','cp');
+/*!40000 ALTER TABLE `medicamentos` ENABLE KEYS */;
+UNLOCK TABLES;
 
--- ---
--- Table Properties
--- ---
+--
+-- Table structure for table `pessoas`
+--
 
--- ALTER TABLE `pessoas` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `leitos` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `atendimentos` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `prescricoes` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `aplicacoes` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `medicamentos` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `pessoas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pessoas` (
+  `idpessoa` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `cpf` varchar(14) NOT NULL,
+  `endereco` varchar(200) DEFAULT NULL,
+  `numero` varchar(200) DEFAULT NULL,
+  `cidade` varchar(50) NOT NULL,
+  `estado` char(2) NOT NULL,
+  `pais` varchar(20) NOT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `tipo_pessoa` char(1) DEFAULT NULL COMMENT 'M - Médico, E - Enfermeiro, P - Paciente',
+  `especialidade` varchar(40) DEFAULT NULL,
+  `data_nascimento` date NOT NULL,
+  `tipo_sanguineo` char(2) NOT NULL,
+  `usuario` varchar(200) NOT NULL,
+  `senha` varchar(32) NOT NULL,
+  `alergias` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`idpessoa`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ---
--- Test Data
--- ---
+--
+-- Dumping data for table `pessoas`
+--
 
--- INSERT INTO `pessoas` (`idpessoa`,`nome`,`cpf`,`endereco`,`numero`,`cidade`,`estado`,`pais`,`telefone`,`tipo_pessoa`,`especialidade`,`data_nascimento`,`tipo_sanguineo`,`usuario`,`senha`,`alergias`) VALUES
--- ('','','','','','','','','','','','','','','','');
--- INSERT INTO `leitos` (`idleito`,`quarto`,`leito`) VALUES
--- ('','','');
--- INSERT INTO `atendimentos` (`idatendimento`,`idleito`,`idpaciente`,`fuma`,`peso`,`data_entrada`,`data_saida`) VALUES
--- ('','','','','','','');
--- INSERT INTO `prescricoes` (`idprescricao`,`idatendimento`,`idmedicamento`,`posologia`,`intervalo_horas`,`hora_inicio`,`quantidade_aplicações`,`idMedico`) VALUES
--- ('','','','','','','','');
--- INSERT INTO `aplicacoes` (`idaplicacao`,`idEnfermeiro`,`idprescricao`,`hora_previsto`,`hora_aplicado`) VALUES
--- ('','','','','');
--- INSERT INTO `medicamentos` (`idmedicamento`,`farmaco`,`detentor`,`medicamento_referencia`,`concentracao`,`forma_farmaceutica`) VALUES
--- ('','','','','','');
+LOCK TABLES `pessoas` WRITE;
+/*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
+INSERT INTO `pessoas` VALUES (1,'Gabriel','01243444029','aff','12','Sapiranga','Rs','Brasil','0','M',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(2,'Jose','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(3,'Pedro','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(4,'Carlos','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(5,'Thomas','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(6,'Pafuncio','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(7,'Beltrano','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(8,'Ciclano','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(9,'Jose joao','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol');
+/*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Table structure for table `prescricoes`
+--
+
+DROP TABLE IF EXISTS `prescricoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `prescricoes` (
+  `idprescricao` int(11) NOT NULL AUTO_INCREMENT,
+  `idatendimento` int(11) NOT NULL,
+  `idmedicamento` int(11) NOT NULL,
+  `posologia` int(11) NOT NULL DEFAULT '1',
+  `intervalo_horas` int(11) NOT NULL,
+  `hora_inicio` time DEFAULT NULL,
+  `quantidade_aplicações` int(11) NOT NULL DEFAULT '1',
+  `idMedico` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idprescricao`),
+  KEY `idatendimento` (`idatendimento`),
+  KEY `idmedicamento` (`idmedicamento`),
+  KEY `idMedico` (`idMedico`),
+  CONSTRAINT `prescricoes_ibfk_1` FOREIGN KEY (`idatendimento`) REFERENCES `atendimentos` (`idatendimento`),
+  CONSTRAINT `prescricoes_ibfk_2` FOREIGN KEY (`idmedicamento`) REFERENCES `medicamentos` (`idmedicamento`),
+  CONSTRAINT `prescricoes_ibfk_3` FOREIGN KEY (`idMedico`) REFERENCES `pessoas` (`idpessoa`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `prescricoes`
+--
+
+LOCK TABLES `prescricoes` WRITE;
+/*!40000 ALTER TABLE `prescricoes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `prescricoes` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2013-05-04 23:33:22
