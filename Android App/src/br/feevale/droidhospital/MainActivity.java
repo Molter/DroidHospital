@@ -16,6 +16,7 @@ import br.feevale.droidhospital.db.Interpretador;
 public class MainActivity extends Activity {
 
 	public static String DROID_HOSPITAL_LOG_TAG = "br.feevale.droidhospital";
+	public static boolean ONLINE = true;
 	
 	private EditText loginEditText;
 	private EditText passwordEditText;
@@ -47,7 +48,7 @@ public class MainActivity extends Activity {
 		String usuario = loginEditText.getText().toString();
 		String senha = passwordEditText.getText().toString();
 
-		if (setUpDadosSocket(usuario, senha)) {
+		if (checkLogin(usuario, senha)) {
 
 			Intent intent = new Intent(getApplicationContext(),
 					ListaQuartosActivity.class);
@@ -61,14 +62,14 @@ public class MainActivity extends Activity {
 		}
 	}
 
-<<<<<<< HEAD
 	private boolean checkLogin(String usuario, String senha) {
-		if (true) {
+		if (ONLINE) {
+			return setUpDadosSocket(usuario, senha);
+		} else {
 			return true;
 		}
-=======
+	}
 	private boolean setUpDadosSocket(String usuario, String senha) {
->>>>>>> 8f5da1dc643066079c469c4fa4a8bb437063235c
 		String[] dados = new String[2];
 
 		dados[0] = usuario;
