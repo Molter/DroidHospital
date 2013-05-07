@@ -5,11 +5,16 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.adapters.MedicamentosAdapter;
+import br.feevale.droidhospital.db.Interpretador;
+import br.feevale.droidhospital.db.Quarto;
 import br.feevale.droidhospital.pojos.Medicamento;
 
 public class ListaMedicamentosActivity extends Activity implements OnItemClickListener {
@@ -33,19 +38,30 @@ public class ListaMedicamentosActivity extends Activity implements OnItemClickLi
 
 
 	private void setUpMedicamentos() {
-		medicamentos = Medicamento.medicamentos;
-		ArrayList<Medicamento> newQuartos = new ArrayList<Medicamento>();
-		String ultimoMedicamento = ""; 
-		
-		for (int i = 0; i < medicamentos.size(); i++) {
-			if(ultimoMedicamento != medicamentos.get(i).getPrincipio()) {
-				newQuartos.add(medicamentos.get(i));
-				ultimoMedicamento = medicamentos.get(i).getPrincipio();
-			}else{
-				ultimoMedicamento = medicamentos.get(i).getPrincipio();
+		try {
+
+			Interpretador interpretador = new Interpretador();
+
+			interpretador.setCdTransacao(Interpretador.LISTA_MEDICAMENTOS);
+
+			EnviaTransacao enviador = new EnviaTransacao(interpretador);
+
+			try {
+
+				enviador.envia();
+
+				medicamentos =  (ArrayList<Medicamento>) enviador.recebe();
+
+			} finally {
+				enviador.fechaSocket();
 			}
+
+		} catch (Exception e) {
+			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG, getString(R.string.not_connected));
+			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+			finish();
 		}
-		medicamentos = newQuartos;
 	}
 
 

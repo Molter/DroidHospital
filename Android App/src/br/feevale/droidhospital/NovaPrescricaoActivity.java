@@ -1,9 +1,8 @@
 package br.feevale.droidhospital;
 
-import br.feevale.droidhospital.pojos.Prescricao;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -72,7 +71,7 @@ public class NovaPrescricaoActivity extends Activity {
 
 	public void adicionarPrescricao(View v){
 
-		Toast.makeText(getApplicationContext(), "Paciente João adicionado", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "Paciente Joï¿½o adicionado", Toast.LENGTH_LONG).show();
 		finish();
 		
 		/*

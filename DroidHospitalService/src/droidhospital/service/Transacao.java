@@ -46,6 +46,8 @@ public abstract class Transacao {
 						
 					case Interpretador.LISTA_MEDICAMENTOS:
 						
+						transacao = new ListaMedicamentos();
+						
 						break;
 						
 					default:

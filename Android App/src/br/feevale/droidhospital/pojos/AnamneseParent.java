@@ -7,10 +7,15 @@ import br.feevale.droidhospital.R;
 public class AnamneseParent {
 	
 	public static ArrayList<AnamneseParent> anamneseParents = new ArrayList<AnamneseParent>(){
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		{
 			add(new AnamneseParent(1,"Dados Gerais", R.layout.dados_gerais));
-			add(new AnamneseParent(2,"Aplicações Efetuadas", R.layout.dados_gerais));
-			add(new AnamneseParent(3,"Aplicações Futuras", R.layout.dados_gerais));
+			add(new AnamneseParent(2,"Aplicaï¿½ï¿½es Efetuadas", R.layout.dados_gerais));
+			add(new AnamneseParent(3,"Aplicaï¿½ï¿½es Futuras", R.layout.dados_gerais));
 		}
 	};
 	
