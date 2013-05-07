@@ -19,7 +19,8 @@ import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.Paciente;
 
 public class ListaPacientesActivity extends Activity implements OnItemClickListener {
-		ArrayList<Paciente> pacientes;
+	
+		private ArrayList<Paciente> pacientes;
 
 		public static final String ID_VALUE = "id";
 		
@@ -29,7 +30,6 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 			setContentView(R.layout.pacientes_layout);
 			
 			ListView pacientesListView = (ListView) findViewById(R.id.pacientes_list_view);
-			
 			
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);

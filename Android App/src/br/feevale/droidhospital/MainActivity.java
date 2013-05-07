@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 				enviador.envia();
 
 				tipoUsuario = (String) enviador.recebe();
-
+				
 			} finally {
 				enviador.fechaSocket();
 			}

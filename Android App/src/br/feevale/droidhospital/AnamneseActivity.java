@@ -17,8 +17,8 @@ import br.feevale.droidhospital.db.PacienteDescription;
 
 public class AnamneseActivity extends Activity {
 	public static String ID_PACIENTE = "id";
-	long idPaciente;
-	PacienteDescription dadosPaciente;
+	private long idPaciente;
+	private PacienteDescription dadosPaciente;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,9 @@ public class AnamneseActivity extends Activity {
 		
 		setUpDadosSocket();
 		
-		ExpandableListView expandableList = (ExpandableListView)findViewById(R.id.anamnese_expandablelistview);
+		ExpandableListView expandableList = (ExpandableListView) findViewById(R.id.anamnese_expandablelistview);
 		
-		AnamneseAdapter adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente);
+		AnamneseAdapter adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente );
 		expandableList.setAdapter(adapter);
 	}
 	
@@ -58,9 +58,9 @@ public class AnamneseActivity extends Activity {
 				enviador.envia();
 				
 				dadosPaciente = (PacienteDescription) enviador.recebe();
-				
 
 			} finally {
+				
 				enviador.fechaSocket();
 				
 				TextView  pacientName = (TextView) findViewById(R.id.anamnese_pacient_name);
@@ -70,6 +70,7 @@ public class AnamneseActivity extends Activity {
 			}
 
 		} catch (Exception e) {
+			
 			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG, getString(R.string.not_connected));
 			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
 			finish();

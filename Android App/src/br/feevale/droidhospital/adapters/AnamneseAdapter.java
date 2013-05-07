@@ -2,7 +2,6 @@ package br.feevale.droidhospital.adapters;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Random;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -11,33 +10,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 import br.feevale.droidhospital.R;
+import br.feevale.droidhospital.db.Aplicacao;
 import br.feevale.droidhospital.db.PacienteDescription;
 import br.feevale.droidhospital.pojos.AnamneseParent;
-import br.feevale.droidhospital.pojos.Aplicacoes;
 
 public class AnamneseAdapter implements ExpandableListAdapter {
 
-	Context context;
+	private Context context;
 
-	ArrayList<AnamneseParent> parents;
-	LayoutInflater inflater;
+	private ArrayList<AnamneseParent> parents;
+	private LayoutInflater inflater;
 
 	private PacienteDescription pacientDescription;
 	
-	Aplicacoes aplicacoes;
-
-	public AnamneseAdapter(Context context, PacienteDescription pacientDescription) {
+	private ArrayList<Aplicacao> aplicacoesEfetuadas;
+	private ArrayList<Aplicacao> aplicacoesFuturas;
+	
+	public AnamneseAdapter(Context context, PacienteDescription pacientDescription ) {
+		
 		this.context = context;
+		
 		parents = AnamneseParent.anamneseParents;
-		Toast.makeText(context,String.valueOf( parents.size()), Toast.LENGTH_LONG).show();
 		
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		this.pacientDescription = pacientDescription;
-		//Ramdow Aplicacoes
-		aplicacoes = new Aplicacoes();
+		
+		this.aplicacoesEfetuadas = this.pacientDescription.getAplicacoesEfetuadas();
+		this.aplicacoesFuturas = this.pacientDescription.getAplicacoesFuturas();
 	}
 
 	@Override
@@ -66,13 +67,11 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	}
 
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded,
-			View convertView, ViewGroup parent) {
+	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
 		View layout = inflater.inflate(R.layout.grouplayout, null);
 
-		TextView itemName = (TextView) layout
-				.findViewById(R.id.amnese_expandable_group_name);
+		TextView itemName = (TextView) layout.findViewById(R.id.amnese_expandable_group_name);
 
 		itemName.setText(parents.get(groupPosition).getName());
 
@@ -117,67 +116,54 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int groupPosition, int childPosition,
-			boolean isLastChild, View convertView, ViewGroup parent) {
+	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
 		switch (groupPosition) {
 
-		case 0:
-			return configureAnamnese();
-		case 1:
-			return aplicacoesEfetuadasView(childPosition);
-		case 2:
-			return aplicacoesEfetuadasView(childPosition);
-			//return aplicacoesFuturasView(childPosition);
-		default:
-			return null;
+			case 0:
+				return configureAnamnese();
+			case 1:
+				return aplicacoesEfetuadasView(childPosition);
+			case 2:
+				return aplicacoesFuturasView(childPosition);
+			default:
+				return null;
 		}
 	}
 
 	private View aplicacoesFuturasView(int childPosition) {
-		// aplicacoes
-		Random r = new Random();
-		int x = r.nextInt(aplicacoes.countAplicacaoesFuturas());
-		
+
 		View layout = inflater.inflate(R.layout.aplicacoes, null);
 		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
-		data.setText(aplicacoes.getAplicacoes().get(x).getDataHoraAplicacao());
+		data.setText( aplicacoesFuturas.get( childPosition ).getHoraAplicado().toString() );
 
 		TextView nome = (TextView) layout.findViewById(R.id.aplicacoes_nome);
-		nome.setText(aplicacoes.getAplicacoes().get(x).getNomeMedicamento());
+		nome.setText(aplicacoesFuturas.get( childPosition ).getNomeMedicamento());
 
-		TextView dosagem = (TextView) layout
-				.findViewById(R.id.aplicacoes_dosagem);
-		dosagem.setText(aplicacoes.getAplicacoes().get(x).getDosagem());
+		TextView dosagem = (TextView) layout.findViewById(R.id.aplicacoes_dosagem);
+		dosagem.setText(aplicacoesFuturas.get( childPosition ).getConcentracaoMedicamento() ); // TODO tem que ver isso
 
 		return layout;
 	}
 
 	private View aplicacoesEfetuadasView(int childPosition) {
-		Random r = new Random();
-		int totalAplicacoes = aplicacoes.getAplicacoes().size();
 		
-		int x = r.nextInt(totalAplicacoes);
-		
-		if(x >= totalAplicacoes){
-			x = 2;
-		}
-
 		View layout = inflater.inflate(R.layout.aplicacoes, null);
+		
 		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
-		data.setText(aplicacoes.getAplicacoes().get(x).getDataHoraAplicacao());
+		data.setText( aplicacoesEfetuadas.get( childPosition ).getHoraAplicado().toString() );
 
 		TextView nome = (TextView) layout.findViewById(R.id.aplicacoes_nome);
-		nome.setText(aplicacoes.getAplicacoes().get(x).getNomeMedicamento());
+		nome.setText( aplicacoesEfetuadas.get( childPosition ).getNomeMedicamento() );
 
-		TextView dosagem = (TextView) layout
-				.findViewById(R.id.aplicacoes_dosagem);
-		dosagem.setText(aplicacoes.getAplicacoes().get(x).getDosagem());
+		TextView dosagem = (TextView) layout.findViewById(R.id.aplicacoes_dosagem);
+		dosagem.setText( aplicacoesEfetuadas.get( childPosition ).getConcentracaoMedicamento() ); // TODO tem que ver isso
 
 		return layout;
 	}
 
 	private View configureAnamnese() {
+
 		View layout = inflater.inflate(R.layout.dados_gerais, null);
 
 		TextView idadeTextView = (TextView) layout.findViewById(R.id.dados_gerais_data_entrada);
@@ -216,10 +202,10 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		case 0:
 			return 1;
 		case 1:
-			return aplicacoes.countAplicacaoesEfetuadas();
+			return aplicacoesEfetuadas.size();
 
 		case 2:
-			return aplicacoes.countAplicacaoesFuturas();
+			return aplicacoesFuturas.size();
 
 		default:
 			break;
@@ -229,7 +215,6 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 
 	@Override
 	public long getCombinedChildId(long groupId, long childId) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
