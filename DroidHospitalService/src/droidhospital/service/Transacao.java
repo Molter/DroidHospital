@@ -50,6 +50,12 @@ public abstract class Transacao {
 						
 						break;
 						
+					case Interpretador.BUSCA_MEDICAMENTO:
+						
+						transacao = new BuscaMedicamento();
+						
+						break;
+						
 					default:
 						throw new DroidHospitalException( "C�digo de transa��o (" + interpretador.getCdTransacao() + ") desconhecido." );
 				}

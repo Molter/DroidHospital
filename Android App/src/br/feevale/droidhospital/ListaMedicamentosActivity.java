@@ -3,6 +3,7 @@ package br.feevale.droidhospital;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -65,10 +66,6 @@ public class ListaMedicamentosActivity extends Activity implements
 
 					setUpMedicamentos(edit_busca.getText().toString());
 
-					Toast.makeText(getBaseContext(),
-							"buscando.", Toast.LENGTH_SHORT)
-							.show();
-
 					if (start == 50) {
 						Toast.makeText(getBaseContext(),
 								"Limite do campo atingido.", Toast.LENGTH_SHORT)
@@ -125,20 +122,14 @@ public class ListaMedicamentosActivity extends Activity implements
 	public void onItemClick(AdapterView<?> arg0, View view, int position,
 			long id) {
 		if (medicamentos.get(position).getIdMedicamento() > -1) {
-			// Toast.makeText(getApplicationContext(), "Medicamento" +
-			// String.valueOf(id), Toast.LENGTH_LONG).show();
-			/*
-			 * Intent intent = new Intent(getApplicationContext(),
-			 * ListaPacientesActivity.class); intent.putExtra(ID_VALUE, id);
-			 * startActivity(intent); // implementar retorno para tela de
-			 * prescrição
-			 */
-			Toast.makeText(getBaseContext(), "Nennhum medicamento localizado",
+			Intent resultIntent = getIntent();
+			resultIntent.putExtra(ID_VALUE,medicamentos.get(position).getIdMedicamento().toString());
+			setResult(RESULT_OK, resultIntent);
+			finish();
+		} else {
+			Toast.makeText(getBaseContext(), R.string.nenhum_medicamento_encontrado,
 					Toast.LENGTH_SHORT).show();
-
 		}
-		Toast.makeText(getBaseContext(), "Implementar retorno para prescricao",
-				Toast.LENGTH_SHORT).show();
 
 	}
 

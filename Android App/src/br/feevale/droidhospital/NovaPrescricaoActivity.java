@@ -3,14 +3,20 @@ package br.feevale.droidhospital;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.feevale.comunicacao.EnviaTransacao;
+import br.feevale.droidhospital.db.Interpretador;
+import br.feevale.droidhospital.db.Medicamento;
+import br.feevale.droidhospital.db.MedicamentoDescription;
 
 public class NovaPrescricaoActivity extends Activity {
 
+	Integer idMedicamento;
 	EditText edPrincipio;
 	EditText edReferencia;
 	EditText edLaboratorio;
@@ -20,7 +26,9 @@ public class NovaPrescricaoActivity extends Activity {
 	EditText edQtd_aplicacoes;
 	EditText edIntervalo;	
 	
-	private final int LISTA_MEDICAMENTOS = 301; 
+	Medicamento medicamento;
+	
+	public final static int LISTA_MEDICAMENTOS = 301; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +111,68 @@ public class NovaPrescricaoActivity extends Activity {
 		p.setQtd_aplicacoes(descQtdAplicacoes);
 		p.setIntervalo(descIntervalo);
 		*/
+		
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		if (requestCode == LISTA_MEDICAMENTOS) {
+
+			switch (resultCode) {
+			case RESULT_OK:
+				medicamento = new Medicamento();
+				String id_medicamento;
+				id_medicamento = data.getStringExtra(ListaMedicamentosActivity.ID_VALUE);
+				Log.d(MainActivity.DROID_HOSPITAL_LOG_TAG, "id_medicamento: "+id_medicamento);
+
+				try {
+
+					MedicamentoDescription interpretador = new MedicamentoDescription(
+							id_medicamento);
+
+					interpretador.setCdTransacao(Interpretador.BUSCA_MEDICAMENTO);
+
+					EnviaTransacao enviador = new EnviaTransacao(interpretador);
+
+					try {
+
+						enviador.envia();
+
+						medicamento = (Medicamento) enviador.recebe();
+
+					} finally {
+						enviador.fechaSocket();
+					}
+
+				} catch (Exception e) {
+					Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG,
+							getString(R.string.not_connected));
+					Toast.makeText(getApplicationContext(),
+							getString(R.string.not_connected), Toast.LENGTH_LONG)
+							.show();
+					e.printStackTrace();
+				}
+
+				idMedicamento = medicamento.getIdMedicamento();
+				edPrincipio.setText(medicamento.getPrincipio());
+				edReferencia.setText(medicamento.getFantasia());
+				edLaboratorio.setText(medicamento.getLaboratorio());
+				edConcentracao.setText(medicamento.getConcentracao());
+				edPosologia.setText(medicamento.getFormaFarmaceutica());
+
+				break;
+			case RESULT_CANCELED:
+				
+				break;
+
+			default:
+				
+				break;
+			}
+			
+			
+		}
 		
 	}
 	

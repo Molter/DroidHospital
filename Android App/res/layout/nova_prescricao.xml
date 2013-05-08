@@ -36,7 +36,6 @@
                 android:layout_width="234dp"
                 android:layout_height="match_parent"
                 android:text="@string/paciente" />
-            
         </LinearLayout>
 
         <LinearLayout
@@ -57,24 +56,22 @@
                 android:layout_height="match_parent"
                 android:text="@string/paciente"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-            
         </LinearLayout>
-        
     </LinearLayout>
 
     <TextView
         android:id="@+id/titulo_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_alignLeft="@+id/linearLayout1"
         android:layout_alignRight="@+id/linearLayout1"
         android:layout_below="@+id/linearLayout1"
+        android:gravity="center"
+        android:paddingBottom="@dimen/margem_vertical"
+        android:paddingLeft="@dimen/margem_horizontal"
+        android:paddingRight="@dimen/margem_horizontal"
+        android:paddingTop="@dimen/margem_vertical"
         android:text="@string/titulo_prescricao"
-	    android:paddingBottom="@dimen/margem_vertical"
-	    android:paddingLeft="@dimen/margem_horizontal"
-	    android:paddingRight="@dimen/margem_horizontal"
-	    android:paddingTop="@dimen/margem_vertical"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
@@ -106,6 +103,7 @@
                 android:layout_width="202dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:enabled="false"
                 android:textSize="@dimen/edit_size" >
             </EditText>
 
@@ -133,7 +131,7 @@
                 android:id="@+id/referencia_edit_text"
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
-                
+                android:enabled="false"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
 
@@ -154,7 +152,7 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                
+                android:enabled="false"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
 
@@ -175,7 +173,7 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                
+                android:enabled="false"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
 
@@ -196,7 +194,7 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                
+                android:enabled="false"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
 
@@ -217,7 +215,6 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
 
@@ -238,7 +235,6 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
 
