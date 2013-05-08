@@ -73,13 +73,6 @@ public class ListaMedicamentos extends Transacao {
 
 					medicamentos.add(medicamento);
 
-					String str_medicamento = "id: "+ medicamento.getIdMedicamento();
-					str_medicamento += " -principio: " + medicamento.getPrincipio();
-					str_medicamento += " -laboratorio: "+ medicamento.getLaboratorio();
-					str_medicamento += " -fantasia: "+ medicamento.getFantasia();
-					str_medicamento += " -concentracao: "+ medicamento.getConcentracao();
-					str_medicamento += " -forma: "+ medicamento.getFormaFarmaceutica();
-					System.out.println(str_medicamento);
 				}
 
 			} catch (Exception e) {
