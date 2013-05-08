@@ -2,24 +2,11 @@ package br.feevale.droidhospital.pojos;
 
 import java.util.ArrayList;
 
-public class Medicamento {
-	@SuppressWarnings("serial")
-	public static ArrayList<Medicamento> medicamentos = new ArrayList<Medicamento>() {
+public class Medicamentos {
+	
+	private static ArrayList<Medicamentos> medicamentos;
 
-		{
-			add(new Medicamento(1, "Paracetamol", "Aché", "Tylenol", "250mg","cp"));
-			add(new Medicamento(2, "Paracetamol", "Aché", "Tylenol Sinus","250mg", "cp"));
-			add(new Medicamento(3, "Paracetamol", "Aché", "Tylenol", "500mg","cp"));
-			add(new Medicamento(4, "Paracetamol", "Bayer", "Vick Vaporub","100ml", "pt"));
-			add(new Medicamento(5, "Paracetamol", "Bayer", "Bayernol", "750mg","cp"));
-			add(new Medicamento(6, "Paracetamol", "Bayer", "Vick Vaporub","300ml", "pt"));
-			add(new Medicamento(7, "Paracetamol", "P&G", "Macarol", "250ml","se"));
-			add(new Medicamento(8, "Paracetamol", "P&G", "Macarol", "250ml","am"));
-			add(new Medicamento(9, "Paracetamol", "P&G", "Macarol", "250mg","cp"));
-		}
-	};
-
-	public static Medicamento getMedicamentoById(long id) {
+	public static Medicamentos getMedicamentoById(long id) {
 		for (int i = 0; i < medicamentos.size(); i++) {
 			if (medicamentos.get(i).getId() == id) {
 				return medicamentos.get(i);
@@ -31,12 +18,12 @@ public class Medicamento {
 	private long id;
 	private String principio, laboratorio, fantasia, concentracao, forma;
 
-	public static ArrayList<Medicamento> getMedicamentos() {
+	public static ArrayList<Medicamentos> getMedicamentos() {
 		return medicamentos;
 	}
 
-	public static void setMedicamentos(ArrayList<Medicamento> medicamentos) {
-		Medicamento.medicamentos = medicamentos;
+	public static void setMedicamentos(ArrayList<Medicamentos> medicamentos) {
+		Medicamentos.medicamentos = medicamentos;
 	}
 
 	public String getPrincipio() {
@@ -87,7 +74,7 @@ public class Medicamento {
 		this.id = id;
 	}
 
-	public Medicamento(long id, String principio, String laboratorio,
+	public Medicamentos(long id, String principio, String laboratorio,
 			String fantasia, String concentracao, String forma) {
 		this.id = id;
 		this.principio = principio;

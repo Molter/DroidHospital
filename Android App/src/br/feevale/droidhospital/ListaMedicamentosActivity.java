@@ -16,8 +16,8 @@ import android.widget.Toast;
 import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.adapters.MedicamentosAdapter;
 import br.feevale.droidhospital.db.Interpretador;
+import br.feevale.droidhospital.db.Medicamento;
 import br.feevale.droidhospital.db.MedicamentoDescription;
-import br.feevale.droidhospital.pojos.Medicamento;
 
 public class ListaMedicamentosActivity extends Activity implements OnItemClickListener {
 	public static final String ID_VALUE = "id";
@@ -96,6 +96,7 @@ public class ListaMedicamentosActivity extends Activity implements OnItemClickLi
 				enviador.envia();
 
 				medicamentos = (ArrayList<Medicamento>) enviador.recebe();
+				Log.d(MainActivity.DROID_HOSPITAL_LOG_TAG, medicamentos.size()+" - "+medicamentos.get(0).getFantasia());
 
 			} finally {
 				enviador.fechaSocket();

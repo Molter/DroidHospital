@@ -4,19 +4,19 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import br.feevale.droidhospital.db.DadosId;
 import br.feevale.droidhospital.db.Medicamento;
+import br.feevale.droidhospital.db.MedicamentoDescription;
 import droidhospital.util.Conexao;
 import droidhospital.util.Query;
 
 public class ListaMedicamentos extends Transacao {
 
 	private ArrayList<Medicamento> medicamentos;
-	private DadosId dados;
+	private MedicamentoDescription dados;
 
 	@Override
 	public void setDadosRecebidos(Serializable dadosRecebidos) {
-		dados = (DadosId) dadosRecebidos;
+		dados = (MedicamentoDescription) dadosRecebidos;
 
 	}
 
@@ -28,9 +28,9 @@ public class ListaMedicamentos extends Transacao {
 
 			StringBuilder sbQuery = new StringBuilder();
 
-			String nome_medicamento = dados.getId();
+			String nome_medicamento = dados.getBusca_medicamento();
 
-			String sql = "select idmedicamento id, " 
+			String sql = "select idmedicamento id, "
 					+ "       farmaco principio, "
 					+ "       detentor laboratorio, "
 					+ "       medicamento_referencia fantasia, "
@@ -62,16 +62,24 @@ public class ListaMedicamentos extends Transacao {
 					Medicamento medicamento = new Medicamento();
 
 					medicamento.setIdMedicamento(resultSet.getInt("id"));
-					medicamento.setFarmaco(resultSet.getString("principio"));
-					medicamento.setDetentor(resultSet.getString("laboratorio"));
-					medicamento.setMedicamentoReferencia(resultSet
-							.getString("fantasia"));
+					medicamento.setPrincipio(resultSet.getString("principio"));
+					medicamento.setLaboratorio(resultSet
+							.getString("laboratorio"));
+					medicamento.setFantasia(resultSet.getString("fantasia"));
 					medicamento.setConcentracao(resultSet
 							.getString("concentracao"));
 					medicamento.setFormaFarmaceutica(resultSet
 							.getString("forma"));
 
 					medicamentos.add(medicamento);
+
+					String str_medicamento = "id: "+ medicamento.getIdMedicamento();
+					str_medicamento += " -principio: " + medicamento.getPrincipio();
+					str_medicamento += " -laboratorio: "+ medicamento.getLaboratorio();
+					str_medicamento += " -fantasia: "+ medicamento.getFantasia();
+					str_medicamento += " -concentracao: "+ medicamento.getConcentracao();
+					str_medicamento += " -forma: "+ medicamento.getFormaFarmaceutica();
+					System.out.println(str_medicamento);
 				}
 
 			} catch (Exception e) {

@@ -20,6 +20,8 @@ public class NovaPrescricaoActivity extends Activity {
 	EditText edQtd_aplicacoes;
 	EditText edIntervalo;	
 	
+	private final int LISTA_MEDICAMENTOS = 301; 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,10 +65,8 @@ public class NovaPrescricaoActivity extends Activity {
 	
     public void listaMedicamentos(View v) {
 		Intent chamaTelaLista = new Intent(getBaseContext(), ListaMedicamentosActivity.class);
-		startActivity(chamaTelaLista);
+		startActivityForResult(chamaTelaLista, LISTA_MEDICAMENTOS);
     	
-    	Toast.makeText(getApplicationContext(), "Chama lista de medicamentos", Toast.LENGTH_LONG).show();
-    	//finish();
 	}
 
 	public void adicionarPrescricao(View v){
@@ -103,7 +103,6 @@ public class NovaPrescricaoActivity extends Activity {
 		p.setQtd_aplicacoes(descQtdAplicacoes);
 		p.setIntervalo(descIntervalo);
 		*/
-		
 		
 	}
 	
