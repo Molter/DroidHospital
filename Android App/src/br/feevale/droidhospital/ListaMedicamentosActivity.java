@@ -60,22 +60,29 @@ public class ListaMedicamentosActivity extends Activity implements
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 
-				edit_busca.removeTextChangedListener(this);
+				if (medicamentos.size() > 0) {
+					edit_busca.removeTextChangedListener(this);
 
-				setUpMedicamentos(edit_busca.getText().toString());
+					setUpMedicamentos(edit_busca.getText().toString());
 
-				if (start == 50) {
 					Toast.makeText(getBaseContext(),
-							"Limite do campo atingido.", Toast.LENGTH_SHORT)
+							"buscando.", Toast.LENGTH_SHORT)
 							.show();
-					edit_busca.setText(s.toString().substring(0,
-							s.toString().length() - 1));
-					edit_busca.setSelection(s.toString().length() - 1);
+
+					if (start == 50) {
+						Toast.makeText(getBaseContext(),
+								"Limite do campo atingido.", Toast.LENGTH_SHORT)
+								.show();
+						edit_busca.setText(s.toString().substring(0,
+								s.toString().length() - 1));
+						edit_busca.setSelection(s.toString().length() - 1);
+					}
+
+					atualizaLista();
+
+					edit_busca.addTextChangedListener(this);
+
 				}
-
-				atualizaLista();
-
-				edit_busca.addTextChangedListener(this);
 			}
 
 		});
@@ -98,8 +105,6 @@ public class ListaMedicamentosActivity extends Activity implements
 				enviador.envia();
 
 				medicamentos = (ArrayList<Medicamento>) enviador.recebe();
-				Log.d(MainActivity.DROID_HOSPITAL_LOG_TAG, medicamentos.size()
-						+ " - " + medicamentos.get(0).getFantasia());
 
 			} finally {
 				enviador.fechaSocket();
@@ -112,26 +117,45 @@ public class ListaMedicamentosActivity extends Activity implements
 					getString(R.string.not_connected), Toast.LENGTH_LONG)
 					.show();
 			e.printStackTrace();
-			finish();
+			// finish();
 		}
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View view, int position,
 			long id) {
-		// Toast.makeText(getApplicationContext(), "Medicamento" +
-		// String.valueOf(id), Toast.LENGTH_LONG).show();
-		/*
-		 * Intent intent = new Intent(getApplicationContext(),
-		 * ListaPacientesActivity.class); intent.putExtra(ID_VALUE, id);
-		 * startActivity(intent); // implementar retorno para tela de prescrição
-		 */
+		if (medicamentos.get(position).getIdMedicamento() > -1) {
+			// Toast.makeText(getApplicationContext(), "Medicamento" +
+			// String.valueOf(id), Toast.LENGTH_LONG).show();
+			/*
+			 * Intent intent = new Intent(getApplicationContext(),
+			 * ListaPacientesActivity.class); intent.putExtra(ID_VALUE, id);
+			 * startActivity(intent); // implementar retorno para tela de
+			 * prescrição
+			 */
+			Toast.makeText(getBaseContext(), "Nennhum medicamento localizado",
+					Toast.LENGTH_SHORT).show();
+
+		}
+		Toast.makeText(getBaseContext(), "Implementar retorno para prescricao",
+				Toast.LENGTH_SHORT).show();
+
 	}
 
 	private void atualizaLista() {
 
+		Log.d(MainActivity.DROID_HOSPITAL_LOG_TAG, "qtd medicamentos na lista:"
+				+ medicamentos.size());
+
+		if (medicamentos.size() == 0) {
+			Medicamento medic = new Medicamento();
+			medic.setMedicamentoVazio();
+			medicamentos.add(medic);
+		}
+
 		MedicamentosAdapter adapter = new MedicamentosAdapter(this,
 				medicamentos);
+
 		medicamentosListView.setAdapter(adapter);
 
 		adapter.notifyDataSetChanged();
