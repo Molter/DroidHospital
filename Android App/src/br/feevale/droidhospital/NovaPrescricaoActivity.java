@@ -16,16 +16,13 @@ import android.widget.Toast;
 import br.feevale.droidhospital.fragments.HoraInicialDatePicker;
 import br.feevale.droidhospital.fragments.IntervaloDialog;
 import br.feevale.droidhospital.fragments.QtdAplicacoesDialog;
-
-
-public class NovaPrescricaoActivity extends FragmentActivity{
-
 import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.Medicamento;
 import br.feevale.droidhospital.db.MedicamentoDescription;
 
-public class NovaPrescricaoActivity extends Activity {
+public class NovaPrescricaoActivity extends FragmentActivity{
+
 
 	Integer idMedicamento;
 	EditText edPrincipio;
