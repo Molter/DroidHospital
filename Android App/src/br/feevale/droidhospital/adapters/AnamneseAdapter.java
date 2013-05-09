@@ -31,8 +31,11 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		
 		this.context = context;
 		
-		parents = AnamneseParent.anamneseParents;
-		
+		parents = new ArrayList<AnamneseParent>();
+		parents.add(new AnamneseParent(1, context.getString(R.string.general_info), R.layout.dados_gerais));
+		parents.add(new AnamneseParent(2, context.getString(R.string.applications_made), R.layout.dados_gerais));
+		parents.add(new AnamneseParent(3, context.getString(R.string.applications_todo), R.layout.dados_gerais));
+				
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		this.pacientDescription = pacientDescription;

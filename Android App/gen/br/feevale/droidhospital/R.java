@@ -282,6 +282,7 @@ public final class R {
         public static final int leito=0x7f060016;
         public static final int login=0x7f060003;
         public static final int login_field=0x7f060004;
+        public static final int medice_required=0x7f06002f;
         public static final int minute_lower=0x7f06002d;
         public static final int minutes=0x7f060029;
         public static final int minutes_lower=0x7f06002c;
@@ -299,6 +300,8 @@ public final class R {
         public static final int referencia=0x7f06001b;
         public static final int room=0x7f060007;
         public static final int rooms=0x7f060006;
+        public static final int saved_sucessuful=0x7f060030;
+        public static final int saved_wrong=0x7f060031;
         public static final int smoker=0x7f06000e;
         public static final int title_activity_nova_prescricao=0x7f060015;
         public static final int titulo_prescricao=0x7f060018;

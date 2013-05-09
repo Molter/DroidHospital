@@ -105,7 +105,7 @@
                 android:layout_weight="1"
                 android:enabled="false"
                 android:textSize="@dimen/edit_size" 
-                android:text="Paracetamol"
+                android:text="@string/principio"
                 >
             </EditText>
 
@@ -134,7 +134,7 @@
                 android:id="@+id/referencia_edit_text"
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
-                android:text="ISS B3"
+                android:text="@string/referencia"
                 android:enabled="false"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
@@ -157,7 +157,7 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Bayer"
+                android:text="@string/laboratorio"
                 android:enabled="false"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
@@ -180,7 +180,7 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="500mg"
+                android:text="@string/concentracao"
                 android:enabled="false"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
@@ -203,7 +203,7 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Comprimidos"
+                android:text="@string/posologia"
                 android:enabled="false"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
@@ -256,7 +256,7 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="01"
+                android:text="1"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_marginLeft="8dp"
                 android:onClick="setQtdAplicacoes"
@@ -288,7 +288,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:onClick="setIntervalo"
-                android:text="1 hora e 30 minutos"
+                android:text="1 hora"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
@@ -300,7 +300,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/LinearLayout01"
         android:layout_alignParentBottom="true"
-        android:onClick="incluiPrescricao"
+        android:onClick="adicionarPrescricao"
         android:text="@string/botao_incluir" />
 
     

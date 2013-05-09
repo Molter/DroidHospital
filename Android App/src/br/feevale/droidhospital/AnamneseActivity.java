@@ -16,6 +16,7 @@ import android.widget.Toast;
 import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.adapters.AnamneseAdapter;
 import br.feevale.droidhospital.db.DadosId;
+import br.feevale.droidhospital.db.DadosUsuario;
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.PacienteDescription;
 
@@ -106,9 +107,9 @@ public class AnamneseActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, MainActivity.USER_TYPE_NONE);
+		String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, DadosUsuario.FAIL);
 		
-		if (userType.equalsIgnoreCase(MainActivity.USER_TYPE_NURSE)) {
+		if (userType.equalsIgnoreCase(DadosUsuario.TIPO_ENFERMEIRO)) {
 		    MenuItem menuItem = menu.getItem(R.id.action_agenda);
 		    menuItem.setVisible(true);
 		}

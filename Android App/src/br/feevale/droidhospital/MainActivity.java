@@ -13,17 +13,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.db.DadosLogin;
+import br.feevale.droidhospital.db.DadosUsuario;
 import br.feevale.droidhospital.db.Interpretador;
 
 public class MainActivity extends Activity {
 
-	public static final String USER_TYPE_PREFERENCE = "N";
-	public static final String USER_TYPE_DOCTOR = "M";
-	public static final String USER_TYPE_NURSE = "E";
-	public static final String USER_TYPE_NONE = "N";
+	public static final String USER_TYPE_PREFERENCE = "br.feevale.droidhospital.usertype";
+	public static final String USER_ID_PREFERENCE = "br.feevale.droidhospital.userid";
 
 	public static String DROID_HOSPITAL_LOG_TAG = "br.feevale.droidhospital";
-	
+
 	private EditText loginEditText;
 	private EditText passwordEditText;
 
@@ -40,7 +39,6 @@ public class MainActivity extends Activity {
 		passwordEditText = (EditText) findViewById(R.id.password_edit_text);
 	}
 
-
 	public void login(View v) {
 
 		String usuario = loginEditText.getText().toString();
@@ -48,12 +46,14 @@ public class MainActivity extends Activity {
 
 		if (setUpDadosSocket(usuario, senha)) {
 
-			Intent intent = new Intent(getApplicationContext(),ListaQuartosActivity.class);
+			Intent intent = new Intent(getApplicationContext(),
+					ListaQuartosActivity.class);
 			startActivity(intent);
 
 		} else {
 
-			Toast.makeText(getApplicationContext(),getString(R.string.bad_login), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.bad_login), Toast.LENGTH_LONG).show();
 			// passwordEditText.setText( "" );
 		}
 	}
@@ -64,7 +64,8 @@ public class MainActivity extends Activity {
 		dados[0] = usuario;
 		dados[1] = senha;
 
-		String tipoUsuario = null;
+		DadosUsuario dadosUsuario = new DadosUsuario();
+		;
 
 		try {
 
@@ -77,39 +78,44 @@ public class MainActivity extends Activity {
 			try {
 				enviador.envia();
 
-				tipoUsuario = (String) enviador.recebe();
-				
+				dadosUsuario = (DadosUsuario) enviador.recebe();
+
 			} finally {
 				enviador.fechaSocket();
 			}
 
 		} catch (Exception e) {
-			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG, getString(R.string.not_connected));
-			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
+			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG,
+					getString(R.string.not_connected));
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.not_connected), Toast.LENGTH_LONG)
+					.show();
 			e.printStackTrace();
-			//finish();
+			// finish();
 		}
 
-		if (tipoUsuario == null) {
+		if (dadosUsuario.getIdUsuario() == null) {
 			Toast.makeText(getApplicationContext(),
 					getString(R.string.not_connected), Toast.LENGTH_LONG)
 					.show();
 			return false;
 		}
 
-		if (tipoUsuario.equalsIgnoreCase("N")) {
-			return false;
-		}
-		
-		if(tipoUsuario.equalsIgnoreCase("M") || tipoUsuario.equalsIgnoreCase("E")) {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		if ((dadosUsuario.getTipoUsuario().equals(DadosUsuario.TIPO_MEDICO))
+				|| (dadosUsuario.getTipoUsuario()
+						.equals(DadosUsuario.TIPO_ENFERMEIRO))) {
+
+			SharedPreferences prefs = PreferenceManager
+					.getDefaultSharedPreferences(getApplicationContext());
 			Editor editor = prefs.edit();
-			editor.putString(USER_TYPE_PREFERENCE, tipoUsuario);
+			editor.putString(USER_TYPE_PREFERENCE,
+					dadosUsuario.getTipoUsuario());
+			editor.putInt(USER_ID_PREFERENCE, dadosUsuario.getIdUsuario());
 			editor.commit();
-			
+
 			return true;
 		}
-		
+
 		return false;
 	}
 }

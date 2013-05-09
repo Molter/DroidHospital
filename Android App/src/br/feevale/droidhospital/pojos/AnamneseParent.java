@@ -1,24 +1,7 @@
 package br.feevale.droidhospital.pojos;
 
-import java.util.ArrayList;
-
-import br.feevale.droidhospital.R;
 
 public class AnamneseParent {
-	
-	public static ArrayList<AnamneseParent> anamneseParents = new ArrayList<AnamneseParent>(){
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
-		{
-			add(new AnamneseParent(1,"Dados Gerais", R.layout.dados_gerais));
-			add(new AnamneseParent(2,"Aplica��es Efetuadas", R.layout.dados_gerais));
-			add(new AnamneseParent(3,"Aplica��es Futuras", R.layout.dados_gerais));
-		}
-	};
-	
 	
 	private long id;
 	private String name;

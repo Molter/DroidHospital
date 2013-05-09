@@ -4,18 +4,21 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 
 import br.feevale.droidhospital.db.DadosLogin;
-
+import br.feevale.droidhospital.db.DadosUsuario;
 import droidhospital.util.Conexao;
 import droidhospital.util.Query;
 
 public class ValidaLogin extends Transacao {
 
+	
 	private DadosLogin dados;
-	private String situacao;
+	private DadosUsuario dadosUsuario;
+	
 	
 	@Override
 	public void setDadosRecebidos(Serializable dadosRecebidos) {
 		dados = (DadosLogin) dadosRecebidos;
+		dadosUsuario = new DadosUsuario();
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class ValidaLogin extends Transacao {
 
 			StringBuilder sbQuery = new StringBuilder();
 			
-			sbQuery.append( "SELECT tipo_Pessoa FROM pessoas WHERE usuario = '" );
+			sbQuery.append( "SELECT idpessoa, tipo_Pessoa FROM pessoas WHERE usuario = '" );
 			sbQuery.append( dados.getDados()[0] );
 			sbQuery.append( "' AND senha = '" );
 			sbQuery.append( dados.getDados()[1] );
@@ -44,9 +47,12 @@ public class ValidaLogin extends Transacao {
 				resultSet = q.executeQuery();
 				
 				if( resultSet.first() ) {
-					situacao = resultSet.getString( "tipo_Pessoa" );
+					
+					dadosUsuario.setTipoUsuario(resultSet.getString( "tipo_Pessoa" ));
+					dadosUsuario.setIdUsuario(resultSet.getInt("idpessoa")); 
 				} else {
-					situacao = "N";
+					dadosUsuario.setTipoUsuario(DadosUsuario.FAIL);
+					dadosUsuario.setIdUsuario(0);
 				}
 				
 			} finally {
@@ -62,6 +68,6 @@ public class ValidaLogin extends Transacao {
 
 	@Override
 	public Serializable getDadosResposta() {
-		return situacao;
+		return dadosUsuario;
 	}
 }

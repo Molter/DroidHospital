@@ -55,8 +55,19 @@ public class MedicamentosAdapter extends BaseAdapter {
 		
 		principioTextView.setText(principio);
 		laboratorioTextView.setText(laboratorio);
-		fantasiaTextView.setText(fantasia+" - ");
-		concentracaoTextView.setText(concentracao+" - ");
+		
+		if(!fantasia.isEmpty()) {
+			fantasiaTextView.setText(fantasia + " - ");
+		}else{
+			fantasiaTextView.setText("");
+		}
+		
+		if(!concentracao.isEmpty()) {
+			concentracaoTextView.setText(concentracao + " - ");
+		}else{
+			concentracaoTextView.setText("");
+		}
+		
 		formaTextView.setText(forma);
 		return layout;
 	}

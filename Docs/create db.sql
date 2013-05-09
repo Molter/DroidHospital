@@ -28,14 +28,14 @@ CREATE TABLE `aplicacoes` (
   `idaplicacao` int(11) NOT NULL AUTO_INCREMENT,
   `idEnfermeiro` int(11) DEFAULT NULL,
   `idprescricao` int(11) NOT NULL,
-  `hora_previsto` time NOT NULL,
-  `hora_aplicado` time NOT NULL,
+  `hora_previsto` datetime NOT NULL,
+  `hora_aplicado` datetime DEFAULT NULL,
   PRIMARY KEY (`idaplicacao`),
   KEY `idEnfermeiro` (`idEnfermeiro`),
   KEY `idprescricao` (`idprescricao`),
   CONSTRAINT `aplicacoes_ibfk_1` FOREIGN KEY (`idEnfermeiro`) REFERENCES `pessoas` (`idpessoa`),
   CONSTRAINT `aplicacoes_ibfk_2` FOREIGN KEY (`idprescricao`) REFERENCES `prescricoes` (`idprescricao`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `aplicacoes` (
 
 LOCK TABLES `aplicacoes` WRITE;
 /*!40000 ALTER TABLE `aplicacoes` DISABLE KEYS */;
+INSERT INTO `aplicacoes` VALUES (1,2,1,'2013-02-12 20:00:00',NULL);
 /*!40000 ALTER TABLE `aplicacoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,7 +77,7 @@ CREATE TABLE `atendimentos` (
 
 LOCK TABLES `atendimentos` WRITE;
 /*!40000 ALTER TABLE `atendimentos` DISABLE KEYS */;
-INSERT INTO `atendimentos` VALUES (1,1,1,'S',100,'2013-05-01 09:20:58',NULL),(2,2,2,'S',90,'2013-05-01 09:20:58',NULL),(3,3,3,'N',87,'2013-05-01 09:20:58',NULL),(4,4,4,'S',42,'2013-05-01 09:20:58',NULL),(5,5,5,'N',88,'2013-05-01 09:20:58',NULL),(6,6,6,'N',69,'2013-05-01 09:20:58',NULL),(7,7,7,'N',37,'2013-05-01 09:20:58',NULL);
+INSERT INTO `atendimentos` VALUES (1,1,3,'S',100,'2013-05-01 09:20:58',NULL),(2,2,2,'S',90,'2013-05-01 09:20:58',NULL),(3,3,3,'N',87,'2013-05-01 09:20:58',NULL),(4,4,4,'S',42,'2013-05-01 09:20:58',NULL),(5,5,5,'N',88,'2013-05-01 09:20:58',NULL),(6,6,6,'N',69,'2013-05-01 09:20:58',NULL),(7,7,7,'N',37,'2013-05-01 09:20:58',NULL);
 /*!40000 ALTER TABLE `atendimentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +168,7 @@ CREATE TABLE `pessoas` (
 
 LOCK TABLES `pessoas` WRITE;
 /*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
-INSERT INTO `pessoas` VALUES (1,'Gabriel','01243444029','aff','12','Sapiranga','Rs','Brasil','0','M',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(2,'Jose','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(3,'Pedro','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(4,'Carlos','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(5,'Thomas','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(6,'Pafuncio','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(7,'Beltrano','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(8,'Ciclano','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(9,'Jose joao','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol');
+INSERT INTO `pessoas` VALUES (1,'Gabriel','01243444029','aff','12','Sapiranga','Rs','Brasil','0','M',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(2,'Jose','12345679','aff','12','Sapiranga','Rs','Brasil','0','E',NULL,'1990-03-12','a','molter','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(3,'Pedro','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(4,'Carlos','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(5,'Thomas','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(6,'Pafuncio','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(7,'Beltrano','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(8,'Ciclano','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(9,'Jose joao','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol');
 /*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,8 +183,7 @@ CREATE TABLE `prescricoes` (
   `idprescricao` int(11) NOT NULL AUTO_INCREMENT,
   `idatendimento` int(11) NOT NULL,
   `idmedicamento` int(11) NOT NULL,
-  `posologia` int(11) NOT NULL DEFAULT '1',
-  `intervalo_horas` int(11) NOT NULL,
+  `intervalo_aplicacoes` time NOT NULL,
   `hora_inicio` time DEFAULT NULL,
   `quantidade_aplicações` int(11) NOT NULL DEFAULT '1',
   `idMedico` int(11) DEFAULT NULL,
@@ -194,7 +194,7 @@ CREATE TABLE `prescricoes` (
   CONSTRAINT `prescricoes_ibfk_1` FOREIGN KEY (`idatendimento`) REFERENCES `atendimentos` (`idatendimento`),
   CONSTRAINT `prescricoes_ibfk_2` FOREIGN KEY (`idmedicamento`) REFERENCES `medicamentos` (`idmedicamento`),
   CONSTRAINT `prescricoes_ibfk_3` FOREIGN KEY (`idMedico`) REFERENCES `pessoas` (`idpessoa`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,6 +203,7 @@ CREATE TABLE `prescricoes` (
 
 LOCK TABLES `prescricoes` WRITE;
 /*!40000 ALTER TABLE `prescricoes` DISABLE KEYS */;
+INSERT INTO `prescricoes` VALUES (1,1,1,'02:00:00','20:00:00',10,1);
 /*!40000 ALTER TABLE `prescricoes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -215,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-04 23:33:22
+-- Dump completed on 2013-05-09 12:32:17

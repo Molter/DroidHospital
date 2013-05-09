@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.adapters.ListaQuartosAdapter;
+import br.feevale.droidhospital.db.DadosUsuario;
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.Quarto;
 
@@ -87,16 +88,17 @@ public class ListaQuartosActivity extends Activity implements
 		intent.putExtra(ID_VALUE, id);
 		startActivity(intent);
 	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, MainActivity.USER_TYPE_NONE);
-		
-		if (userType.equalsIgnoreCase(MainActivity.USER_TYPE_NURSE)) {
-		   // menu.
-		    //menuItem.setVisible(true);
+		String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, DadosUsuario.FAIL);
+		if (userType.equalsIgnoreCase(DadosUsuario.TIPO_ENFERMEIRO)) {
+			
+		    MenuItem menuItem = menu.getItem(1);
+		    menuItem.setVisible(true);
 		}
 		
 		return true;

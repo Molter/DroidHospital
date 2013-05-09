@@ -54,6 +54,11 @@
 	
 	<string name="minutes_lower">minutos</string>
 	<string name="minute_lower">minuto</string>
+	
 	<string name="and"> e </string>
+
+	<string name="medice_required">Selecione um medicamento</string>
+	<string name="saved_sucessuful">Salvo com sucesso</string>
+	<string name="saved_wrong">Ocorreu um erro ao salvar sua operação.</string>	
 	
 </resources>

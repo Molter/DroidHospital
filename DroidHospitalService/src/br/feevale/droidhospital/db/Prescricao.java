@@ -9,77 +9,70 @@ public class Prescricao extends Interpretador {
 	private Integer idPrescricao;
 	private Integer idAtendimento;
 	private Integer idMedicamento;
-	private Integer posologia;
-	private Integer intervaloHoras;
-	private Date horaInicio;
+	
+	private Integer horaIntervaloAplicacoes, minutoIntervaloAplicacoes;
+	
+	private Integer horaInicioAplicacoes, minutoInicioAplicacoes;
+	
 	private Integer quantidadeAplicacoes;
 	private Integer idMedico;
-	
 	public Integer getIdPrescricao() {
 		return idPrescricao;
 	}
-	
-	public void setIdPrescricao( Integer idPrescricao ) {
+	public void setIdPrescricao(Integer idPrescricao) {
 		this.idPrescricao = idPrescricao;
 	}
-	
 	public Integer getIdAtendimento() {
 		return idAtendimento;
 	}
-	
-	public void setIdAtendimento( Integer idAtendimento ) {
+	public void setIdAtendimento(Integer idAtendimento) {
 		this.idAtendimento = idAtendimento;
 	}
-	
 	public Integer getIdMedicamento() {
 		return idMedicamento;
 	}
-	
-	public void setIdMedicamento( Integer idMedicamento ) {
+	public void setIdMedicamento(Integer idMedicamento) {
 		this.idMedicamento = idMedicamento;
 	}
-	
-	public Integer getPosologia() {
-		return posologia;
+	public Integer getHoraIntervaloAplicacoes() {
+		return horaIntervaloAplicacoes;
 	}
-	
-	public void setPosologia( Integer posologia ) {
-		this.posologia = posologia;
+	public void setHoraIntervaloAplicacoes(Integer horaIntervaloAplicacoes) {
+		this.horaIntervaloAplicacoes = horaIntervaloAplicacoes;
 	}
-	
-	public Integer getIntervaloHoras() {
-		return intervaloHoras;
+	public Integer getMinutoIntervaloAplicacoes() {
+		return minutoIntervaloAplicacoes;
 	}
-	
-	public void setIntervaloHoras( Integer intervaloHoras ) {
-		this.intervaloHoras = intervaloHoras;
+	public void setMinutoIntervaloAplicacoes(Integer minutoIntervaloAplicacoes) {
+		this.minutoIntervaloAplicacoes = minutoIntervaloAplicacoes;
 	}
-	
-	public Date getHoraInicio() {
-		return horaInicio;
+	public Integer getHoraInicioAplicacoes() {
+		return horaInicioAplicacoes;
 	}
-	
-	public void setHoraInicio( Date horaInicio ) {
-		this.horaInicio = horaInicio;
+	public void setHoraInicioAplicacoes(Integer horaInicioAplicacoes) {
+		this.horaInicioAplicacoes = horaInicioAplicacoes;
 	}
-	
+	public Integer getMinutoInicioAplicacoes() {
+		return minutoInicioAplicacoes;
+	}
+	public void setMinutoInicioAplicacoes(Integer minutoInicioAplicacoes) {
+		this.minutoInicioAplicacoes = minutoInicioAplicacoes;
+	}
 	public Integer getQuantidadeAplicacoes() {
 		return quantidadeAplicacoes;
 	}
-	
-	public void setQuantidadeAplicacoes( Integer quantidadeAplicacoes ) {
+	public void setQuantidadeAplicacoes(Integer quantidadeAplicacoes) {
 		this.quantidadeAplicacoes = quantidadeAplicacoes;
 	}
-	
 	public Integer getIdMedico() {
 		return idMedico;
 	}
-	
-	public void setIdMedico( Integer idMedico ) {
+	public void setIdMedico(Integer idMedico) {
 		this.idMedico = idMedico;
 	}
-	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+
 }
