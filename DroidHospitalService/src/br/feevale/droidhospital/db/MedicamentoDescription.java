@@ -1,21 +1,35 @@
 package br.feevale.droidhospital.db;
 
-public class Medicamento extends Interpretador {
 
-	private static final long serialVersionUID = 5214888360118454517L;
+public class MedicamentoDescription extends Interpretador {
 
-	private Integer idMedicamento;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 883548177569131505L;
+	private String idMedicamento;
 	private String principio;
 	private String laboratorio;
 	private String fantasia;
 	private String concentracao;
-	private String formaFarmaceutica;
+	private String forma;
 
-	public Integer getIdMedicamento() {
+	private String busca_medicamento;
+
+	public String getBusca_medicamento() {
+		System.out.println("buscaMedicamento: "+busca_medicamento);
+		return busca_medicamento;
+	}
+
+	public MedicamentoDescription(String busca_medicamento) {
+		this.busca_medicamento = busca_medicamento;
+	}
+
+	public String getIdMedicamento() {
 		return idMedicamento;
 	}
 
-	public void setIdMedicamento(Integer idMedicamento) {
+	public void setIdMedicamento(String idMedicamento) {
 		this.idMedicamento = idMedicamento;
 	}
 
@@ -51,21 +65,12 @@ public class Medicamento extends Interpretador {
 		this.concentracao = concentracao;
 	}
 
-	public String getFormaFarmaceutica() {
-		return formaFarmaceutica;
+	public String getForma() {
+		return forma;
 	}
 
-	public void setFormaFarmaceutica(String formaFarmaceutica) {
-		this.formaFarmaceutica = formaFarmaceutica;
-	}
-
-	public void setMedicamentoVazio() {
-		this.idMedicamento = -1;
-		this.principio = "nenhum medicamento localizado";
-		this.laboratorio = "Laboratório";
-		this.fantasia = "Medicamento";
-		this.concentracao = "0mg";
-		this.formaFarmaceutica = "cp";
+	public void setForma(String forma) {
+		this.forma = forma;
 	}
 
 }

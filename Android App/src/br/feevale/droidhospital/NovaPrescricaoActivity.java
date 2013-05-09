@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +20,14 @@ import br.feevale.droidhospital.fragments.QtdAplicacoesDialog;
 
 public class NovaPrescricaoActivity extends FragmentActivity{
 
+import br.feevale.comunicacao.EnviaTransacao;
+import br.feevale.droidhospital.db.Interpretador;
+import br.feevale.droidhospital.db.Medicamento;
+import br.feevale.droidhospital.db.MedicamentoDescription;
+
+public class NovaPrescricaoActivity extends Activity {
+
+	Integer idMedicamento;
 	EditText edPrincipio;
 	EditText edReferencia;
 	EditText edLaboratorio;
@@ -27,6 +39,11 @@ public class NovaPrescricaoActivity extends FragmentActivity{
 	
 	int horaInicial, minutoInicial, qtdAplicacoes, horaIntervalo, minutoIntervalo;
 	
+	
+	
+	Medicamento medicamento;
+	
+	public final static int LISTA_MEDICAMENTOS = 301; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +92,8 @@ public class NovaPrescricaoActivity extends FragmentActivity{
 	
     public void listaMedicamentos(View v) {
 		Intent chamaTelaLista = new Intent(getBaseContext(), ListaMedicamentosActivity.class);
-		startActivity(chamaTelaLista);
+		startActivityForResult(chamaTelaLista, LISTA_MEDICAMENTOS);
     	
-    	Toast.makeText(getApplicationContext(), "Chama lista de medicamentos", Toast.LENGTH_LONG).show();
-    	//finish();
 	}
     
     public void setHoraInicial(View v) {
@@ -100,7 +115,7 @@ public class NovaPrescricaoActivity extends FragmentActivity{
 
 	public void adicionarPrescricao(View v){
 
-		Toast.makeText(getApplicationContext(), "Paciente João adicionado", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "Paciente Joï¿½o adicionado", Toast.LENGTH_LONG).show();
 		finish();
 		
 		/*
@@ -133,6 +148,67 @@ public class NovaPrescricaoActivity extends FragmentActivity{
 		p.setIntervalo(descIntervalo);
 		*/
 		
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		if (requestCode == LISTA_MEDICAMENTOS) {
+
+			switch (resultCode) {
+			case RESULT_OK:
+				medicamento = new Medicamento();
+				String id_medicamento;
+				id_medicamento = data.getStringExtra(ListaMedicamentosActivity.ID_VALUE);
+				Log.d(MainActivity.DROID_HOSPITAL_LOG_TAG, "id_medicamento: "+id_medicamento);
+
+				try {
+
+					MedicamentoDescription interpretador = new MedicamentoDescription(
+							id_medicamento);
+
+					interpretador.setCdTransacao(Interpretador.BUSCA_MEDICAMENTO);
+
+					EnviaTransacao enviador = new EnviaTransacao(interpretador);
+
+					try {
+
+						enviador.envia();
+
+						medicamento = (Medicamento) enviador.recebe();
+
+					} finally {
+						enviador.fechaSocket();
+					}
+
+				} catch (Exception e) {
+					Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG,
+							getString(R.string.not_connected));
+					Toast.makeText(getApplicationContext(),
+							getString(R.string.not_connected), Toast.LENGTH_LONG)
+							.show();
+					e.printStackTrace();
+				}
+
+				idMedicamento = medicamento.getIdMedicamento();
+				edPrincipio.setText(medicamento.getPrincipio());
+				edReferencia.setText(medicamento.getFantasia());
+				edLaboratorio.setText(medicamento.getLaboratorio());
+				edConcentracao.setText(medicamento.getConcentracao());
+				edPosologia.setText(medicamento.getFormaFarmaceutica());
+
+				break;
+			case RESULT_CANCELED:
+				
+				break;
+
+			default:
+				
+				break;
+			}
+			
+			
+		}
 		
 	}
 	

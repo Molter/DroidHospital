@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.feevale.droidhospital.R;
-import br.feevale.droidhospital.pojos.Medicamento;
+import br.feevale.droidhospital.db.Medicamento;
 
 public class MedicamentosAdapter extends BaseAdapter {
 	ArrayList<Medicamento> medicamentos;
@@ -32,7 +32,7 @@ public class MedicamentosAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		return medicamentos.get(position).getId();
+		return medicamentos.get(position).getIdMedicamento();
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class MedicamentosAdapter extends BaseAdapter {
 		String laboratorio = medicamento.getLaboratorio();
 		String fantasia = medicamento.getFantasia();
 		String concentracao = medicamento.getConcentracao();
-		String forma = medicamento.getForma();
+		String forma = medicamento.getFormaFarmaceutica();
 
 		LayoutInflater inflater = (LayoutInflater)context.getSystemService
 			      (Context.LAYOUT_INFLATER_SERVICE);
@@ -55,8 +55,8 @@ public class MedicamentosAdapter extends BaseAdapter {
 		
 		principioTextView.setText(principio);
 		laboratorioTextView.setText(laboratorio);
-		fantasiaTextView.setText(fantasia);
-		concentracaoTextView.setText(concentracao);
+		fantasiaTextView.setText(fantasia+" - ");
+		concentracaoTextView.setText(concentracao+" - ");
 		formaTextView.setText(forma);
 		return layout;
 	}
