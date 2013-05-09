@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -91,5 +95,20 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 			Intent intent = new Intent(getApplicationContext(), AnamneseActivity.class);
 			intent.putExtra(ID_VALUE, id);
 			startActivity(intent);
+		}
+		
+		@Override
+		public boolean onCreateOptionsMenu(Menu menu) {
+			getMenuInflater().inflate(R.menu.main, menu);
+			
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+			String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, MainActivity.USER_TYPE_NONE);
+			
+			if (userType.equalsIgnoreCase(MainActivity.USER_TYPE_NURSE)) {
+			    MenuItem menuItem = menu.getItem(R.id.action_agenda);
+			    menuItem.setVisible(true);
+			}
+			
+			return true;
 		}
 }

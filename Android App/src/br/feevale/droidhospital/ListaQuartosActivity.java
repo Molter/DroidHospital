@@ -2,21 +2,24 @@ package br.feevale.droidhospital;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.Toast;
 import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.adapters.ListaQuartosAdapter;
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.Quarto;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
 public class ListaQuartosActivity extends Activity implements
 		OnItemClickListener {
@@ -83,5 +86,19 @@ public class ListaQuartosActivity extends Activity implements
 				ListaPacientesActivity.class);
 		intent.putExtra(ID_VALUE, id);
 		startActivity(intent);
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, MainActivity.USER_TYPE_NONE);
+		
+		if (userType.equalsIgnoreCase(MainActivity.USER_TYPE_NURSE)) {
+		   // menu.
+		    //menuItem.setVisible(true);
+		}
+		
+		return true;
 	}
 }

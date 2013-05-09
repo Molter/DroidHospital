@@ -2,9 +2,13 @@ package br.feevale.droidhospital;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -17,8 +21,14 @@ import br.feevale.droidhospital.db.PacienteDescription;
 
 public class AnamneseActivity extends Activity {
 	public static String ID_PACIENTE = "id";
+	public static String NOME_PACIENTE = "nome";
+	public static String LEITO_PACIENTE = "leito";
+	
+	
 	private long idPaciente;
 	private PacienteDescription dadosPaciente;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +92,27 @@ public class AnamneseActivity extends Activity {
 
 	public void novaPrescricao(View v) {
 		Intent novaPrecricaoIntent = new Intent(getApplicationContext(), NovaPrescricaoActivity.class);
+		
 		novaPrecricaoIntent.putExtra(ID_PACIENTE, idPaciente);
+		novaPrecricaoIntent.putExtra(NOME_PACIENTE, dadosPaciente.getNome());
+		novaPrecricaoIntent.putExtra(LEITO_PACIENTE, dadosPaciente.getQuarto() + " " + dadosPaciente.getLeito());
 		
 		startActivity(novaPrecricaoIntent);
+	}
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, MainActivity.USER_TYPE_NONE);
+		
+		if (userType.equalsIgnoreCase(MainActivity.USER_TYPE_NURSE)) {
+		    MenuItem menuItem = menu.getItem(R.id.action_agenda);
+		    menuItem.setVisible(true);
+		}
+		
+		return true;
 	}
 }

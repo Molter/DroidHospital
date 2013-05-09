@@ -25,7 +25,7 @@ public class ValidaLogin extends Transacao {
 
 			StringBuilder sbQuery = new StringBuilder();
 			
-			sbQuery.append( "SELECT tipo_Pessoa FROM Pessoas WHERE usuario = '" );
+			sbQuery.append( "SELECT tipo_Pessoa FROM pessoas WHERE usuario = '" );
 			sbQuery.append( dados.getDados()[0] );
 			sbQuery.append( "' AND senha = '" );
 			sbQuery.append( dados.getDados()[1] );

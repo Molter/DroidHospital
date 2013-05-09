@@ -1,25 +1,32 @@
 package br.feevale.droidhospital;
 
-import br.feevale.droidhospital.pojos.Prescricao;
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.feevale.droidhospital.fragments.HoraInicialDatePicker;
+import br.feevale.droidhospital.fragments.IntervaloDialog;
+import br.feevale.droidhospital.fragments.QtdAplicacoesDialog;
 
-public class NovaPrescricaoActivity extends Activity {
+
+public class NovaPrescricaoActivity extends FragmentActivity{
 
 	EditText edPrincipio;
 	EditText edReferencia;
 	EditText edLaboratorio;
 	EditText edConcentracao;
 	EditText edPosologia;
-	EditText edHora_inicial;
-	EditText edQtd_aplicacoes;
-	EditText edIntervalo;	
+	TextView edHora_inicial;
+	TextView edQtd_aplicacoes;
+	TextView edIntervalo;	
+	
+	int horaInicial, minutoInicial, qtdAplicacoes, horaIntervalo, minutoIntervalo;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,26 +42,30 @@ public class NovaPrescricaoActivity extends Activity {
 			finish();
 		}
 		
-		setUpPaciente(id);
+		String nomePaciente = intent.getStringExtra(AnamneseActivity.NOME_PACIENTE);
+		String leitoPaciente = intent.getStringExtra(AnamneseActivity.LEITO_PACIENTE);
+		TextView  pacientName = (TextView) findViewById(R.id.descricao_paciente_textView);
+		TextView  numLeito    = (TextView) findViewById(R.id.descricao_leito_textView);
+		
+		pacientName.setText(nomePaciente);
+		numLeito.setText(leitoPaciente);
+		
+		setTitle(getString(R.string.title_activity_nova_prescricao) + " " + nomePaciente);
 		
 		edPrincipio 	 = (EditText) findViewById(R.id.principio_edit_text);
 		edReferencia     = (EditText) findViewById(R.id.referencia_edit_text);
 		edLaboratorio    = (EditText) findViewById(R.id.laboratorio_edit_text);
 		edConcentracao   = (EditText) findViewById(R.id.concentracao_edit_text);
 		edPosologia      = (EditText) findViewById(R.id.posologia_edit_text);
-		edHora_inicial   = (EditText) findViewById(R.id.hora_inicial_edit_text);
-		edQtd_aplicacoes = (EditText) findViewById(R.id.qtd_aplicacoes_edit_text);
-		edIntervalo      = (EditText) findViewById(R.id.intervalo_edit_text);		
+		edHora_inicial   = (TextView) findViewById(R.id.hora_inicial_edit_text);
+		edQtd_aplicacoes = (TextView) findViewById(R.id.qtd_aplicacoes_picker);
+		
+		edIntervalo      = (TextView) findViewById(R.id.intervalo_edit_text);		
+		
+		
 		
 	}
 	
-	private void setUpPaciente(long id) {
-		TextView  pacientName = (TextView) findViewById(R.id.descricao_paciente_textView);
-		TextView  numLeito    = (TextView) findViewById(R.id.descricao_leito_textView);
-		pacientName.setText("");
-		numLeito.setText("01 a");		
-	}	
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -69,6 +80,23 @@ public class NovaPrescricaoActivity extends Activity {
     	Toast.makeText(getApplicationContext(), "Chama lista de medicamentos", Toast.LENGTH_LONG).show();
     	//finish();
 	}
+    
+    public void setHoraInicial(View v) {
+    	DialogFragment  horainicialFragment = new HoraInicialDatePicker();
+		horainicialFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+    
+    public void setQtdAplicacoes(View v) {
+    	DialogFragment  qtdAplicacoes = new QtdAplicacoesDialog();
+		qtdAplicacoes.show(getSupportFragmentManager(), "timePicker");
+    }
+    
+    public void setIntervalo(View v) {
+    	DialogFragment  intervaloFragment = new IntervaloDialog();
+    	intervaloFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+    
+    
 
 	public void adicionarPrescricao(View v){
 

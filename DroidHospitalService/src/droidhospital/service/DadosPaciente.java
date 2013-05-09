@@ -29,25 +29,22 @@ public class DadosPaciente extends Transacao {
 	
 	@Override
 	public void executaTransacao() {
-		System.out.println("Criando Paciente Descripton...");
+		
 		createPacientDescription();
-		System.out.println("setUpAplicacoesEfetuadas...");
 		setUpAplicacoesEfetuadas();
-		System.out.println("setUpAplicacoesFuturas ...");
 		setUpAplicacoesFuturas();
 	}
 	
-
-
 	public void createPacientDescription() {
+		
 		pacienteDescription = new PacienteDescription();
 		
 		try {
 
 			StringBuilder sbQuery = new StringBuilder();
 			
-			sbQuery.append(  "select ");
-			sbQuery.append( " p.idpessoa, p.nome, a.data_entrada, a.fuma, a.peso, p.data_nascimento, l.quarto, l.leito, p.alergias ");
+			sbQuery.append("select ");
+			sbQuery.append(" p.idpessoa, p.nome, a.data_entrada, a.fuma, a.peso, p.data_nascimento, l.quarto, l.leito, p.alergias ");
 			sbQuery.append(" from atendimentos a");
 			sbQuery.append(" inner join pessoas  p on a.idpaciente = p.idpessoa");
 			sbQuery.append(" inner join leitos  l on l.idleito = a.idleito");
@@ -56,7 +53,6 @@ public class DadosPaciente extends Transacao {
 	        ResultSet resultSet = null;
 	        Conexao cnx = new Conexao();
 	        
-	        System.out.println(sbQuery.toString());
 	        try {
 	        
 				Query q = new Query( cnx );
@@ -66,11 +62,11 @@ public class DadosPaciente extends Transacao {
 				resultSet = q.executeQuery();
 				
 				while( resultSet.next() ) {
+					
 					pacienteDescription.setIdPaciente(idPaciente);
 					pacienteDescription.setNome(resultSet.getString("nome"));
 					pacienteDescription.setFumante(resultSet.getString("fuma"));
 					pacienteDescription.setPeso(resultSet.getString("peso"));
-					
 					pacienteDescription.setQuarto(resultSet.getString("quarto"));
 					pacienteDescription.setLeito(resultSet.getString("leito"));
 					pacienteDescription.setAlergias(resultSet.getString("alergias"));
@@ -126,26 +122,86 @@ public class DadosPaciente extends Transacao {
 		} catch( Exception  e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
 	public Serializable getDadosResposta() {
-		System.out.println("returning Data ...");
 		return pacienteDescription;
 	}
 	
 	private void setUpAplicacoesFuturas() {
-		ArrayList<Aplicacao> aplicacoesEfetuadas = new ArrayList<Aplicacao>();
-		pacienteDescription.setAplicacoesEfetuadas(aplicacoesEfetuadas);
 		
+		ArrayList<Aplicacao> aplicacoesEfetuadas = getAplicacoes( true );
+		
+		pacienteDescription.setAplicacoesEfetuadas(aplicacoesEfetuadas);
 	}
-
 
 	private void setUpAplicacoesEfetuadas() {
-		ArrayList<Aplicacao> aplicacoesFuturas = new ArrayList<Aplicacao>();
+		
+		ArrayList<Aplicacao> aplicacoesFuturas = getAplicacoes( false );
+		
 		pacienteDescription.setAplicacoesFuturas(aplicacoesFuturas);
 	}
+	
+	private ArrayList<Aplicacao> getAplicacoes(boolean efetuadas) {
+		
+		ArrayList<Aplicacao> aplicacoes = new ArrayList<Aplicacao>();
+		
+		try {
 
+			StringBuilder sbQuery = new StringBuilder();
+			
+			sbQuery.append("select ap.*, me.* from atendimentos at, prescricoes pr, aplicacoes ap, medicamentos me ");
+			sbQuery.append(" where me.idmedicamento = pr.idmedicamento and pr.idatendimento = at.idatendimento and ap.idprescricao = pr.idprescricao and at.idpaciente = ");
+			sbQuery.append(idPaciente);
+			sbQuery.append(" and ap.hora_aplicado is ");
+			
+			if( efetuadas ) {
+				sbQuery.append(" not ");
+			}
+			
+			sbQuery.append(" null order by ap.idaplicacao desc limit 5;");
+			
+			System.out.println(sbQuery.toString());
+			
+	        ResultSet resultSet = null;
+	        Conexao cnx = new Conexao();
+	        
+	        try {
+	        
+				Query q = new Query( cnx );
+				
+				q.setSQL( sbQuery );
+				
+				resultSet = q.executeQuery();
+				
+				while( resultSet.next() ) {
+					
+					Aplicacao aplicacao = new Aplicacao();
+					
+					aplicacao.setConcentracaoMedicamento( resultSet.getString( "concentracao" ) );
+					aplicacao.setHoraAplicado( resultSet.getDate( "hora_aplicado" ) );
+					aplicacao.setHoraPrevisto( resultSet.getDate( "hora_previsto" ) );
+					aplicacao.setIdAplicacao( resultSet.getInt( "idaplicacao" ) );
+					aplicacao.setIdEnfermeiro( resultSet.getInt( "idEnfermeiro" ) );
+					aplicacao.setIdPrescricao( resultSet.getInt( "idprescricao" ) );
+					aplicacao.setNomeMedicamento( resultSet.getString( "farmaco" ) );
+					aplicacao.setPrincipioAtivo( resultSet.getString( "farmaco" ) ); // TODO ver isso
+					
+					aplicacoes.add( aplicacao );
+				}
+	        	
+			} finally {
+				
+				cnx.close();
+				resultSet.close();  
+			}
+			
+		} catch( Exception  e) {
+			e.printStackTrace();
+		}
+		
+		return aplicacoes;
+	}
 
 }

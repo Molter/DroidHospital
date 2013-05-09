@@ -39,6 +39,7 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		
 		this.aplicacoesEfetuadas = this.pacientDescription.getAplicacoesEfetuadas();
 		this.aplicacoesFuturas = this.pacientDescription.getAplicacoesFuturas();
+		
 	}
 
 	@Override
@@ -135,7 +136,8 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 
 		View layout = inflater.inflate(R.layout.aplicacoes, null);
 		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
-		data.setText( aplicacoesFuturas.get( childPosition ).getHoraAplicado().toString() );
+		String myDate = DateFormat.getDateInstance().format(aplicacoesFuturas.get( childPosition ).getHoraPrevisto());
+		data.setText(myDate);
 
 		TextView nome = (TextView) layout.findViewById(R.id.aplicacoes_nome);
 		nome.setText(aplicacoesFuturas.get( childPosition ).getNomeMedicamento());
@@ -151,7 +153,9 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		View layout = inflater.inflate(R.layout.aplicacoes, null);
 		
 		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
-		data.setText( aplicacoesEfetuadas.get( childPosition ).getHoraAplicado().toString() );
+		String myDate = DateFormat.getDateInstance().format(aplicacoesFuturas.get( childPosition ).getHoraAplicado());
+		
+		data.setText(myDate);
 
 		TextView nome = (TextView) layout.findViewById(R.id.aplicacoes_nome);
 		nome.setText( aplicacoesEfetuadas.get( childPosition ).getNomeMedicamento() );

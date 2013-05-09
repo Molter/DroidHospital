@@ -106,7 +106,9 @@
                 android:layout_width="202dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="@dimen/edit_size" >
+                android:textSize="@dimen/edit_size" 
+                android:text="Paracetamol"
+                >
             </EditText>
 
             <ImageButton
@@ -119,7 +121,8 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="4dp">
 
             <TextView
                 android:id="@+id/TextView15"
@@ -133,13 +136,14 @@
                 android:id="@+id/referencia_edit_text"
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
-                
+                android:text="ISS B3"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+              android:layout_marginTop="4dp">
 
             <TextView
                 android:id="@+id/TextView07"
@@ -154,13 +158,14 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                
+                android:text="Bayer"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+              android:layout_marginTop="4dp">
 
             <TextView
                 android:id="@+id/TextView06"
@@ -175,13 +180,14 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                
+                android:text="500mg"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+              android:layout_marginTop="4dp">
 
             <TextView
                 android:id="@+id/TextView05"
@@ -196,13 +202,15 @@
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                
+                android:text="Comprimidos"
                 android:textSize="@dimen/edit_size" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="8dp"
+            >
 
             <TextView
                 android:id="@+id/TextView04"
@@ -212,18 +220,25 @@
                 android:text="@string/hora_inicial"
                 android:textSize="@dimen/text_size" />
 
-            <EditText
+            <TextView
                 android:id="@+id/hora_inicial_edit_text"
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="08:00"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginLeft="8dp"
+                android:onClick="setHoraInicial"
+                android:clickable="true"
                 
-                android:textSize="@dimen/edit_size" />
+                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="8dp"
+            >
 
             <TextView
                 android:id="@+id/TextView03"
@@ -231,20 +246,31 @@
                 android:layout_height="wrap_content"
                 android:gravity="bottom"
                 android:text="@string/qtd_aplicacoes"
-                android:textSize="@dimen/text_size" />
-
-            <EditText
-                android:id="@+id/qtd_aplicacoes_edit_text"
+                
+                android:textSize="@dimen/text_size"
+                
+                 />
+             <TextView
+                android:id="@+id/qtd_aplicacoes_picker"
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="01"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginLeft="8dp"
+                android:onClick="setQtdAplicacoes"
+                android:clickable="true"
                 
-                android:textSize="@dimen/edit_size" />
+                 />
+
+        
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+             >
 
             <TextView
                 android:id="@+id/TextView02"
@@ -254,12 +280,17 @@
                 android:text="@string/intervalo"
                 android:textSize="@dimen/text_size" />
 
-            <EditText
+            <TextView
                 android:id="@+id/intervalo_edit_text"
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:layout_weight="1"
-                android:textSize="@dimen/edit_size" />
+                android:clickable="true"
+                android:onClick="setIntervalo"
+                android:text="1 hora e 30 minutos"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -271,5 +302,7 @@
         android:layout_alignParentBottom="true"
         android:onClick="incluiPrescricao"
         android:text="@string/botao_incluir" />
+
+    
 
 </RelativeLayout>
