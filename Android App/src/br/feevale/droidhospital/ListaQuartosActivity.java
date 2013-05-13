@@ -95,12 +95,26 @@ public class ListaQuartosActivity extends Activity implements
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, DadosUsuario.FAIL);
+		
+		
 		if (userType.equalsIgnoreCase(DadosUsuario.TIPO_ENFERMEIRO)) {
 			
-		    MenuItem menuItem = menu.getItem(1);
+		    MenuItem menuItem = menu.findItem(R.id.action_agenda);
 		    menuItem.setVisible(true);
+	
 		}
 		
+		return true;
+	}
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_agenda:
+			Intent agenda = new Intent(getApplicationContext(), AgendaActivity.class);
+			startActivity(agenda);
+			break;
+		}
 		return true;
 	}
 }

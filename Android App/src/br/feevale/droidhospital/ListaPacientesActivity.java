@@ -23,11 +23,19 @@ import br.feevale.droidhospital.db.DadosUsuario;
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.Paciente;
 
+
+
 public class ListaPacientesActivity extends Activity implements OnItemClickListener {
 	
 		private ArrayList<Paciente> pacientes;
 
 		public static final String ID_VALUE = "id";
+
+		public static final String NOME_PACIENTE = "nome_paciente";
+
+		public static final String LEITO_PACIENTE = "leito_paciente";
+		
+		private String userType;
 		
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,11 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 			pacientesListView.setAdapter(pacientesAdapter);
 			
 			pacientesListView.setOnItemClickListener(this);
+			
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+			String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, DadosUsuario.FAIL);
+			
+			this.userType = userType;
 			
 		}
 		
@@ -91,9 +104,20 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 		
 
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long id) {
-			Intent intent = new Intent(getApplicationContext(), AnamneseActivity.class);
+			
+			Intent intent;
+			if (userType.equalsIgnoreCase(DadosUsuario.TIPO_ENFERMEIRO)) {
+				intent = new Intent(getApplicationContext(), PacienteAplicacoesActivity.class);
+				
+				intent.putExtra(NOME_PACIENTE, pacientes.get(position).getNomePaciente());
+				intent.putExtra(LEITO_PACIENTE, pacientes.get(position).getQuartoPaciente() + " " + pacientes.get(position).getLeitoPaciente());
+			}else{
+				
+				intent = new Intent(getApplicationContext(), AnamneseActivity.class);
+			}
+				
 			intent.putExtra(ID_VALUE, id);
 			startActivity(intent);
 		}
@@ -101,15 +125,24 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 		@Override
 		public boolean onCreateOptionsMenu(Menu menu) {
 			getMenuInflater().inflate(R.menu.main, menu);
-			
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-			String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, DadosUsuario.FAIL);
-			
 			if (userType.equalsIgnoreCase(DadosUsuario.TIPO_ENFERMEIRO)) {
-			    MenuItem menuItem = menu.getItem(R.id.action_agenda);
+				
+			    MenuItem menuItem = menu.findItem(R.id.action_agenda);
 			    menuItem.setVisible(true);
+		
 			}
 			
+			return true;
+		}
+		
+		@Override
+		public boolean onMenuItemSelected(int featureId, MenuItem item) {
+			switch (item.getItemId()) {
+			case R.id.action_agenda:
+				Intent agenda = new Intent(getApplicationContext(), AgendaActivity.class);
+				startActivity(agenda);
+				break;
+			}
 			return true;
 		}
 }

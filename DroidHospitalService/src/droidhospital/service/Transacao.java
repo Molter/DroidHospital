@@ -60,7 +60,17 @@ public abstract class Transacao {
 						
 						transacao = new CreatePrescricao();
 						
+						break;
+					case Interpretador.LISTA_APLICACOES:
+						transacao = new GetAplicacoes();
+						
 						break;	
+						
+					case Interpretador.ENVIA_APLICACAO:
+						transacao = new EfetuaAplicacao();
+						
+						break;
+					
 						
 					default:
 						throw new DroidHospitalException( "C�digo de transa��o (" + interpretador.getCdTransacao() + ") desconhecido." );
