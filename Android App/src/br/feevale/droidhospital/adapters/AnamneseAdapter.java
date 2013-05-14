@@ -136,10 +136,11 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	}
 
 	private View aplicacoesFuturasView(int childPosition) {
-
+		Aplicacao aplicacao = aplicacoesFuturas.get( childPosition );
+		
 		View layout = inflater.inflate(R.layout.aplicacoes, null);
 		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
-		String myDate = DateFormat.getDateInstance().format(aplicacoesFuturas.get( childPosition ).getHoraPrevisto());
+		String myDate = DateFormat.getDateInstance().format(aplicacao.getHoraPrevisto());
 		data.setText(myDate);
 
 		TextView nome = (TextView) layout.findViewById(R.id.aplicacoes_nome);
@@ -152,11 +153,12 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	}
 
 	private View aplicacoesEfetuadasView(int childPosition) {
+		Aplicacao aplicacao = aplicacoesFuturas.get( childPosition );
 		
 		View layout = inflater.inflate(R.layout.aplicacoes, null);
 		
 		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
-		String myDate = DateFormat.getDateInstance().format(aplicacoesFuturas.get( childPosition ).getHoraAplicado());
+		String myDate = DateFormat.getDateInstance().format(aplicacao.getHoraAplicado());
 		
 		data.setText(myDate);
 

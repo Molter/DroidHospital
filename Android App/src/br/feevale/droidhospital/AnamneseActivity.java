@@ -27,6 +27,7 @@ public class AnamneseActivity extends Activity {
 	
 	
 	private long idPaciente;
+	private int idAtendimento;
 	private PacienteDescription dadosPaciente;
 	
 	
@@ -46,6 +47,7 @@ public class AnamneseActivity extends Activity {
 			Toast.makeText(getApplicationContext(), "Paciente not found! Plese Try Again", Toast.LENGTH_LONG).show();
 			finish();
 		}
+		idAtendimento = intent.getIntExtra(ListaPacientesActivity.ID_ATENDIMENTO, 0);
 		
 		setUpDadosSocket();
 		
@@ -97,6 +99,8 @@ public class AnamneseActivity extends Activity {
 		novaPrecricaoIntent.putExtra(ID_PACIENTE, idPaciente);
 		novaPrecricaoIntent.putExtra(NOME_PACIENTE, dadosPaciente.getNome());
 		novaPrecricaoIntent.putExtra(LEITO_PACIENTE, dadosPaciente.getQuarto() + " " + dadosPaciente.getLeito());
+		
+		novaPrecricaoIntent.putExtra(ListaPacientesActivity.ID_ATENDIMENTO, idAtendimento);
 		
 		startActivity(novaPrecricaoIntent);
 	}

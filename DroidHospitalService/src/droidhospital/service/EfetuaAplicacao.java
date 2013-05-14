@@ -25,30 +25,7 @@ public class EfetuaAplicacao extends Transacao {
 
 			StringBuilder sbQuery = new StringBuilder();
 			
-			Date dataEfetuada = aplicacaoEfetuada.getDataEfetuada();
-			Calendar c = Calendar.getInstance();
-			c.setTime(dataEfetuada);
-			
-			StringBuilder dateRecord = new StringBuilder();
-			
-			dateRecord.append(c.get(Calendar.YEAR));
-			dateRecord.append("-");
-			dateRecord.append(c.get(Calendar.MONTH));
-			dateRecord.append("-");
-			dateRecord.append(c.get(Calendar.DAY_OF_MONTH));
-			dateRecord.append(" ");
-			
-			dateRecord.append(c.get(Calendar.HOUR_OF_DAY));
-			dateRecord.append(":");
-			dateRecord.append(c.get(Calendar.MINUTE));
-			dateRecord.append(":");
-			dateRecord.append(c.get(Calendar.SECOND));
-			
-			
-			sbQuery.append("UPDATE aplicacoes SET hora_aplicado = \"");
-			sbQuery.append(dateRecord.toString());
-			sbQuery.append("\"");
-			
+			sbQuery.append("UPDATE aplicacoes SET hora_aplicado = now() ");
 			sbQuery.append(" WHERE idaplicacao = ");
 			sbQuery.append(aplicacaoEfetuada.getId());
 			sbQuery.append(";");

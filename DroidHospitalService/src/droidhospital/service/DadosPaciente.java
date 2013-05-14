@@ -25,7 +25,6 @@ public class DadosPaciente extends Transacao {
 		DadosId dadosId = (DadosId) dadosRecebidos;
 		idPaciente = dadosId.getId();
 	}
-
 	
 	@Override
 	public void executaTransacao() {

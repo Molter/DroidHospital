@@ -36,10 +36,12 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 	TextView edHora_inicial;
 	TextView edQtd_aplicacoes;
 	TextView edIntervalo;
+	
 
 	int horaInicial, minutoInicial;
 	int qtdAplicacoes, horaIntervalo = 1;
 	int minutoIntervalo = 0;
+	private int idAtendimento;
 
 	ConfirmaTransacao resultStatus;
 
@@ -85,7 +87,8 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 					Toast.LENGTH_LONG).show();
 			finish();
 		}
-
+		idAtendimento = intent.getIntExtra(ListaPacientesActivity.ID_ATENDIMENTO, 0);
+		
 		String nomePaciente = intent
 				.getStringExtra(AnamneseActivity.NOME_PACIENTE);
 		String leitoPaciente = intent
@@ -174,6 +177,8 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 
 		prescricao.setHoraIntervaloAplicacoes(horaIntervalo);
 		prescricao.setMinutoIntervaloAplicacoes(minutoIntervalo);
+		
+		prescricao.setIdAtendimento(idAtendimento);
 
 		prescricao.setQuantidadeAplicacoes(qtdAplicacoes);
 		
