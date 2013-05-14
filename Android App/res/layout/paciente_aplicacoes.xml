@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margem_vertical"
+    android:paddingLeft="@dimen/margem_horizontal"
+    android:paddingRight="@dimen/margem_horizontal"
+    android:paddingTop="@dimen/margem_vertical"
+    tools:context=".PacienteAplicacoesActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/margem_vertical"
+        android:paddingLeft="@dimen/margem_horizontal"
+        android:paddingRight="@dimen/margem_horizontal"
+        android:paddingTop="@dimen/margem_vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margem_vertical" >
+
+            <TextView
+                android:id="@+id/leito_textView"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:text="@string/leito" />
+
+            <TextView
+                android:id="@+id/paciente_textView"
+                android:layout_width="234dp"
+                android:layout_height="match_parent"
+                android:text="@string/paciente" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/margem_vertical" >
+
+            <TextView
+                android:id="@+id/descricao_leito_textView"
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:text="@string/leito"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/descricao_paciente_textView"
+                android:layout_width="232dp"
+                android:layout_height="match_parent"
+                android:text="@string/paciente"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/margem_vertical"
+        android:paddingLeft="@dimen/margem_horizontal"
+        android:paddingRight="@dimen/margem_horizontal"
+        android:paddingTop="@dimen/margem_vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margem_vertical" >
+
+            <TextView
+                android:id="@+id/horario_textView"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:text="@string/horario" />
+
+            <TextView
+                android:id="@+id/medicamento_textView"
+                android:layout_width="234dp"
+                android:layout_height="match_parent"
+                android:text="@string/medicamento" 
+                android:paddingLeft="50dp"
+                />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listaAplicacoes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/lista_aplicacoes" >
+
+        </ListView>
+
+    </LinearLayout>
+    
+</LinearLayout>
