@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
@@ -67,14 +66,11 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 		
 		aplicacaoListView.setAdapter(pacienteAplicacoesAdapter);
 		
-		aplicacaoListView.setOnItemClickListener(this);
-		
-		
-		
-	
+		//aplicacaoListView.setOnItemClickListener(this);
 			
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void setUpDadosSocket(long id) {
  		try {
 			Interpretador interpretador = new DadosId(String.valueOf(id));

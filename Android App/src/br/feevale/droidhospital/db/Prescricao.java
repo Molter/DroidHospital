@@ -1,6 +1,5 @@
 package br.feevale.droidhospital.db;
 
-import java.util.Date;
 
 public class Prescricao extends Interpretador {
 
