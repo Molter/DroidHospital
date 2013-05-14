@@ -34,6 +34,8 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 		public static final String NOME_PACIENTE = "nome_paciente";
 
 		public static final String LEITO_PACIENTE = "leito_paciente";
+
+		public static final String ID_ATENDIMENTO = "id_atendimento";
 		
 		private String userType;
 		
@@ -117,6 +119,7 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 			}else{
 				
 				intent = new Intent(getApplicationContext(), AnamneseActivity.class);
+				intent.putExtra(ID_ATENDIMENTO, pacientes.get(position).getIdatendimento());
 			}
 				
 			intent.putExtra(ID_VALUE, id);

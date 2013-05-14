@@ -16,6 +16,7 @@ public class Interpretador implements Serializable {
 	public final static int CREATE_PRESCRICAO = 8;
 	public final static int LISTA_APLICACOES = 9;
 	public final static int ENVIA_APLICACAO = 10;
+	public final static int AGENDA_APLICACOES = 11;
 	
 	
 	private Integer cdTransacao;

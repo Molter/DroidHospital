@@ -111,6 +111,8 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 			
 			Toast.makeText(getApplicationContext(), getString(R.string.application_mande), Toast.LENGTH_LONG).show();
 			
+			aplicacoes.get(itemPosition).setAplicada(true);
+			
 		}else {
 			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
 		}

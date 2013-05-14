@@ -30,7 +30,7 @@ public class ListaPacientes extends Transacao {
 			
 			String numeroQuarto = dados.getId();
 			
-			sbQuery.append( " select p.idpessoa, l.quarto, l.leito, p.nome " +
+			sbQuery.append( " select p.idpessoa, l.quarto, l.leito, p.nome, a.idatendimento " +
 							" from atendimentos a " +
 							" inner join leitos  l on a.idleito = l.idleito " +
 							" inner join pessoas p on a.idpaciente = p.idpessoa " +
@@ -57,6 +57,7 @@ public class ListaPacientes extends Transacao {
 					paciente.setQuartoPaciente(resultSet.getInt("quarto"));
 					paciente.setLeitoPaciente(resultSet.getString("leito"));
 					paciente.setNomePaciente(resultSet.getString("nome"));
+					paciente.setIdatendimento(resultSet.getInt("idatendimento"));
 					
 					pacientes.add( paciente );
 				}

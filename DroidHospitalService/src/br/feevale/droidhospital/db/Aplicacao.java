@@ -16,6 +16,11 @@ public class Aplicacao extends Interpretador {
 	private String nomeMedicamento;
 	private String principioAtivo;
 	
+	private boolean aplicada = false;
+	
+	private String nomePaciente;
+	private String QuartoELeito;
+	
 	public Integer getIdAplicacao() {
 		return idAplicacao;
 	}
@@ -82,5 +87,29 @@ public class Aplicacao extends Interpretador {
 
 	public void setPrincipioAtivo(String principioAtivo) {
 		this.principioAtivo = principioAtivo;
+	}
+
+	public boolean isAplicada() {
+		return aplicada;
+	}
+
+	public void setAplicada(boolean aplicada) {
+		this.aplicada = aplicada;
+	}
+
+	public String getNomePaciente() {
+		return nomePaciente;
+	}
+
+	public void setNomePaciente(String nomePaciente) {
+		this.nomePaciente = nomePaciente;
+	}
+
+	public String getQuartoELeito() {
+		return QuartoELeito;
+	}
+
+	public void setQuartoELeito(String quartoELeito) {
+		QuartoELeito = quartoELeito;
 	}
 }
