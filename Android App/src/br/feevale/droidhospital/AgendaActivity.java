@@ -1,8 +1,25 @@
 package br.feevale.droidhospital;
 
-import android.os.Bundle;
+import java.util.ArrayList;
+
 import android.app.Activity;
-import android.view.Menu;
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import br.feevale.comunicacao.EnviaTransacao;
+import br.feevale.droidhospital.adapters.AgendaAplicacoesAdapter;
+import br.feevale.droidhospital.db.Aplicacao;
+import br.feevale.droidhospital.db.AplicacaoEfetuada;
+import br.feevale.droidhospital.db.ConfirmaTransacao;
+import br.feevale.droidhospital.db.Interpretador;
 
 public class AgendaActivity extends Activity implements OnItemClickListener {
 
@@ -33,6 +50,7 @@ public class AgendaActivity extends Activity implements OnItemClickListener {
 			
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void setUpDadosSocket() {
  		try {
 			Interpretador interpretador = new Interpretador();
