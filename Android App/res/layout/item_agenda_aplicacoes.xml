@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    android:focusable="false"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margem_vertical"
+    android:paddingLeft="@dimen/margem_horizontal"
+    android:paddingRight="@dimen/margem_horizontal"
+    android:paddingTop="@dimen/margem_vertical" 
+    android:background="@color/Gray"
+    
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/agenda_quarto_e_leito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="103B"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/Green" />
+
+        <TextView
+            android:id="@+id/agenda_paciente_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.89"
+            android:text="@string/name"
+             android:textColor="@color/Green" 
+             android:layout_marginLeft="15dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal" 
+        android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+    	
+        >
+    
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.89"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/agenda_data_textView"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="@string/data_demo"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/Black" />
+
+        <TextView
+            android:id="@+id/agenda_horario_textView"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:text="@string/hora_demo"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+             android:textColor="@color/Green" 
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.89"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/agenda_medicamento_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_weight="0.89"
+            android:text="@string/medicamento"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/Black" 
+            
+            />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/agenda_aplicacao_injection"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/injection"
+         />
+	</LinearLayout>
+</LinearLayout>

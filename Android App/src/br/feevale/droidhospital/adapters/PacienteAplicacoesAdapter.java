@@ -7,10 +7,12 @@ import java.util.Formatter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import br.feevale.droidhospital.R;
 import br.feevale.droidhospital.db.Aplicacao;
@@ -29,10 +31,6 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		return aplicacoes.size();
-	}
-	@Override
-	public int getViewTypeCount() {
-		return 2;
 	}
 
 	@Override
@@ -78,6 +76,12 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 		
 		horaAplicacaoTextView.setText(horaString.toString());
 
+		if(aplicacao.isAplicada()){
+			medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+			
+			ImageView image = (ImageView)layout.findViewById(R.id.aplicacao_injection);
+			image.setVisibility(View.GONE);
+		}
 		
 		String nomeMedicamento   = aplicacao.getNomeMedicamento() + " " + aplicacao.getConcentracaoMedicamento();
 		medicamentoTextView.setText(nomeMedicamento);

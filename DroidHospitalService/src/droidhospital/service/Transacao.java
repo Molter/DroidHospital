@@ -70,7 +70,10 @@ public abstract class Transacao {
 						transacao = new EfetuaAplicacao();
 						
 						break;
-					
+						
+					case Interpretador.AGENDA_APLICACOES:
+						transacao = new GetAgendaAplicacoes();
+						break;		
 						
 					default:
 						throw new DroidHospitalException( "C�digo de transa��o (" + interpretador.getCdTransacao() + ") desconhecido." );
