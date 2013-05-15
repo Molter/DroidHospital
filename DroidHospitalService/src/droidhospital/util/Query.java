@@ -1,10 +1,11 @@
 package droidhospital.util;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -81,7 +82,7 @@ public class Query {
 					} else if( valor instanceof String ) {
 						ps.setString( chave, (String) valor );
 					} else if( valor instanceof java.util.Date ) {
-						ps.setDate( chave, getDateSQL( valor ) );
+						ps.setString( chave, getDateSQL( valor ) );
 					} else {
 						throw new SQLException( "Tipo de valor para o campo " + chave + " desconhecido." );
 					}
@@ -95,16 +96,16 @@ public class Query {
 		return ps;
 	}
 
-	private Date getDateSQL( Object data ) {
+	private String getDateSQL( Object data ) {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		java.util.Calendar cal = Calendar.getInstance();
 		
-		cal.setTime( (java.util.Date) data );
+		cal.setTime( (Date) data );
 		
-		System.out.println( "Hora: " + cal.getTime() );
+		String currentTime = sdf.format( cal.getTime() );
 		
-		Date sqlDate = new Date( cal.getTime().getTime() );
-		
-		return sqlDate;
+		return currentTime;
 	}
 }

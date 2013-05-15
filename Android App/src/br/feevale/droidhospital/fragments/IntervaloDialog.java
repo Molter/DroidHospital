@@ -32,8 +32,8 @@ public class IntervaloDialog extends DialogFragment {
 		 
 		 
 		 mMinutePicker = (NumberPicker) layout.findViewById(R.id.intervalo_dialog_minute_number_picker);
-		 mMinutePicker.setMaxValue(60);
-		 mMinutePicker.setMinValue(1);
+		 mMinutePicker.setMaxValue(59);
+		 mMinutePicker.setMinValue(0);
 		 
 	        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	        builder.setTitle(R.string.intervalo)
@@ -68,7 +68,7 @@ public class IntervaloDialog extends DialogFragment {
 	                		   text.append(" " + getString(R.string.minutes_lower));
 	                		   
 	                	   }else if(mMinutePicker.getValue() == 1) {
-	                		   if(mHourPicker.getValue() > 1) {
+	                		   if(mHourPicker.getValue() >= 1) {
 	                			   text.append(" ") ;
 	                			   text.append(getString(R.string.and));
 	                			   text.append(" ") ;

@@ -33,7 +33,7 @@
             android:layout_height="25dp"
             android:text="@string/hora_demo"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/Black" />
+            android:textColor="@color/Green" />
     </LinearLayout>
     <TextView
         android:id="@+id/descricao_medicamento_textView"
@@ -42,7 +42,7 @@
         android:layout_weight="0.89"
         android:text="@string/medicamento"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/Black" />
+        android:textColor="@color/Green" />
 
     <ImageView
         android:id="@+id/aplicacao_injection"

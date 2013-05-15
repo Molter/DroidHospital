@@ -199,8 +199,8 @@ public final class R {
         public static final int anamnese_pacient_name_label=0x7f090005;
         public static final int aplicacao_injection=0x7f090022;
         public static final int aplicacaoes_data=0x7f090008;
-        public static final int aplicacoes_dosagem=0x7f09000a;
-        public static final int aplicacoes_nome=0x7f090009;
+        public static final int aplicacaoes_horario=0x7f090009;
+        public static final int aplicacoes_nome=0x7f09000a;
         public static final int btn_busca=0x7f090024;
         public static final int button1=0x7f090043;
         public static final int concentracao_edit_text=0x7f09003a;
