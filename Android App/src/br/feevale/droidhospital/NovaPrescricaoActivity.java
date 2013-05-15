@@ -38,7 +38,7 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 	
 
 	int horaInicial, minutoInicial;
-	int qtdAplicacoes, horaIntervalo = 1;
+	int qtdAplicacoes = 1, horaIntervalo = 1;
 	int minutoIntervalo = 0;
 	private int idAtendimento;
 

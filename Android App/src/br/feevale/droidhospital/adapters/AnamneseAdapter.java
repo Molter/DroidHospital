@@ -2,9 +2,13 @@ package br.feevale.droidhospital.adapters;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Formatter;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,47 +131,61 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 			case 0:
 				return configureAnamnese();
 			case 1:
-				return aplicacoesEfetuadasView(childPosition);
+				return aplicacoesView(childPosition, false);
 			case 2:
-				return aplicacoesFuturasView(childPosition);
+				return aplicacoesView(childPosition, true);
 			default:
 				return null;
 		}
 	}
 
-	private View aplicacoesFuturasView(int childPosition) {
-		Aplicacao aplicacao = aplicacoesFuturas.get( childPosition );
-		
-		View layout = inflater.inflate(R.layout.aplicacoes, null);
-		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
-		String myDate = DateFormat.getDateInstance().format(aplicacao.getHoraPrevisto());
-		data.setText(myDate);
-
-		TextView nome = (TextView) layout.findViewById(R.id.aplicacoes_nome);
-		nome.setText(aplicacoesFuturas.get( childPosition ).getNomeMedicamento());
-
-		TextView dosagem = (TextView) layout.findViewById(R.id.aplicacoes_dosagem);
-		dosagem.setText(aplicacoesFuturas.get( childPosition ).getConcentracaoMedicamento() ); // TODO tem que ver isso
-
-		return layout;
-	}
-
-	private View aplicacoesEfetuadasView(int childPosition) {
-		Aplicacao aplicacao = aplicacoesFuturas.get( childPosition );
+	private View aplicacoesView(int childPosition, boolean futura) {
+		Aplicacao aplicacao;
 		
 		View layout = inflater.inflate(R.layout.aplicacoes, null);
 		
-		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
-		String myDate = DateFormat.getDateInstance().format(aplicacao.getHoraAplicado());
+		Date dataAplicacao;
+		if(futura){
+			aplicacao = aplicacoesFuturas.get( childPosition );
+			dataAplicacao = aplicacao.getHoraPrevisto();
+		}else{
+			aplicacao = aplicacoesEfetuadas.get( childPosition );
+			dataAplicacao = aplicacao.getHoraAplicado();
+		}
 		
-		data.setText(myDate);
+		String myDateString = DateFormat.getDateInstance().format(dataAplicacao);
+		
+		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
+		data.setText(myDateString);
+		
+		TextView horaTextView = (TextView) layout.findViewById(R.id.aplicacaoes_horario);
+		
+		StringBuilder horaString = new StringBuilder();
+		Calendar c = Calendar.getInstance();
+		c.setTime(dataAplicacao);
+		
+		Formatter hourFormatter = new Formatter();
+		hourFormatter.format("%02d", c.get(Calendar.HOUR_OF_DAY));
+		horaString.append(hourFormatter.toString());
+		
+		horaString.append(":");
+		
+		Formatter minuteFormatter = new Formatter();
+		minuteFormatter.format("%02d", c.get(Calendar.MINUTE));
+		horaString.append(minuteFormatter.toString());
+		
+		horaTextView.setText(horaString.toString());
 
 		TextView nome = (TextView) layout.findViewById(R.id.aplicacoes_nome);
-		nome.setText( aplicacoesEfetuadas.get( childPosition ).getNomeMedicamento() );
+		String nomeMedicamento = aplicacoesFuturas.get( childPosition ).getNomeMedicamento() + " " + aplicacoesFuturas.get( childPosition ).getConcentracaoMedicamento();
+		nome.setText(nomeMedicamento);
 
-		TextView dosagem = (TextView) layout.findViewById(R.id.aplicacoes_dosagem);
-		dosagem.setText( aplicacoesEfetuadas.get( childPosition ).getConcentracaoMedicamento() ); // TODO tem que ver isso
-
+		if(childPosition % 2 == 0) {
+			layout.setBackgroundColor(Color.GRAY);
+		}else{
+			layout.setBackgroundColor(Color.WHITE);
+		}
+		
 		return layout;
 	}
 
