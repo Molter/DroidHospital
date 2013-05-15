@@ -50,6 +50,7 @@ public class AgendaActivity extends Activity implements OnItemClickListener {
 			
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void setUpDadosSocket() {
  		try {
 			Interpretador interpretador = new Interpretador();

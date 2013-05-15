@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.db.ConfirmaTransacao;
-import br.feevale.droidhospital.db.DadosUsuario;
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.Medicamento;
 import br.feevale.droidhospital.db.MedicamentoDescription;

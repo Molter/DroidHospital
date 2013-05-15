@@ -72,6 +72,7 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		private void setUpDadosSocket(long id) {
 			pacientes = new ArrayList<Paciente>();
 			try {
