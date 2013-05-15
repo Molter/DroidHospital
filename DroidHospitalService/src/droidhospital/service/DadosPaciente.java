@@ -150,7 +150,9 @@ public class DadosPaciente extends Transacao {
 
 			StringBuilder sbQuery = new StringBuilder();
 			
-			sbQuery.append("select ap.*, me.* from atendimentos at, prescricoes pr, aplicacoes ap, medicamentos me ");
+			sbQuery.append("select ap.*, me.*, ap.hora_aplicado as date_aplicado, ap.hora_previsto as date_previsto ");
+			sbQuery.append(" , hour(hora_previsto) as hora_previsto, minute(hora_previsto) as minuto_previsto, hour(hora_aplicado) as hora_aplicado, minute(hora_aplicado) as minute_aplicado ");
+			sbQuery.append(" from atendimentos at, prescricoes pr, aplicacoes ap, medicamentos me ");
 			sbQuery.append(" where me.idmedicamento = pr.idmedicamento and pr.idatendimento = at.idatendimento and ap.idprescricao = pr.idprescricao and at.idpaciente = ");
 			sbQuery.append(idPaciente);
 			sbQuery.append(" and ap.hora_aplicado is ");
@@ -179,13 +181,33 @@ public class DadosPaciente extends Transacao {
 					Aplicacao aplicacao = new Aplicacao();
 					
 					aplicacao.setConcentracaoMedicamento( resultSet.getString( "concentracao" ) );
-					aplicacao.setHoraAplicado( resultSet.getDate( "hora_aplicado" ) );
-					aplicacao.setHoraPrevisto( resultSet.getDate( "hora_previsto" ) );
+					
+					//hora aplicado
+					Calendar calendar = Calendar.getInstance();
+					
+					Date dateAplicado = resultSet.getDate( "date_aplicado" );
+					if(dateAplicado != null) {
+						calendar.setTime(dateAplicado);
+						calendar.set(Calendar.HOUR_OF_DAY, resultSet.getInt("hora_aplicado"));
+						calendar.set(Calendar.MINUTE, resultSet.getInt("minuto_aplicado"));
+						aplicacao.setHoraAplicado(calendar.getTime());
+					}
+					
+					//hora previsto
+					Date dataPrevisto = resultSet.getDate( "date_previsto" );
+					if(dataPrevisto != null) {
+						calendar.setTime(dataPrevisto);
+						calendar.set(Calendar.HOUR_OF_DAY, resultSet.getInt("hora_previsto"));
+						calendar.set(Calendar.MINUTE, resultSet.getInt("minuto_previsto"));
+						aplicacao.setHoraPrevisto(calendar.getTime());
+					}
+					
+					
 					aplicacao.setIdAplicacao( resultSet.getInt( "idaplicacao" ) );
 					aplicacao.setIdEnfermeiro( resultSet.getInt( "idEnfermeiro" ) );
 					aplicacao.setIdPrescricao( resultSet.getInt( "idprescricao" ) );
 					aplicacao.setNomeMedicamento( resultSet.getString( "farmaco" ) );
-					aplicacao.setPrincipioAtivo( resultSet.getString( "farmaco" ) ); // TODO ver isso
+					aplicacao.setPrincipioAtivo( resultSet.getString( "farmaco" ) );
 					
 					aplicacoes.add( aplicacao );
 				}

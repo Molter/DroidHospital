@@ -127,7 +127,7 @@ public class CreatePrescricao extends Transacao {
 		sbQuery.append( "`idmedicamento`,\n" );
 		sbQuery.append( "`intervalo_aplicacoes`,\n" );
 		sbQuery.append( "`hora_inicio`,\n" );
-		sbQuery.append( "`quantidade_aplicações`,\n" );
+		sbQuery.append( "`quantidade_aplicacoes`,\n" );
 		sbQuery.append( "`idMedico`)\n" );
 		sbQuery.append( "VALUES\n" );
 		sbQuery.append( "(\n" );
@@ -145,8 +145,13 @@ public class CreatePrescricao extends Transacao {
 
 		query.setParameter( 1, prescricao.getIdAtendimento() );
 		query.setParameter( 2, prescricao.getIdMedicamento() );
-		query.setParameter( 3, prescricao.getMinutoIntervaloAplicacoes() );
-		query.setParameter( 4, prescricao.getHoraInicioAplicacoes() );
+		
+		String horarioAplicacao =  prescricao.getHoraIntervaloAplicacoes()+ ":"+ prescricao.getMinutoIntervaloAplicacoes();
+		query.setParameter( 3, horarioAplicacao);
+		
+		String inicioAplicacao =  prescricao.getHoraInicioAplicacoes()+ ":"+ prescricao.getMinutoInicioAplicacoes();
+		query.setParameter( 4, inicioAplicacao);
+		
 		query.setParameter( 5, prescricao.getQuantidadeAplicacoes() );
 		query.setParameter( 6, prescricao.getIdMedico() );
 		

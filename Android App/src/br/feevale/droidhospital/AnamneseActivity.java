@@ -30,7 +30,8 @@ public class AnamneseActivity extends Activity {
 	private int idAtendimento;
 	private PacienteDescription dadosPaciente;
 	
-	
+	AnamneseAdapter adapter;
+	ExpandableListView expandableList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,17 @@ public class AnamneseActivity extends Activity {
 		
 		setUpDadosSocket();
 		
-		ExpandableListView expandableList = (ExpandableListView) findViewById(R.id.anamnese_expandablelistview);
+		expandableList = (ExpandableListView) findViewById(R.id.anamnese_expandablelistview);
 		
-		AnamneseAdapter adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente );
+		adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente );
+		expandableList.setAdapter(adapter);
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setUpDadosSocket();
+		
+		adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente );
 		expandableList.setAdapter(adapter);
 	}
 	
