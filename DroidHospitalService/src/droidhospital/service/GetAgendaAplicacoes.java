@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import br.feevale.droidhospital.db.Aplicacao;
-import br.feevale.droidhospital.db.DadosId;
 import droidhospital.util.Conexao;
 import droidhospital.util.Query;
 
