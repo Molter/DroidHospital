@@ -107,7 +107,9 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 
 			public void onClick(View viewClicked) {
 				if(enviaAplicacao(aplicacao.getIdAplicacao())) {
-					TextView medicineDescription = (TextView)viewClicked.findViewById(R.id.descricao_medicamento_textView);
+					View parent = (View) viewClicked.getParent();
+					
+					TextView medicineDescription = (TextView) parent.findViewById(R.id.descricao_medicamento_textView);
 					medicineDescription.setPaintFlags(medicineDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 					medicineDescription.invalidate();
 					
