@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import br.feevale.droidhospital.R;
 import br.feevale.droidhospital.db.Aplicacao;
 import br.feevale.droidhospital.db.PacienteDescription;
@@ -165,6 +166,8 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		c.setTime(dataAplicacao);
 		
 		Formatter hourFormatter = new Formatter();
+		//Toast.makeText(context, String.valueOf(c.get(Calendar.HOUR_OF_DAY)), Toast.LENGTH_LONG).show();
+		
 		hourFormatter.format("%02d", c.get(Calendar.HOUR_OF_DAY));
 		horaString.append(hourFormatter.toString());
 		

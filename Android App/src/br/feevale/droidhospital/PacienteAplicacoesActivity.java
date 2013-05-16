@@ -34,6 +34,8 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 	
 	public static final String ID_VALUE = "id";
 	
+	int idEnfermeiro;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,6 +69,9 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 		aplicacaoListView.setAdapter(pacienteAplicacoesAdapter);
 		
 		//aplicacaoListView.setOnItemClickListener(this);
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		idEnfermeiro = prefs.getInt(MainActivity.USER_ID_PREFERENCE, 0);
 			
 	}
 	
@@ -124,7 +129,8 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 		
  		try {
  			AplicacaoEfetuada interpretador = new AplicacaoEfetuada(String.valueOf(id));
-
+ 			interpretador.setIdEnfermeiro(idEnfermeiro);
+ 			
 			interpretador.setCdTransacao(Interpretador.ENVIA_APLICACAO);
 
 			EnviaTransacao enviador = new EnviaTransacao(interpretador);
