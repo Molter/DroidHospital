@@ -155,7 +155,7 @@ CREATE TABLE `pessoas` (
   `especialidade` varchar(40) DEFAULT NULL,
   `data_nascimento` date NOT NULL,
   `tipo_sanguineo` char(2) NOT NULL,
-  `usuario` varchar(200) NOT NULL,
+  `usuario` varchar(200) NOT NULL,adapter
   `senha` varchar(32) NOT NULL,
   `alergias` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`idpessoa`)
@@ -185,7 +185,7 @@ CREATE TABLE `prescricoes` (
   `idmedicamento` int(11) NOT NULL,
   `intervalo_aplicacoes` time NOT NULL,
   `hora_inicio` time DEFAULT NULL,
-  `quantidade_aplicações` int(11) NOT NULL DEFAULT '1',
+  `quantidade_aplicacoes` int(11) NOT NULL DEFAULT '1',
   `idMedico` int(11) DEFAULT NULL,
   PRIMARY KEY (`idprescricao`),
   KEY `idatendimento` (`idatendimento`),
