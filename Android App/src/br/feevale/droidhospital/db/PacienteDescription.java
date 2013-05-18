@@ -120,4 +120,10 @@ public class PacienteDescription extends Interpretador {
 	public void setIdade(String idade) {
 		this.idade = idade;
 	}
+<<<<<<< HEAD
 }
+=======
+
+	
+}
+>>>>>>> Web Services Sync Tasks

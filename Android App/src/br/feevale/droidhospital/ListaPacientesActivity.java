@@ -7,10 +7,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+<<<<<<< HEAD
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+=======
+import android.util.Log;
+>>>>>>> Web Services Sync Tasks
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -19,6 +23,7 @@ import android.widget.Toast;
 import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.adapters.PacientesAdapter;
 import br.feevale.droidhospital.db.DadosId;
+<<<<<<< HEAD
 import br.feevale.droidhospital.db.DadosUsuario;
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.Paciente;
@@ -28,6 +33,13 @@ import br.feevale.droidhospital.db.Paciente;
 public class ListaPacientesActivity extends Activity implements OnItemClickListener {
 	
 		private ArrayList<Paciente> pacientes;
+=======
+import br.feevale.droidhospital.db.Interpretador;
+import br.feevale.droidhospital.db.Paciente;
+
+public class ListaPacientesActivity extends Activity implements OnItemClickListener {
+		ArrayList<Paciente> pacientes;
+>>>>>>> Web Services Sync Tasks
 
 		public static final String ID_VALUE = "id";
 
@@ -45,6 +57,9 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 			setContentView(R.layout.pacientes_layout);
 			
 			ListView pacientesListView = (ListView) findViewById(R.id.pacientes_list_view);
+			
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
 			
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
@@ -72,7 +87,10 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 			
 		}
 		
+<<<<<<< HEAD
 		@SuppressWarnings("unchecked")
+=======
+>>>>>>> Web Services Sync Tasks
 		private void setUpDadosSocket(long id) {
 			pacientes = new ArrayList<Paciente>();
 			try {
@@ -124,6 +142,7 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 				
 			intent.putExtra(ID_VALUE, id);
 			startActivity(intent);
+<<<<<<< HEAD
 		}
 		
 		@Override
@@ -148,5 +167,7 @@ public class ListaPacientesActivity extends Activity implements OnItemClickListe
 				break;
 			}
 			return true;
+=======
+>>>>>>> Web Services Sync Tasks
 		}
 }

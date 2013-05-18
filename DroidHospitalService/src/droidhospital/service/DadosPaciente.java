@@ -25,6 +25,7 @@ public class DadosPaciente extends Transacao {
 		DadosId dadosId = (DadosId) dadosRecebidos;
 		idPaciente = dadosId.getId();
 	}
+<<<<<<< HEAD
 	
 	@Override
 	public void executaTransacao() {
@@ -36,14 +37,36 @@ public class DadosPaciente extends Transacao {
 	
 	public void createPacientDescription() {
 		
+=======
+
+	
+	@Override
+	public void executaTransacao() {
+		System.out.println("Criando Paciente Descripton...");
+		createPacientDescription();
+		System.out.println("setUpAplicacoesEfetuadas...");
+		setUpAplicacoesEfetuadas();
+		System.out.println("setUpAplicacoesFuturas ...");
+		setUpAplicacoesFuturas();
+	}
+	
+
+
+	public void createPacientDescription() {
+>>>>>>> Web Services Sync Tasks
 		pacienteDescription = new PacienteDescription();
 		
 		try {
 
 			StringBuilder sbQuery = new StringBuilder();
 			
+<<<<<<< HEAD
 			sbQuery.append("select ");
 			sbQuery.append(" p.idpessoa, p.nome, a.data_entrada, a.fuma, a.peso, p.data_nascimento, l.quarto, l.leito, p.alergias ");
+=======
+			sbQuery.append(  "select ");
+			sbQuery.append( " p.idpessoa, p.nome, a.data_entrada, a.fuma, a.peso, p.data_nascimento, l.quarto, l.leito, p.alergias ");
+>>>>>>> Web Services Sync Tasks
 			sbQuery.append(" from atendimentos a");
 			sbQuery.append(" inner join pessoas  p on a.idpaciente = p.idpessoa");
 			sbQuery.append(" inner join leitos  l on l.idleito = a.idleito");
@@ -52,6 +75,10 @@ public class DadosPaciente extends Transacao {
 	        ResultSet resultSet = null;
 	        Conexao cnx = new Conexao();
 	        
+<<<<<<< HEAD
+=======
+	        System.out.println(sbQuery.toString());
+>>>>>>> Web Services Sync Tasks
 	        try {
 	        
 				Query q = new Query( cnx );
@@ -61,11 +88,18 @@ public class DadosPaciente extends Transacao {
 				resultSet = q.executeQuery();
 				
 				while( resultSet.next() ) {
+<<<<<<< HEAD
 					
+=======
+>>>>>>> Web Services Sync Tasks
 					pacienteDescription.setIdPaciente(idPaciente);
 					pacienteDescription.setNome(resultSet.getString("nome"));
 					pacienteDescription.setFumante(resultSet.getString("fuma"));
 					pacienteDescription.setPeso(resultSet.getString("peso"));
+<<<<<<< HEAD
+=======
+					
+>>>>>>> Web Services Sync Tasks
 					pacienteDescription.setQuarto(resultSet.getString("quarto"));
 					pacienteDescription.setLeito(resultSet.getString("leito"));
 					pacienteDescription.setAlergias(resultSet.getString("alergias"));
@@ -121,14 +155,23 @@ public class DadosPaciente extends Transacao {
 		} catch( Exception  e) {
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
+=======
+
+>>>>>>> Web Services Sync Tasks
 	}
 
 	@Override
 	public Serializable getDadosResposta() {
+<<<<<<< HEAD
+=======
+		System.out.println("returning Data ...");
+>>>>>>> Web Services Sync Tasks
 		return pacienteDescription;
 	}
 	
 	private void setUpAplicacoesFuturas() {
+<<<<<<< HEAD
 		
 		ArrayList<Aplicacao> aplicacoesEfetuadas = getAplicacoes( true );
 		
@@ -226,3 +269,18 @@ public class DadosPaciente extends Transacao {
 	}
 
 }
+=======
+		ArrayList<Aplicacao> aplicacoesEfetuadas = new ArrayList<Aplicacao>();
+		pacienteDescription.setAplicacoesEfetuadas(aplicacoesEfetuadas);
+		
+	}
+
+
+	private void setUpAplicacoesEfetuadas() {
+		ArrayList<Aplicacao> aplicacoesFuturas = new ArrayList<Aplicacao>();
+		pacienteDescription.setAplicacoesFuturas(aplicacoesFuturas);
+	}
+
+
+}
+>>>>>>> Web Services Sync Tasks

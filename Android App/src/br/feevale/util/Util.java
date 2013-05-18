@@ -2,6 +2,12 @@ package br.feevale.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+<<<<<<< HEAD
+=======
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+>>>>>>> Web Services Sync Tasks
 
 public class Util {
 
