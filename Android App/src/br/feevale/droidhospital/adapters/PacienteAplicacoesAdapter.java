@@ -118,7 +118,7 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 					
 					injection.setVisibility(View.INVISIBLE);
 					
-					Toast.makeText(context, context.getString(R.string.application_made), Toast.LENGTH_LONG).show();
+					Toast.makeText(context, context.getString(R.string.application_mande), Toast.LENGTH_LONG).show();
 					
 					aplicacao.setAplicada(true);
 					

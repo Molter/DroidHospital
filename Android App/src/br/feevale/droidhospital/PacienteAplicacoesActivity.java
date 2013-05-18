@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,57 +28,53 @@ import br.feevale.droidhospital.db.DadosId;
 import br.feevale.droidhospital.db.DadosUsuario;
 import br.feevale.droidhospital.db.Interpretador;
 
-public class PacienteAplicacoesActivity extends Activity{
+public class PacienteAplicacoesActivity extends Activity implements OnItemClickListener {
 
 	private ArrayList<Aplicacao> aplicacoes;
-	
+
 	public static final String ID_VALUE = "id";
-	
+
 	int idEnfermeiro;
-<<<<<<< HEAD
-	ListView aplicacaoListView;
-=======
->>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.paciente_aplicacoes);
-		
-		aplicacaoListView = (ListView) findViewById(R.id.listaAplicacoes);
-		
+
+		ListView aplicacaoListView = (ListView) findViewById(R.id.listaAplicacoes);
+
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
-		
+
 		Intent intent = getIntent();
 		long id = intent.getLongExtra(ListaMedicamentosActivity.ID_VALUE, 1);
-		
+
 		if(id == 0) {
 			Toast.makeText(getApplicationContext(), "Pacient not found", Toast.LENGTH_LONG).show();
 			finish();
 		}
-		
-		
+
+
 		TextView leitoPaciente = (TextView)findViewById(R.id.descricao_leito_textView);
 		leitoPaciente.setText(intent.getStringExtra(ListaPacientesActivity.NOME_PACIENTE));
-		
+
 		TextView nomePaciente = (TextView)findViewById(R.id.descricao_paciente_textView);
 		nomePaciente.setText(intent.getStringExtra(ListaPacientesActivity.LEITO_PACIENTE));
-		
-		
+
+
 		setUpDadosSocket(id);
-		
+
 		PacienteAplicacoesAdapter pacienteAplicacoesAdapter= new PacienteAplicacoesAdapter(getApplicationContext(), aplicacoes);
-		
+
 		aplicacaoListView.setAdapter(pacienteAplicacoesAdapter);
-		
+
 		//aplicacaoListView.setOnItemClickListener(this);
-		
+
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		idEnfermeiro = prefs.getInt(MainActivity.USER_ID_PREFERENCE, 0);
-			
+
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void setUpDadosSocket(long id) {
  		try {
@@ -105,30 +102,31 @@ public class PacienteAplicacoesActivity extends Activity{
 		}
 	}
 
+	@Override
 	public void onItemClick(AdapterView<?> parentAdapter, View viewClicked, int itemPosition, long idItem) {
 		//Toast.makeText(getApplicationContext(), "item clicked", Toast.LENGTH_LONG).show();
-		
+
 		if(enviaAplicacao(idItem)) {
 			TextView medicineDescription = (TextView)viewClicked.findViewById(R.id.descricao_medicamento_textView);
 			medicineDescription.setPaintFlags(medicineDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			medicineDescription.invalidate();
-			
+
 			ImageView image = (ImageView)viewClicked.findViewById(R.id.descricao_aplicacao_injection);
 			image.setVisibility(View.GONE);
-			
-			Toast.makeText(getApplicationContext(), getString(R.string.application_made), Toast.LENGTH_LONG).show();
-			
+
+			Toast.makeText(getApplicationContext(), getString(R.string.application_mande), Toast.LENGTH_LONG).show();
+
 			aplicacoes.get(itemPosition).setAplicada(true);
-			
+
 		}else {
 			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
 		}
 	}
-	
-	
+
+
 	private boolean enviaAplicacao(long id) {
 		ConfirmaTransacao retorno = new ConfirmaTransacao();
-		
+
  		try {
  			AplicacaoEfetuada interpretador = new AplicacaoEfetuada(String.valueOf(id));
  			interpretador.setIdEnfermeiro(idEnfermeiro);
@@ -138,10 +136,11 @@ public class PacienteAplicacoesActivity extends Activity{
 			EnviaTransacao enviador = new EnviaTransacao(interpretador);
 
 			try {
+
 				enviador.envia();
-				
+
 				retorno = (ConfirmaTransacao) enviador.recebe();
-				
+
 
 			} finally {
 				enviador.fechaSocket();
@@ -159,25 +158,25 @@ public class PacienteAplicacoesActivity extends Activity{
  			return false;
  		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
-		
+
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		String userType = prefs.getString(MainActivity.USER_TYPE_PREFERENCE, DadosUsuario.FAIL);
-		
-		
+
+
 		if (userType.equalsIgnoreCase(DadosUsuario.TIPO_ENFERMEIRO)) {
-			
+
 		    MenuItem menuItem = menu.findItem(R.id.action_agenda);
 		    menuItem.setVisible(true);
-	
+
 		}
-		
+
 		return true;
 	}
-	
+
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
@@ -187,10 +186,6 @@ public class PacienteAplicacoesActivity extends Activity{
 			break;
 		}
 		return true;
-	}
-	
-	public Integer getIdEnfermeiro(){
-		return idEnfermeiro;
 	}
 
 }
