@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,7 +24,7 @@ import br.feevale.droidhospital.fragments.QtdAplicacoesDialog;
 import br.feevale.droidhospital.interfaces.OnDialogFinished;
 
 public class NovaPrescricaoActivity extends FragmentActivity {
-
+	
 	Integer idMedicamento;
 	EditText edPrincipio;
 	EditText edReferencia;
@@ -35,8 +34,6 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 	TextView edHora_inicial;
 	TextView edQtd_aplicacoes;
 	TextView edIntervalo;
-	
-
 	int horaInicial, minutoInicial;
 	int qtdAplicacoes = 1, horaIntervalo = 1;
 	int minutoIntervalo = 0;
@@ -122,20 +119,6 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 
 		edIntervalo = (TextView) findViewById(R.id.intervalo_edit_text);
 
-	}
-	
-	private void setUpPaciente(long id) {
-		TextView  pacientName = (TextView) findViewById(R.id.descricao_paciente_textView);
-		TextView  numLeito    = (TextView) findViewById(R.id.descricao_leito_textView);
-		pacientName.setText("");
-		numLeito.setText("01 a");		
-	}	
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.nova_prescricao, menu);
-		return true;
 	}
 
 	public void listaMedicamentos(View v) {

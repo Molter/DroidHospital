@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.feevale.droidhospital"
-    android:versionCode="5"
-    android:versionName="Brave Bear" >
+    android:versionCode="7"
+    android:versionName="Thunder Thor" >
 
     <uses-sdk
         android:minSdkVersion="16"

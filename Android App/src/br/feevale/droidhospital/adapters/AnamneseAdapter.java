@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
-import java.util.Random;
-
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -15,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 import br.feevale.droidhospital.R;
 import br.feevale.droidhospital.db.Aplicacao;
 import br.feevale.droidhospital.db.PacienteDescription;
@@ -33,8 +30,6 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	LayoutInflater inflater;
 
 	private PacienteDescription pacientDescription;
-	
-	Aplicacoes aplicacoes;
 
 	public AnamneseAdapter(Context context, PacienteDescription pacientDescription) {
 		this.context = context;
@@ -47,8 +42,9 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		this.pacientDescription = pacientDescription;
-		//Ramdow Aplicacoes
-		aplicacoes = new Aplicacoes();
+		
+		aplicacoesFuturas = pacientDescription.getAplicacoesFuturas();
+		aplicacoesEfetuadas = pacientDescription.getAplicacoesEfetuadas();
 	}
 
 	@Override
@@ -190,7 +186,7 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		case 1:
 			return aplicacoesEfetuadas.size();
 		case 2:
-			return aplicacoes.countAplicacaoesFuturas();
+			return aplicacoesFuturas.size();
 		default:
 			break;
 		}

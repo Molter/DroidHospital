@@ -21,10 +21,10 @@ public class EfetuaAplicacao extends Transacao {
 	public void executaTransacao() {
 		try {
 			
-			if(!podeEdefuarAplicacao()){
-				retorno.setResult(ConfirmaTransacao.RESULT_DENIED);
-				return;
-			}
+			//if(!podeEdefuarAplicacao()){
+				//retorno.setResult(ConfirmaTransacao.RESULT_DENIED);
+				//return;
+			//}
 
 			StringBuilder sbQuery = new StringBuilder();
 			

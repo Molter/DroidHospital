@@ -21,6 +21,7 @@ import br.feevale.droidhospital.db.DadosId;
 import br.feevale.droidhospital.db.DadosUsuario;
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.PacienteDescription;
+import br.feevale.droidhospital.NovaPrescricaoActivity;
 
 public class AnamneseActivity extends Activity {
 	public static String ID_PACIENTE = "id";
@@ -124,17 +125,12 @@ public class AnamneseActivity extends Activity {
 	}
 
 	public void novaPrescricao(View v) {
-		Intent novaPrecricaoIntent = new Intent(getApplicationContext(),
-				NovaPrescricaoActivity.class);
-
+		
+		Intent novaPrecricaoIntent = new Intent(getApplicationContext(), NovaPrescricaoActivity.class);
 		novaPrecricaoIntent.putExtra(ID_PACIENTE, idPaciente);
 		novaPrecricaoIntent.putExtra(NOME_PACIENTE, dadosPaciente.getNome());
-		novaPrecricaoIntent.putExtra(LEITO_PACIENTE, dadosPaciente.getQuarto()
-				+ " " + dadosPaciente.getLeito());
-
-		novaPrecricaoIntent.putExtra(ListaPacientesActivity.ID_ATENDIMENTO,
-				idAtendimento);
-
+		novaPrecricaoIntent.putExtra(LEITO_PACIENTE, dadosPaciente.getQuarto()+ " " + dadosPaciente.getLeito());
+		novaPrecricaoIntent.putExtra(ListaPacientesActivity.ID_ATENDIMENTO, idAtendimento);
 		startActivity(novaPrecricaoIntent);
 	}
 
