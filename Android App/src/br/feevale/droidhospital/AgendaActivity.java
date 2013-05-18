@@ -46,9 +46,15 @@ public class AgendaActivity extends Activity implements OnItemClickListener {
 		
 		//aplicacaoListView.setOnItemClickListener(this);
 		
+<<<<<<< HEAD
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		idEnfermeiro = prefs.getInt(MainActivity.USER_ID_PREFERENCE, 0);
+=======
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		idEnfermeiro = prefs.getInt(MainActivity.USER_ID_PREFERENCE, 0);
+	
+>>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
 			
 	}
 	

@@ -34,7 +34,10 @@ public class PacienteAplicacoesActivity extends Activity{
 	public static final String ID_VALUE = "id";
 	
 	int idEnfermeiro;
+<<<<<<< HEAD
 	ListView aplicacaoListView;
+=======
+>>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

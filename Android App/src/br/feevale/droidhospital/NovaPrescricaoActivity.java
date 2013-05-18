@@ -1,7 +1,13 @@
 package br.feevale.droidhospital;
 
+<<<<<<< HEAD
 import java.util.Calendar;
 
+=======
+import br.feevale.droidhospital.pojos.Prescricao;
+import android.os.Bundle;
+import android.app.Activity;
+>>>>>>> Web Services Sync Tasks
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,7 +32,10 @@ import br.feevale.droidhospital.pojos.Prescricao;
 
 public class NovaPrescricaoActivity extends FragmentActivity {
 
+<<<<<<< HEAD
 	Integer idMedicamento;
+=======
+>>>>>>> Web Services Sync Tasks
 	EditText edPrincipio;
 	EditText edReferencia;
 	EditText edLaboratorio;
@@ -127,13 +136,24 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 		edIntervalo = (TextView) findViewById(R.id.intervalo_edit_text);
 
 	}
+<<<<<<< HEAD
 	/*
+=======
+<<<<<<< HEAD
+=======
+	
+>>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
 	private void setUpPaciente(long id) {
 		TextView  pacientName = (TextView) findViewById(R.id.descricao_paciente_textView);
 		TextView  numLeito    = (TextView) findViewById(R.id.descricao_leito_textView);
 		pacientName.setText("");
 		numLeito.setText("01 a");		
+<<<<<<< HEAD
 	}*/	
+=======
+	}	
+>>>>>>> Web Services Sync Tasks
+>>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -153,6 +173,7 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 		HoraInicialDatePicker horainicialFragment = new HoraInicialDatePicker();
 		horainicialFragment.setCallback(horaInicialListener);
 
+<<<<<<< HEAD
 		horainicialFragment.show(getSupportFragmentManager(), "timePicker");
 	}
 
@@ -187,8 +208,15 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 
 		prescricao.setHoraIntervaloAplicacoes(horaIntervalo);
 		prescricao.setMinutoIntervaloAplicacoes(minutoIntervalo);
+<<<<<<< HEAD
 		Toast.makeText(getApplicationContext(), "Paciente Joï¿½o adicionado", Toast.LENGTH_LONG).show();
 		finish();
+=======
+=======
+		Toast.makeText(getApplicationContext(), "Paciente João adicionado", Toast.LENGTH_LONG).show();
+		finish();
+>>>>>>> Web Services Sync Tasks
+>>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
 		
 		prescricao.setIdAtendimento(idAtendimento);
 
