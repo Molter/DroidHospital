@@ -6,13 +6,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.StrictMode;
-<<<<<<< HEAD
 import android.preference.PreferenceManager;
 import android.util.Log;
-=======
-import android.util.Log;
-import android.view.Menu;
->>>>>>> Web Services Sync Tasks
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,16 +18,11 @@ import br.feevale.droidhospital.db.Interpretador;
 
 public class MainActivity extends Activity {
 
-<<<<<<< HEAD
 	public static final String USER_TYPE_PREFERENCE = "br.feevale.droidhospital.usertype";
 	public static final String USER_ID_PREFERENCE = "br.feevale.droidhospital.userid";
 
 	public static String DROID_HOSPITAL_LOG_TAG = "br.feevale.droidhospital";
 
-=======
-	public static String DROID_HOSPITAL_LOG_TAG = "br.feevale.droidhospital";
-	
->>>>>>> Web Services Sync Tasks
 	private EditText loginEditText;
 	private EditText passwordEditText;
 
@@ -95,26 +85,12 @@ public class MainActivity extends Activity {
 			}
 
 		} catch (Exception e) {
-<<<<<<< HEAD
 			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG,
 					getString(R.string.not_connected));
 			Toast.makeText(getApplicationContext(),
 					getString(R.string.not_connected), Toast.LENGTH_LONG)
 					.show();
 			e.printStackTrace();
-			// finish();
-<<<<<<< HEAD
-=======
-=======
->>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
-			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG, getString(R.string.not_connected));
-			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
-			e.printStackTrace();
-			//finish();
-<<<<<<< HEAD
-=======
->>>>>>> Web Services Sync Tasks
->>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
 		}
 
 		if (dadosUsuario.getIdUsuario() == null) {

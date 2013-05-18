@@ -35,7 +35,7 @@
     <string name="hora_inicial">Hora Inicial</string>
     <string name="qtd_aplicacoes">Qtd Aplic.</string>
     <string name="intervalo">Intervalo</string>
-    <string name="not_connected">Houve um erro na conecção com o Servidor</string>
+    <string name="not_connected">Houve um erro na conexão com o Servidor</string>
     <string name="nenhum_medicamento_encontrado">Nenhum medicamento encontrado</string>
     <string name="bad_login">Login ou senha inválida</string>
     <string name="action_agenda">Agenda</string>

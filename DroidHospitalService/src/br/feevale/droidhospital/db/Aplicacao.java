@@ -88,7 +88,6 @@ public class Aplicacao extends Interpretador {
 	public void setPrincipioAtivo(String principioAtivo) {
 		this.principioAtivo = principioAtivo;
 	}
-
 	public boolean isAplicada() {
 		return aplicada;
 	}

@@ -1,20 +1,13 @@
 package br.feevale.droidhospital;
 
-<<<<<<< HEAD
 import java.util.Calendar;
 
-=======
-import br.feevale.droidhospital.pojos.Prescricao;
-import android.os.Bundle;
-import android.app.Activity;
->>>>>>> Web Services Sync Tasks
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,18 +17,15 @@ import br.feevale.droidhospital.db.ConfirmaTransacao;
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.Medicamento;
 import br.feevale.droidhospital.db.MedicamentoDescription;
+import br.feevale.droidhospital.db.Prescricao;
 import br.feevale.droidhospital.fragments.HoraInicialDatePicker;
 import br.feevale.droidhospital.fragments.IntervaloDialog;
 import br.feevale.droidhospital.fragments.QtdAplicacoesDialog;
 import br.feevale.droidhospital.interfaces.OnDialogFinished;
-import br.feevale.droidhospital.pojos.Prescricao;
 
 public class NovaPrescricaoActivity extends FragmentActivity {
-
-<<<<<<< HEAD
+	
 	Integer idMedicamento;
-=======
->>>>>>> Web Services Sync Tasks
 	EditText edPrincipio;
 	EditText edReferencia;
 	EditText edLaboratorio;
@@ -44,10 +34,7 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 	TextView edHora_inicial;
 	TextView edQtd_aplicacoes;
 	TextView edIntervalo;
-	
-
 	int horaInicial, minutoInicial;
-	String horaMinInicial;
 	int qtdAplicacoes = 1, horaIntervalo = 1;
 	int minutoIntervalo = 0;
 	private int idAtendimento;
@@ -60,7 +47,6 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 
 			horaInicial = hora;
 			minutoInicial = minuto;
-			horaMinInicial = hora+":"+minuto;
 		}
 	};
 
@@ -126,8 +112,6 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 		horaInicial = c.get(Calendar.HOUR_OF_DAY);
 		minutoInicial = c.get(Calendar.MINUTE);
 
-		horaMinInicial = horaInicial+":"+minutoInicial;
-		
 		edHora_inicial.setText(String.valueOf(horaInicial) + ": "
 				+ String.valueOf(minutoInicial));
 
@@ -135,31 +119,6 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 
 		edIntervalo = (TextView) findViewById(R.id.intervalo_edit_text);
 
-	}
-<<<<<<< HEAD
-	/*
-=======
-<<<<<<< HEAD
-=======
-	
->>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
-	private void setUpPaciente(long id) {
-		TextView  pacientName = (TextView) findViewById(R.id.descricao_paciente_textView);
-		TextView  numLeito    = (TextView) findViewById(R.id.descricao_leito_textView);
-		pacientName.setText("");
-		numLeito.setText("01 a");		
-<<<<<<< HEAD
-	}*/	
-=======
-	}	
->>>>>>> Web Services Sync Tasks
->>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.nova_prescricao, menu);
-		return true;
 	}
 
 	public void listaMedicamentos(View v) {
@@ -173,7 +132,6 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 		HoraInicialDatePicker horainicialFragment = new HoraInicialDatePicker();
 		horainicialFragment.setCallback(horaInicialListener);
 
-<<<<<<< HEAD
 		horainicialFragment.show(getSupportFragmentManager(), "timePicker");
 	}
 
@@ -201,23 +159,13 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 					.show();
 			return;
 		}
-		prescricao.setId(medicamento.getIdMedicamento());
+		prescricao.setIdMedicamento(medicamento.getIdMedicamento());
 
-		prescricao.setHora_inicial(horaMinInicial);
+		prescricao.setHoraInicioAplicacoes(horaInicial);
 		prescricao.setMinutoInicioAplicacoes(minutoInicial);
 
 		prescricao.setHoraIntervaloAplicacoes(horaIntervalo);
 		prescricao.setMinutoIntervaloAplicacoes(minutoIntervalo);
-<<<<<<< HEAD
-		Toast.makeText(getApplicationContext(), "Paciente Joï¿½o adicionado", Toast.LENGTH_LONG).show();
-		finish();
-=======
-=======
-		Toast.makeText(getApplicationContext(), "Paciente João adicionado", Toast.LENGTH_LONG).show();
-		finish();
->>>>>>> Web Services Sync Tasks
->>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
-		
 		prescricao.setIdAtendimento(idAtendimento);
 
 		prescricao.setQuantidadeAplicacoes(qtdAplicacoes);

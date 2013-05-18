@@ -1,18 +1,16 @@
 package br.feevale.droidhospital;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
-<<<<<<< HEAD
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-=======
-import android.util.Log;
->>>>>>> Web Services Sync Tasks
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -20,59 +18,56 @@ import android.widget.Toast;
 import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.adapters.AnamneseAdapter;
 import br.feevale.droidhospital.db.DadosId;
-<<<<<<< HEAD
 import br.feevale.droidhospital.db.DadosUsuario;
-=======
->>>>>>> Web Services Sync Tasks
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.PacienteDescription;
+import br.feevale.droidhospital.NovaPrescricaoActivity;
 
 public class AnamneseActivity extends Activity {
 	public static String ID_PACIENTE = "id";
-<<<<<<< HEAD
 	public static String NOME_PACIENTE = "nome";
 	public static String LEITO_PACIENTE = "leito";
-	
-	
+
 	private long idPaciente;
 	private int idAtendimento;
 	private PacienteDescription dadosPaciente;
-	
+
 	AnamneseAdapter adapter;
 	ExpandableListView expandableList;
-<<<<<<< HEAD
-=======
-=======
-	long idPaciente;
-	PacienteDescription dadosPaciente;
->>>>>>> Web Services Sync Tasks
->>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.anamnese);
-		
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
-		
+
 		Intent intent = getIntent();
 		idPaciente = intent.getLongExtra(ListaQuartosActivity.ID_VALUE, 0);
-		
-		if( idPaciente == 0) {
-			Toast.makeText(getApplicationContext(), "Paciente not found! Plese Try Again", Toast.LENGTH_LONG).show();
+
+		if (idPaciente == 0) {
+			Toast.makeText(getApplicationContext(),
+					"Paciente not found! Plese Try Again", Toast.LENGTH_LONG)
+					.show();
 			finish();
 		}
-<<<<<<< HEAD
-		idAtendimento = intent.getIntExtra(ListaPacientesActivity.ID_ATENDIMENTO, 0);
-		
-		setUpDadosSocket();
-		
+		idAtendimento = intent.getIntExtra(
+				ListaPacientesActivity.ID_ATENDIMENTO, 0);
+
+		try {
+			setUpDadosSocket();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		expandableList = (ExpandableListView) findViewById(R.id.anamnese_expandablelistview);
-		
-		adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente );
+
+		adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente);
 		expandableList.setAdapter(adapter);
 	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -80,10 +75,6 @@ public class AnamneseActivity extends Activity {
 		
 		adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente );
 		expandableList.setAdapter(adapter);
-<<<<<<< HEAD
-=======
-=======
->>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
 		
 		setUpDadosSocket();
 		
@@ -91,7 +82,6 @@ public class AnamneseActivity extends Activity {
 		
 		AnamneseAdapter adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente);
 		expandableList.setAdapter(adapter);
->>>>>>> Web Services Sync Tasks
 	}
 	
 	public void setUpDadosSocket() {
@@ -121,8 +111,6 @@ public class AnamneseActivity extends Activity {
 			}
 
 		} catch (Exception e) {
-<<<<<<< HEAD
-=======
 			
 =======
 
@@ -142,7 +130,6 @@ public class AnamneseActivity extends Activity {
 
 		} catch (Exception e) {
 >>>>>>> Web Services Sync Tasks
->>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
 			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG, getString(R.string.not_connected));
 			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
 			finish();

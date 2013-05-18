@@ -25,6 +25,8 @@ public class DadosPaciente extends Transacao {
 		DadosId dadosId = (DadosId) dadosRecebidos;
 		idPaciente = dadosId.getId();
 	}
+
+
 	
 	@Override
 	public void executaTransacao() {
@@ -39,16 +41,13 @@ public class DadosPaciente extends Transacao {
 
 
 	public void createPacientDescription() {
+
 		pacienteDescription = new PacienteDescription();
 		
 		try {
 
 			StringBuilder sbQuery = new StringBuilder();
 			
-			sbQuery.append("select ");
-			sbQuery.append(" p.idpessoa, p.nome, a.data_entrada, a.fuma, a.peso, p.data_nascimento, l.quarto, l.leito, p.alergias ");
-			sbQuery.append(  "select ");
-			sbQuery.append( " p.idpessoa, p.nome, a.data_entrada, a.fuma, a.peso, p.data_nascimento, l.quarto, l.leito, p.alergias ");
 			sbQuery.append(  "select ");
 			sbQuery.append( " p.idpessoa, p.nome, a.data_entrada, a.fuma, a.peso, p.data_nascimento, l.quarto, l.leito, p.alergias ");
 			sbQuery.append(" from atendimentos a");
@@ -59,8 +58,9 @@ public class DadosPaciente extends Transacao {
 	        ResultSet resultSet = null;
 	        Conexao cnx = new Conexao();
 	        
+
 	        System.out.println(sbQuery.toString());
-	        System.out.println(sbQuery.toString());
+
 	        try {
 	        
 				Query q = new Query( cnx );
@@ -70,10 +70,12 @@ public class DadosPaciente extends Transacao {
 				resultSet = q.executeQuery();
 				
 				while( resultSet.next() ) {
+
 					pacienteDescription.setIdPaciente(idPaciente);
 					pacienteDescription.setNome(resultSet.getString("nome"));
 					pacienteDescription.setFumante(resultSet.getString("fuma"));
 					pacienteDescription.setPeso(resultSet.getString("peso"));
+
 					pacienteDescription.setQuarto(resultSet.getString("quarto"));
 					pacienteDescription.setLeito(resultSet.getString("leito"));
 					pacienteDescription.setAlergias(resultSet.getString("alergias"));
@@ -129,16 +131,19 @@ public class DadosPaciente extends Transacao {
 		} catch( Exception  e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
 	public Serializable getDadosResposta() {
+
 		System.out.println("returning Data ...");
-		System.out.println("returning Data ...");
+
 		return pacienteDescription;
 	}
 	
 	private void setUpAplicacoesFuturas() {
+
 		
 		ArrayList<Aplicacao> aplicacoesEfetuadas = getAplicacoes( true );
 		

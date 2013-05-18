@@ -38,8 +38,6 @@ public class ListaPacientes extends Transacao {
 							" and l.quarto = " + numeroQuarto);
 			//sbQuery.append( "  SELECT DISTINCT idLeito FROM Atendimentos WHERE data_saida IS NULL " );
 			//sbQuery.append( ");" );
-			//sbQuery.append( "  SELECT DISTINCT idLeito FROM Atendimentos WHERE data_saida IS NULL " );
-			//sbQuery.append( ");" );
 			
 	        ResultSet resultSet = null;
 	        Conexao cnx = new Conexao();

@@ -17,6 +17,7 @@ public class MedicamentoDescription extends Interpretador {
 	private String busca_medicamento;
 
 	public String getBusca_medicamento() {
+		System.out.println("buscaMedicamento: "+busca_medicamento);
 		return busca_medicamento;
 	}
 

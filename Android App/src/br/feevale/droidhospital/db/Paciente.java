@@ -9,6 +9,7 @@ public class Paciente extends Interpretador {
 	private String leitoPaciente;
 	private Integer quartoPaciente;
 	private Integer idatendimento;
+	
 	public Integer getIdPaciente() {
 		return idPaciente;
 	}
@@ -36,6 +37,7 @@ public class Paciente extends Interpretador {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 	public Integer getIdatendimento() {
 		return idatendimento;
 	}

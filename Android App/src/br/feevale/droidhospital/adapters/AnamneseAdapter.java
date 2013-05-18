@@ -2,6 +2,7 @@ package br.feevale.droidhospital.adapters;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -17,6 +18,7 @@ import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.feevale.droidhospital.R;
+<<<<<<< HEAD
 import br.feevale.droidhospital.db.Aplicacao;
 import br.feevale.droidhospital.db.PacienteDescription;
 import br.feevale.droidhospital.pojos.AnamneseParent;
@@ -246,6 +248,10 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	}
 
 	private View configureAnamnese() {
+<<<<<<< HEAD
+
+=======
+>>>>>>> Web Services Sync Tasks
 		View layout = inflater.inflate(R.layout.dados_gerais, null);
 
 		TextView idadeTextView = (TextView) layout.findViewById(R.id.dados_gerais_data_entrada);
@@ -280,11 +286,11 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 
 	@Override
 	public int getChildrenCount(int groupPosition) {
-		
 		switch (groupPosition) {
 		case 0:
 			return 1;
 		case 1:
+
 			return aplicacoesEfetuadas.size();
 
 		case 2:
@@ -302,6 +308,7 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 
 	@Override
 	public long getCombinedChildId(long groupId, long childId) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -313,4 +320,5 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	public void unregisterDataSetObserver(DataSetObserver observer) {
 
 	}
+<<<<<<< HEAD
 }
