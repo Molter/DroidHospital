@@ -22,6 +22,11 @@ public class EfetuaAplicacao extends Transacao {
 	@Override
 	public void executaTransacao() {
 		try {
+			
+			if(!podeEdefuarAplicacao()){
+				retorno.setResult(ConfirmaTransacao.RESULT_DENIED);
+				return;
+			}
 
 			StringBuilder sbQuery = new StringBuilder();
 			
@@ -60,6 +65,10 @@ public class EfetuaAplicacao extends Transacao {
 			e.printStackTrace();
 		}
 
+	}
+
+	private boolean podeEdefuarAplicacao() {
+		return false;
 	}
 
 	@Override

@@ -4,8 +4,9 @@ public class ConfirmaTransacao extends Interpretador {
 
 	private static final long serialVersionUID = -1768147733502128870L;
 	
-	public static int RESULT_OK = 1;
 	public static int RESULT_FAIL = 0;
+	public static int RESULT_OK = 1;
+	public static int RESULT_DENIED = 2;
 	
 	private int result;
 
