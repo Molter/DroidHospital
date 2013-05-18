@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.feevale.droidhospital"
+    android:versionCode="5"
+    android:versionName="Brave Bear" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="br.feevale.droidhospital.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="br.feevale.droidhospital.ListaQuartosActivity"
+            android:label="@string/rooms" >
+        </activity>
+        <activity
+            android:name="br.feevale.droidhospital.ListaPacientesActivity"
+            android:label="@string/rooms" >
+        </activity>
+        <activity
+            android:name="br.feevale.droidhospital.ListaMedicamentosActivity"
+            android:label="@string/rooms" >
+        </activity>
+        <activity
+            android:name="br.feevale.droidhospital.AnamneseActivity"
+            android:label="@string/rooms" >
+        </activity>
+        <activity
+            android:name="br.feevale.droidhospital.NovaPrescricaoActivity"
+            android:label="@string/title_activity_nova_prescricao" >
+        </activity>
+        <activity
+            android:name="br.feevale.droidhospital.AgendaActivity"
+            android:label="@string/title_activity_agenda" >
+        </activity>
+        
+        <activity
+            android:name="br.feevale.droidhospital.PacienteAplicacoesActivity"
+            android:label="@string/title_activity_paciente_aplicacoes" >
+        </activity>
+        
+        
+    </application>
+
+</manifest>
