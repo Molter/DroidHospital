@@ -30,7 +30,8 @@ public class AnamneseActivity extends Activity {
 	private int idAtendimento;
 	private PacienteDescription dadosPaciente;
 	
-	
+	AnamneseAdapter adapter;
+	ExpandableListView expandableList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,24 @@ public class AnamneseActivity extends Activity {
 		
 		setUpDadosSocket();
 		
-		ExpandableListView expandableList = (ExpandableListView) findViewById(R.id.anamnese_expandablelistview);
+		expandableList = (ExpandableListView) findViewById(R.id.anamnese_expandablelistview);
 		
-		AnamneseAdapter adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente );
+		adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente );
+		expandableList.setAdapter(adapter);
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setUpDadosSocket();
+		
+		adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente );
+		expandableList.setAdapter(adapter);
+		
+		setUpDadosSocket();
+		
+		ExpandableListView expandableList = (ExpandableListView)findViewById(R.id.anamnese_expandablelistview);
+		
+		AnamneseAdapter adapter = new AnamneseAdapter(getApplicationContext(), dadosPaciente);
 		expandableList.setAdapter(adapter);
 	}
 	
@@ -83,7 +99,6 @@ public class AnamneseActivity extends Activity {
 			}
 
 		} catch (Exception e) {
-			
 			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG, getString(R.string.not_connected));
 			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
 			finish();

@@ -3,9 +3,11 @@ package br.feevale.droidhospital;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,7 +26,7 @@ import br.feevale.droidhospital.db.Interpretador;
 public class AgendaActivity extends Activity implements OnItemClickListener {
 
 	private ArrayList<Aplicacao> aplicacoes;
-	
+	int idEnfermeiro;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,11 +44,11 @@ public class AgendaActivity extends Activity implements OnItemClickListener {
 		
 		aplicacaoListView.setAdapter(pacienteAplicacoesAdapter);
 		
-		aplicacaoListView.setOnItemClickListener(this);
+		//aplicacaoListView.setOnItemClickListener(this);
 		
 		
-		
-	
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		idEnfermeiro = prefs.getInt(MainActivity.USER_ID_PREFERENCE, 0);
 			
 	}
 	
@@ -98,7 +100,7 @@ public class AgendaActivity extends Activity implements OnItemClickListener {
 			ImageView image = (ImageView)layout.findViewById(R.id.agenda_aplicacao_injection);
 			image.setVisibility(View.GONE);
 			
-			Toast.makeText(getApplicationContext(), getString(R.string.application_mande), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.application_made), Toast.LENGTH_LONG).show();
 			
 			aplicacoes.get(itemPosition).setAplicada(true);
 			
@@ -113,7 +115,8 @@ public class AgendaActivity extends Activity implements OnItemClickListener {
 		
  		try {
  			AplicacaoEfetuada interpretador = new AplicacaoEfetuada(String.valueOf(id));
-
+ 			interpretador.setIdEnfermeiro(idEnfermeiro);
+ 			
 			interpretador.setCdTransacao(Interpretador.ENVIA_APLICACAO);
 
 			EnviaTransacao enviador = new EnviaTransacao(interpretador);

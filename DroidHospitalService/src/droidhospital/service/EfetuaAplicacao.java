@@ -20,10 +20,17 @@ public class EfetuaAplicacao extends Transacao {
 	@Override
 	public void executaTransacao() {
 		try {
+			
+			if(!podeEdefuarAplicacao()){
+				retorno.setResult(ConfirmaTransacao.RESULT_DENIED);
+				return;
+			}
 
 			StringBuilder sbQuery = new StringBuilder();
 			
 			sbQuery.append("UPDATE aplicacoes SET hora_aplicado = now() ");
+			sbQuery.append(", idEnfermeiro = ");
+			sbQuery.append(aplicacaoEfetuada.getIdEnfermeiro());
 			sbQuery.append(" WHERE idaplicacao = ");
 			sbQuery.append(aplicacaoEfetuada.getId());
 			sbQuery.append(";");
@@ -56,6 +63,10 @@ public class EfetuaAplicacao extends Transacao {
 			e.printStackTrace();
 		}
 
+	}
+
+	private boolean podeEdefuarAplicacao() {
+		return false;
 	}
 
 	@Override

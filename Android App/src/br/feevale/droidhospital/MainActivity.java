@@ -92,6 +92,10 @@ public class MainActivity extends Activity {
 					.show();
 			e.printStackTrace();
 			// finish();
+			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG, getString(R.string.not_connected));
+			Toast.makeText(getApplicationContext(), getString(R.string.not_connected), Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+			//finish();
 		}
 
 		if (dadosUsuario.getIdUsuario() == null) {

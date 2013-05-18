@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,18 +27,21 @@ import br.feevale.droidhospital.db.DadosId;
 import br.feevale.droidhospital.db.DadosUsuario;
 import br.feevale.droidhospital.db.Interpretador;
 
-public class PacienteAplicacoesActivity extends Activity implements OnItemClickListener {
+public class PacienteAplicacoesActivity extends Activity{
 
 	private ArrayList<Aplicacao> aplicacoes;
 	
 	public static final String ID_VALUE = "id";
+	
+	int idEnfermeiro;
+	ListView aplicacaoListView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.paciente_aplicacoes);
 		
-		ListView aplicacaoListView = (ListView) findViewById(R.id.listaAplicacoes);
+		aplicacaoListView = (ListView) findViewById(R.id.listaAplicacoes);
 		
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
@@ -67,6 +69,9 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 		aplicacaoListView.setAdapter(pacienteAplicacoesAdapter);
 		
 		//aplicacaoListView.setOnItemClickListener(this);
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		idEnfermeiro = prefs.getInt(MainActivity.USER_ID_PREFERENCE, 0);
 			
 	}
 	
@@ -97,7 +102,6 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 		}
 	}
 
-	@Override
 	public void onItemClick(AdapterView<?> parentAdapter, View viewClicked, int itemPosition, long idItem) {
 		//Toast.makeText(getApplicationContext(), "item clicked", Toast.LENGTH_LONG).show();
 		
@@ -106,10 +110,10 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 			medicineDescription.setPaintFlags(medicineDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			medicineDescription.invalidate();
 			
-			ImageView image = (ImageView)viewClicked.findViewById(R.id.aplicacao_injection);
+			ImageView image = (ImageView)viewClicked.findViewById(R.id.descricao_aplicacao_injection);
 			image.setVisibility(View.GONE);
 			
-			Toast.makeText(getApplicationContext(), getString(R.string.application_mande), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), getString(R.string.application_made), Toast.LENGTH_LONG).show();
 			
 			aplicacoes.get(itemPosition).setAplicada(true);
 			
@@ -124,13 +128,13 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 		
  		try {
  			AplicacaoEfetuada interpretador = new AplicacaoEfetuada(String.valueOf(id));
-
+ 			interpretador.setIdEnfermeiro(idEnfermeiro);
+ 			
 			interpretador.setCdTransacao(Interpretador.ENVIA_APLICACAO);
 
 			EnviaTransacao enviador = new EnviaTransacao(interpretador);
 
 			try {
-
 				enviador.envia();
 				
 				retorno = (ConfirmaTransacao) enviador.recebe();
@@ -180,6 +184,10 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 			break;
 		}
 		return true;
+	}
+	
+	public Integer getIdEnfermeiro(){
+		return idEnfermeiro;
 	}
 
 }

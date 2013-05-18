@@ -43,6 +43,5 @@ public class Paciente extends Interpretador {
 	public void setIdatendimento(Integer idatendimento) {
 		this.idatendimento = idatendimento;
 	}
-	
 
 }

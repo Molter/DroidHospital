@@ -58,6 +58,6 @@
     <string name="data_demo">12/03/1990</string>
     <string name="medicamento">Medicamento</string>
     <string name="title_activity_agenda">Minha Agenda</string>
-    <string name="application_mande">Aplicação Efetuada com Sucesso</string>
+    <string name="application_made">Aplicação Efetuada com Sucesso</string>
 
 </resources>

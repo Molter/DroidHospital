@@ -197,7 +197,6 @@ public final class R {
         public static final int anamnese_expandablelistview=0x7f090007;
         public static final int anamnese_pacient_name=0x7f090006;
         public static final int anamnese_pacient_name_label=0x7f090005;
-        public static final int aplicacao_injection=0x7f090022;
         public static final int aplicacaoes_data=0x7f090008;
         public static final int aplicacaoes_horario=0x7f090009;
         public static final int aplicacoes_nome=0x7f09000a;
@@ -211,6 +210,7 @@ public final class R {
         public static final int dados_gerais_fumante=0x7f09000e;
         public static final int dados_gerais_idade_extenso=0x7f090014;
         public static final int dados_gerais_peso=0x7f090011;
+        public static final int descricao_aplicacao_injection=0x7f090022;
         public static final int descricao_data_textView=0x7f09001f;
         public static final int descricao_horario_textView=0x7f090020;
         public static final int descricao_leito_textView=0x7f09002e;
@@ -284,7 +284,7 @@ public final class R {
         public static final int allergies=0x7f060010;
         public static final int and=0x7f06002e;
         public static final int app_name=0x7f060000;
-        public static final int application_mande=0x7f060039;
+        public static final int application_made=0x7f060039;
         public static final int applications_made=0x7f06000a;
         public static final int applications_todo=0x7f06000b;
         public static final int bad_login=0x7f060024;

@@ -36,6 +36,8 @@ public class ListaPacientes extends Transacao {
 							" inner join pessoas p on a.idpaciente = p.idpessoa " +
 							" where data_saida is null" +
 							" and l.quarto = " + numeroQuarto);
+			//sbQuery.append( "  SELECT DISTINCT idLeito FROM Atendimentos WHERE data_saida IS NULL " );
+			//sbQuery.append( ");" );
 			
 	        ResultSet resultSet = null;
 	        Conexao cnx = new Conexao();

@@ -18,11 +18,11 @@ import br.feevale.droidhospital.db.ConfirmaTransacao;
 import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.Medicamento;
 import br.feevale.droidhospital.db.MedicamentoDescription;
-import br.feevale.droidhospital.db.Prescricao;
 import br.feevale.droidhospital.fragments.HoraInicialDatePicker;
 import br.feevale.droidhospital.fragments.IntervaloDialog;
 import br.feevale.droidhospital.fragments.QtdAplicacoesDialog;
 import br.feevale.droidhospital.interfaces.OnDialogFinished;
+import br.feevale.droidhospital.pojos.Prescricao;
 
 public class NovaPrescricaoActivity extends FragmentActivity {
 
@@ -38,6 +38,7 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 	
 
 	int horaInicial, minutoInicial;
+	String horaMinInicial;
 	int qtdAplicacoes = 1, horaIntervalo = 1;
 	int minutoIntervalo = 0;
 	private int idAtendimento;
@@ -50,6 +51,7 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 
 			horaInicial = hora;
 			minutoInicial = minuto;
+			horaMinInicial = hora+":"+minuto;
 		}
 	};
 
@@ -115,6 +117,8 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 		horaInicial = c.get(Calendar.HOUR_OF_DAY);
 		minutoInicial = c.get(Calendar.MINUTE);
 
+		horaMinInicial = horaInicial+":"+minutoInicial;
+		
 		edHora_inicial.setText(String.valueOf(horaInicial) + ": "
 				+ String.valueOf(minutoInicial));
 
@@ -123,6 +127,13 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 		edIntervalo = (TextView) findViewById(R.id.intervalo_edit_text);
 
 	}
+	/*
+	private void setUpPaciente(long id) {
+		TextView  pacientName = (TextView) findViewById(R.id.descricao_paciente_textView);
+		TextView  numLeito    = (TextView) findViewById(R.id.descricao_leito_textView);
+		pacientName.setText("");
+		numLeito.setText("01 a");		
+	}*/	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -169,13 +180,15 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 					.show();
 			return;
 		}
-		prescricao.setIdMedicamento(medicamento.getIdMedicamento());
+		prescricao.setId(medicamento.getIdMedicamento());
 
-		prescricao.setHoraInicioAplicacoes(horaInicial);
+		prescricao.setHora_inicial(horaMinInicial);
 		prescricao.setMinutoInicioAplicacoes(minutoInicial);
 
 		prescricao.setHoraIntervaloAplicacoes(horaIntervalo);
 		prescricao.setMinutoIntervaloAplicacoes(minutoIntervalo);
+		Toast.makeText(getApplicationContext(), "Paciente Jo�o adicionado", Toast.LENGTH_LONG).show();
+		finish();
 		
 		prescricao.setIdAtendimento(idAtendimento);
 
