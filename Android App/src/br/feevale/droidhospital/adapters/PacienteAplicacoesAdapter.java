@@ -30,6 +30,10 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 	long idEnfermeiro;
 	Context context;
 	ArrayList<Aplicacao> aplicacoes;
+	TextView dataAplicacaoTextView;
+	TextView medicamentoTextView;
+	TextView horaAplicacaoTextView;
+	ImageView injection;
 	
 	public PacienteAplicacoesAdapter (Context context, ArrayList<Aplicacao> aplicacoes) {
 		this.aplicacoes = aplicacoes;
@@ -59,10 +63,10 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 		
 		final Aplicacao aplicacao = aplicacoes.get(position);
 		
-		TextView dataAplicacaoTextView = (TextView)layout.findViewById(R.id.descricao_data_textView);
-		TextView medicamentoTextView   = (TextView)layout.findViewById(R.id.descricao_medicamento_textView);
-		TextView horaAplicacaoTextView = (TextView)layout.findViewById(R.id.descricao_horario_textView);
-		
+		dataAplicacaoTextView = (TextView) layout.findViewById(R.id.descricao_data_textView);
+		medicamentoTextView   = (TextView) layout.findViewById(R.id.descricao_medicamento_textView);
+		horaAplicacaoTextView = (TextView) layout.findViewById(R.id.descricao_horario_textView);
+		injection 			  = (ImageView) layout.findViewById(R.id.aplicacao_injection);
 
 		String myDate = DateFormat.getDateInstance().format(aplicacao.getHoraPrevisto());
 		dataAplicacaoTextView.setText(myDate);
@@ -84,7 +88,6 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 		
 		horaAplicacaoTextView.setText(horaString.toString());
 
-		ImageView injection = (ImageView) layout.findViewById(R.id.aplicacao_injection);
 
 		if(aplicacao.isAplicada()){
 			medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -107,16 +110,12 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 
 			public void onClick(View viewClicked) {
 				if(enviaAplicacao(aplicacao.getIdAplicacao())) {
-					View parent = (View) viewClicked.getParent();
+					medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+					medicamentoTextView.invalidate();
 					
-					TextView medicineDescription = (TextView) parent.findViewById(R.id.descricao_medicamento_textView);
-					medicineDescription.setPaintFlags(medicineDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-					medicineDescription.invalidate();
+					injection.setVisibility(View.GONE);
 					
-					ImageView image = (ImageView)viewClicked.findViewById(R.id.aplicacao_injection);
-					image.setVisibility(View.GONE);
-					
-					Toast.makeText(context, ((PacienteAplicacoesActivity) context).getString(R.string.application_mande), Toast.LENGTH_LONG).show();
+					Toast.makeText(context, context.getString(R.string.application_mande), Toast.LENGTH_LONG).show();
 					
 				}else {
 					Toast.makeText(context, ((PacienteAplicacoesActivity) context).getString(R.string.not_connected), Toast.LENGTH_LONG).show();

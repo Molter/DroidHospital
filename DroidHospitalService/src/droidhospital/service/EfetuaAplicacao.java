@@ -1,8 +1,6 @@
 package droidhospital.service;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
 
 import br.feevale.droidhospital.db.AplicacaoEfetuada;
 import br.feevale.droidhospital.db.ConfirmaTransacao;

@@ -3,6 +3,10 @@ package br.feevale.droidhospital.db;
 public class DadosUsuario extends Interpretador {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7993569717042590684L;
 	private String tipoUsuario;
 	private Integer idUsuario;
 	
