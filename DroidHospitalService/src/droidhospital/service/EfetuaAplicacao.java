@@ -1,6 +1,7 @@
 package droidhospital.service;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 
 import br.feevale.droidhospital.db.AplicacaoEfetuada;
 import br.feevale.droidhospital.db.ConfirmaTransacao;
@@ -19,12 +20,13 @@ public class EfetuaAplicacao extends Transacao {
 
 	@Override
 	public void executaTransacao() {
+		if(!podeEdefuarAplicacao()){
+			retorno.setResult(ConfirmaTransacao.RESULT_DENIED);
+			return;
+		}
+		
 		try {
 			
-			//if(!podeEdefuarAplicacao()){
-				//retorno.setResult(ConfirmaTransacao.RESULT_DENIED);
-				//return;
-			//}
 
 			StringBuilder sbQuery = new StringBuilder();
 			
@@ -66,7 +68,46 @@ public class EfetuaAplicacao extends Transacao {
 	}
 
 	private boolean podeEdefuarAplicacao() {
-		return false;
+		
+		boolean resultStatus = false;
+	try {
+			StringBuilder sbQuery = new StringBuilder();
+			
+			sbQuery.append(" select * from aplicacoes ");
+			sbQuery.append(" where idprescricao = (select idprescricao from aplicacoes where idaplicacao = " +String.valueOf(aplicacaoEfetuada.getId()) + ") ");
+			sbQuery.append(" and hora_aplicado is null ");
+			sbQuery.append(" and hora_previsto < (select hora_previsto from aplicacoes where idaplicacao = " +String.valueOf(aplicacaoEfetuada.getId()) + ") ");
+			sbQuery.append(" order by hora_previsto");
+
+
+
+
+	        Conexao cnx = new Conexao();
+	        
+	        System.out.println(sbQuery.toString());
+	        try {
+	        
+				Query q = new Query( cnx );
+				
+				q.setSQL( sbQuery.toString());
+				
+				ResultSet result = q.executeQuery();
+				
+				if(result.next()){
+					resultStatus = false;
+				}else{
+					resultStatus = true;
+				}
+				
+			} finally {
+				cnx.close();
+			}
+			
+		} catch( Exception  e) {
+			e.printStackTrace();
+		}
+		
+		return resultStatus;
 	}
 
 	@Override
