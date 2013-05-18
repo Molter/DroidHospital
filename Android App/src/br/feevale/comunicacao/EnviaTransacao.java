@@ -12,11 +12,7 @@ import br.feevale.util.Serializador;
 
 public class EnviaTransacao {
 	
-<<<<<<< HEAD
 	private String ipServidor = "192.168.122.1";
-=======
-	private String ipServidor = "192.168.0.112";
->>>>>>> Web Services Sync Tasks
 	private int nrPorta = 1444;
 	private Interpretador interpretador;
 	private Socket socket;

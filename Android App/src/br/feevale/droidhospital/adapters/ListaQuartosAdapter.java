@@ -8,12 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.R;
-<<<<<<< HEAD:Android App/src/br/feevale/droidhospital/adapters/ListaQuartosAdapter.java
-=======
-import br.feevale.droidhospital.db.Interpretador;
->>>>>>> Web Services Sync Tasks:Android App/src/br/feevale/droidhospital/adapters/ListaQuartosAdapter.java
 import br.feevale.droidhospital.db.Quarto;
 
 public class ListaQuartosAdapter extends BaseAdapter {

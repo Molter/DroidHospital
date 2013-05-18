@@ -174,7 +174,6 @@ public final class R {
         public static final int navigation_expand=0x7f020004;
     }
     public static final class id {
-<<<<<<< HEAD
         public static final int LinearLayout01=0x7f090044;
         public static final int LinearLayout2=0x7f090031;
         public static final int TextView01=0x7f090032;
@@ -254,68 +253,6 @@ public final class R {
         public static final int txt_forma=0x7f090029;
         public static final int txt_laboratorio=0x7f09002a;
         public static final int txt_principio=0x7f090026;
-=======
-        public static final int LinearLayout01=0x7f090036;
-        public static final int LinearLayout2=0x7f090023;
-        public static final int TextView01=0x7f090024;
-        public static final int TextView02=0x7f090033;
-        public static final int TextView03=0x7f090031;
-        public static final int TextView04=0x7f09002f;
-        public static final int TextView05=0x7f09002d;
-        public static final int TextView06=0x7f09002b;
-        public static final int TextView07=0x7f090029;
-        public static final int TextView15=0x7f090027;
-        public static final int action_settings=0x7f09003b;
-        public static final int amnese_expandable_group_name=0x7f090014;
-        public static final int anamnese_expandablelistview=0x7f090006;
-        public static final int anamnese_pacient_name=0x7f090005;
-        public static final int anamnese_pacient_name_label=0x7f090004;
-        public static final int aplicacaoes_data=0x7f090007;
-        public static final int aplicacoes_dosagem=0x7f090009;
-        public static final int aplicacoes_nome=0x7f090008;
-        public static final int btn_busca=0x7f090016;
-        public static final int button1=0x7f090035;
-        public static final int concentracao_edit_text=0x7f09002c;
-        public static final int confirm_buttom=0x7f090002;
-        public static final int dados_gerais_alergias=0x7f090012;
-        public static final int dados_gerais_data_entrada=0x7f09000a;
-        public static final int dados_gerais_data_entrada_label=0x7f09000b;
-        public static final int dados_gerais_fumante=0x7f09000d;
-        public static final int dados_gerais_idade_extenso=0x7f090013;
-        public static final int dados_gerais_peso=0x7f090010;
-        public static final int descricao_leito_textView=0x7f090020;
-        public static final int descricao_paciente_textView=0x7f090021;
-        public static final int edit_busca=0x7f090015;
-        public static final int hora_inicial_edit_text=0x7f090030;
-        public static final int intervalo_edit_text=0x7f090034;
-        public static final int laboratorio_edit_text=0x7f09002a;
-        public static final int leito_textView=0x7f09001e;
-        public static final int linearLayout1=0x7f09001d;
-        public static final int lista_medicamentos=0x7f090017;
-        public static final int login_edit_text=0x7f090000;
-        public static final int pacient_info=0x7f090003;
-        public static final int paciente_item_text_view=0x7f090037;
-        public static final int paciente_textView=0x7f09001f;
-        public static final int pacientes_list_view=0x7f090038;
-        public static final int password_edit_text=0x7f090001;
-        public static final int posologia_edit_text=0x7f09002e;
-        public static final int principio_edit_text=0x7f090025;
-        public static final int qtd_aplicacoes_edit_text=0x7f090032;
-        public static final int quarto_item_text_view=0x7f090039;
-        public static final int quartos_list_view=0x7f09003a;
-        public static final int referencia_edit_text=0x7f090028;
-        public static final int search_button=0x7f090026;
-        public static final int textView2=0x7f09000c;
-        public static final int textView5=0x7f09000e;
-        public static final int textView7=0x7f09000f;
-        public static final int textView9=0x7f090011;
-        public static final int titulo_textView=0x7f090022;
-        public static final int txt_concentracao=0x7f09001a;
-        public static final int txt_fantasia=0x7f090019;
-        public static final int txt_forma=0x7f09001b;
-        public static final int txt_laboratorio=0x7f09001c;
-        public static final int txt_principio=0x7f090018;
->>>>>>> Web Services Sync Tasks
     }
     public static final class layout {
         public static final int activity_agenda=0x7f030000;
@@ -341,7 +278,6 @@ public final class R {
         public static final int nova_prescricao=0x7f080001;
     }
     public static final class string {
-<<<<<<< HEAD
         public static final int action_agenda=0x7f060025;
         public static final int action_settings=0x7f060001;
         public static final int age=0x7f06000d;
@@ -365,42 +301,22 @@ public final class R {
         public static final int hour_lower=0x7f06002b;
         public static final int hours=0x7f060028;
         public static final int hours_lower=0x7f06002a;
-=======
-        public static final int action_settings=0x7f060001;
-        public static final int age=0x7f06000d;
-        public static final int allergies=0x7f060010;
-        public static final int app_name=0x7f060000;
-        public static final int applications_made=0x7f06000a;
-        public static final int applications_todo=0x7f06000b;
-        public static final int botao_incluir=0x7f060019;
-        public static final int concentracao=0x7f06001d;
-        public static final int date_of_entrance=0x7f06000c;
-        public static final int general_info=0x7f060009;
-        public static final int hello_world=0x7f060002;
-        public static final int hora_inicial=0x7f06001f;
->>>>>>> Web Services Sync Tasks
         public static final int intervalo=0x7f060021;
         public static final int laboratorio=0x7f06001c;
         public static final int leito=0x7f060016;
         public static final int login=0x7f060003;
         public static final int login_field=0x7f060004;
-<<<<<<< HEAD
         public static final int medicamento=0x7f060037;
         public static final int medice_required=0x7f06002f;
         public static final int minute_lower=0x7f06002d;
         public static final int minutes=0x7f060029;
         public static final int minutes_lower=0x7f06002c;
-=======
->>>>>>> Web Services Sync Tasks
         public static final int name=0x7f060008;
         public static final int nenhum_medicamento_encontrado=0x7f060023;
         public static final int no=0x7f060013;
         public static final int not_connected=0x7f060022;
         public static final int nova_prescricao=0x7f060014;
-<<<<<<< HEAD
         public static final int ok=0x7f060026;
-=======
->>>>>>> Web Services Sync Tasks
         public static final int paciente=0x7f060017;
         public static final int password=0x7f060005;
         public static final int posologia=0x7f06001e;
@@ -409,7 +325,6 @@ public final class R {
         public static final int referencia=0x7f06001b;
         public static final int room=0x7f060007;
         public static final int rooms=0x7f060006;
-<<<<<<< HEAD
         public static final int saved_sucessuful=0x7f060030;
         public static final int saved_wrong=0x7f060031;
         public static final int smoker=0x7f06000e;
@@ -417,10 +332,6 @@ public final class R {
         public static final int title_activity_nova_prescricao=0x7f060015;
         public static final int title_activity_paciente_aplicacoes=0x7f060032;
         public static final int titulo_aplicacao=0x7f060033;
-=======
-        public static final int smoker=0x7f06000e;
-        public static final int title_activity_nova_prescricao=0x7f060015;
->>>>>>> Web Services Sync Tasks
         public static final int titulo_prescricao=0x7f060018;
         public static final int weight=0x7f06000f;
         public static final int wheight_measure=0x7f060011;

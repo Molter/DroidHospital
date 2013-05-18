@@ -8,11 +8,7 @@ public class Paciente extends Interpretador {
 	private String nomePaciente;
 	private String leitoPaciente;
 	private Integer quartoPaciente;
-<<<<<<< HEAD
 	private Integer idatendimento;
-	
-=======
->>>>>>> Web Services Sync Tasks
 	public Integer getIdPaciente() {
 		return idPaciente;
 	}
@@ -40,18 +36,11 @@ public class Paciente extends Interpretador {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-<<<<<<< HEAD
 	public Integer getIdatendimento() {
 		return idatendimento;
 	}
 	public void setIdatendimento(Integer idatendimento) {
 		this.idatendimento = idatendimento;
 	}
-<<<<<<< HEAD
-=======
-=======
->>>>>>> Web Services Sync Tasks
-	
->>>>>>> c07e21a29df35e41a9f0124f4b8c9cf74f2281dc
 
 }
