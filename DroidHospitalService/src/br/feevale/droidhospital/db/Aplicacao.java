@@ -16,14 +16,12 @@ public class Aplicacao extends Interpretador {
 	private String nomeMedicamento;
 	private String principioAtivo;
 	
-<<<<<<< HEAD
 	private boolean aplicada = false;
 	
 	private String nomePaciente;
 	private String QuartoELeito;
 	
-=======
->>>>>>> Web Services Sync Tasks
+
 	public Integer getIdAplicacao() {
 		return idAplicacao;
 	}
@@ -91,8 +89,6 @@ public class Aplicacao extends Interpretador {
 	public void setPrincipioAtivo(String principioAtivo) {
 		this.principioAtivo = principioAtivo;
 	}
-<<<<<<< HEAD
-
 	public boolean isAplicada() {
 		return aplicada;
 	}
@@ -116,6 +112,4 @@ public class Aplicacao extends Interpretador {
 	public void setQuartoELeito(String quartoELeito) {
 		QuartoELeito = quartoELeito;
 	}
-=======
->>>>>>> Web Services Sync Tasks
 }
