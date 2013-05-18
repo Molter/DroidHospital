@@ -5,7 +5,7 @@
     android:versionName="Brave Bear" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="16"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
