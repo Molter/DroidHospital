@@ -62,10 +62,10 @@ public class Medicamento extends Interpretador {
 	public void setMedicamentoVazio() {
 		this.idMedicamento = -1;
 		this.principio = "nenhum medicamento localizado";
-		this.laboratorio = "";
-		this.fantasia = "";
-		this.concentracao = "";
-		this.formaFarmaceutica = "";
+		this.laboratorio = "Laboratório";
+		this.fantasia = "Medicamento";
+		this.concentracao = "0mg";
+		this.formaFarmaceutica = "cp";
 	}
 
 }

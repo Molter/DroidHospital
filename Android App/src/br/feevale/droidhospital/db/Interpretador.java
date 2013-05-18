@@ -12,15 +12,11 @@ public class Interpretador implements Serializable {
 	public final static int LISTA_MEDICAMENTOS = 4;
 	public final static int LISTA_PACIENTES = 5;
 	public final static int DADOS_PACIENTE = 6;
-<<<<<<< HEAD
 	public final static int BUSCA_MEDICAMENTO = 7;
 	public final static int CREATE_PRESCRICAO = 8;
 	public final static int LISTA_APLICACOES = 9;
 	public final static int ENVIA_APLICACAO = 10;
 	public final static int AGENDA_APLICACOES = 11;
-	
-=======
->>>>>>> Web Services Sync Tasks
 	
 	private Integer cdTransacao;
 	
