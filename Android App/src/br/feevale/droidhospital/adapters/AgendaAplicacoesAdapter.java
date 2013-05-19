@@ -123,19 +123,25 @@ public class AgendaAplicacoesAdapter extends BaseAdapter {
 
 			public void onClick(View viewClicked) {
 				if(enviaAplicacao(aplicacao.getIdAplicacao())) {
-					dataAplicacaoTextView.setPaintFlags(dataAplicacaoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-					medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-					horaAplicacaoTextView.setPaintFlags(horaAplicacaoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-					nomePacienteTextView.setPaintFlags(nomePacienteTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-					quartoTextView.setPaintFlags(quartoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-					
-					injection.setVisibility(View.GONE);
-					
-					//Toast.makeText(context, ((AgendaActivity)context).getString(R.string.application_made), Toast.LENGTH_LONG).show();
-					
-					aplicacao.setAplicada(true);
+					if (!aplicacao.isAplicada()){
+						dataAplicacaoTextView.setPaintFlags(dataAplicacaoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+						medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+						horaAplicacaoTextView.setPaintFlags(horaAplicacaoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+						nomePacienteTextView.setPaintFlags(nomePacienteTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+						quartoTextView.setPaintFlags(quartoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+						
+						injection.setVisibility(View.GONE);
+						Log.d(MainActivity.DROID_HOSPITAL_LOG_TAG, "onClick "+aplicacao.getIdAplicacao()+" "+medicamentoTextView.getText().toString());
+						
+						Toast.makeText(context, context.getString(R.string.application_mande), Toast.LENGTH_LONG).show();
+						
+						aplicacao.setAplicada(true);
+					} else {
+						Toast.makeText(context, context.getString(R.string.application_not_possible), Toast.LENGTH_LONG).show();
+					}
+
 				}else {
-					Toast.makeText(context, ((PacienteAplicacoesActivity) context).getString(R.string.not_connected), Toast.LENGTH_LONG).show();
+					Toast.makeText(context, context.getString(R.string.not_connected), Toast.LENGTH_LONG).show();
 				}
 
 			}

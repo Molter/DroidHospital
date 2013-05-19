@@ -113,23 +113,25 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 
 			public void onClick(View viewClicked) {
 				if(enviaAplicacao(aplicacao.getIdAplicacao())) {
-					medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-					medicamentoTextView.invalidate();
-					
-					injection.setVisibility(View.INVISIBLE);
-					
-					Toast.makeText(context, context.getString(R.string.application_mande), Toast.LENGTH_LONG).show();
-					
-					aplicacao.setAplicada(true);
+					if (!aplicacao.isAplicada()){
+						medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() & Paint.STRIKE_THRU_TEXT_FLAG);
+						
+						injection.setVisibility(View.GONE);
+						Log.d(MainActivity.DROID_HOSPITAL_LOG_TAG, "onClick "+aplicacao.getIdAplicacao()+" "+medicamentoTextView.getText().toString());
+						
+						Toast.makeText(context, context.getString(R.string.application_mande), Toast.LENGTH_LONG).show();
+						
+						aplicacao.setAplicada(true);
+					} else {
+						Toast.makeText(context, context.getString(R.string.application_not_possible), Toast.LENGTH_LONG).show();
+					}
 					
 				}else {
-					Toast.makeText(context, ((PacienteAplicacoesActivity) context).getString(R.string.not_connected), Toast.LENGTH_LONG).show();
+					Toast.makeText(context, context.getString(R.string.not_connected), Toast.LENGTH_LONG).show();
 				}
 
 			}
 		});
-		
-		aplicacao.getIdAplicacao();
 		
 		return layout;
 

@@ -39,7 +39,7 @@ public class GetAgendaAplicacoes extends Transacao {
 			sbQuery.append(" GROUP BY idaplicacao ");
 			sbQuery.append(" ORDER BY hora_previsto ");
 			
-			
+			System.out.println(sbQuery.toString());
 			
 	        ResultSet resultSet = null;
 	        Conexao cnx = new Conexao();

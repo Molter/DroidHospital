@@ -204,7 +204,7 @@ public class DadosPaciente extends Transacao {
 					if(dateAplicado != null) {
 						calendar.setTime(dateAplicado);
 						calendar.set(Calendar.HOUR_OF_DAY, resultSet.getInt("hora_aplicado"));
-						calendar.set(Calendar.MINUTE, resultSet.getInt("minuto_aplicado"));
+						//calendar.set(Calendar.MINUTE, resultSet.getInt("minuto_aplicado"));
 						aplicacao.setHoraAplicado(calendar.getTime());
 					}
 					
@@ -213,7 +213,7 @@ public class DadosPaciente extends Transacao {
 					if(dataPrevisto != null) {
 						calendar.setTime(dataPrevisto);
 						calendar.set(Calendar.HOUR_OF_DAY, resultSet.getInt("hora_previsto"));
-						calendar.set(Calendar.MINUTE, resultSet.getInt("minuto_previsto"));
+						//calendar.set(Calendar.MINUTE, resultSet.getInt("minuto_previsto"));
 						aplicacao.setHoraPrevisto(calendar.getTime());
 					}
 					
