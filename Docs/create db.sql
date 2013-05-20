@@ -18,70 +18,6 @@ USE `droid_hospital`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `aplicacoes`
---
-
-DROP TABLE IF EXISTS `aplicacoes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `aplicacoes` (
-  `idaplicacao` int(11) NOT NULL AUTO_INCREMENT,
-  `idEnfermeiro` int(11) DEFAULT NULL,
-  `idprescricao` int(11) NOT NULL,
-  `hora_previsto` datetime NOT NULL,
-  `hora_aplicado` datetime DEFAULT NULL,
-  PRIMARY KEY (`idaplicacao`),
-  KEY `idEnfermeiro` (`idEnfermeiro`),
-  KEY `idprescricao` (`idprescricao`),
-  CONSTRAINT `aplicacoes_ibfk_1` FOREIGN KEY (`idEnfermeiro`) REFERENCES `pessoas` (`idpessoa`),
-  CONSTRAINT `aplicacoes_ibfk_2` FOREIGN KEY (`idprescricao`) REFERENCES `prescricoes` (`idprescricao`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `aplicacoes`
---
-
-LOCK TABLES `aplicacoes` WRITE;
-/*!40000 ALTER TABLE `aplicacoes` DISABLE KEYS */;
-INSERT INTO `aplicacoes` VALUES (1,2,1,'2013-02-12 20:00:00',NULL);
-/*!40000 ALTER TABLE `aplicacoes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `atendimentos`
---
-
-DROP TABLE IF EXISTS `atendimentos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `atendimentos` (
-  `idatendimento` int(11) NOT NULL AUTO_INCREMENT,
-  `idleito` int(11) NOT NULL,
-  `idpaciente` int(11) NOT NULL,
-  `fuma` char(1) NOT NULL DEFAULT 'N',
-  `peso` decimal(10,0) NOT NULL DEFAULT '0',
-  `data_entrada` datetime NOT NULL,
-  `data_saida` datetime DEFAULT NULL,
-  PRIMARY KEY (`idatendimento`),
-  KEY `idleito` (`idleito`),
-  KEY `idpaciente` (`idpaciente`),
-  CONSTRAINT `atendimentos_ibfk_1` FOREIGN KEY (`idleito`) REFERENCES `leitos` (`idleito`),
-  CONSTRAINT `atendimentos_ibfk_2` FOREIGN KEY (`idpaciente`) REFERENCES `pessoas` (`idpessoa`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `atendimentos`
---
-
-LOCK TABLES `atendimentos` WRITE;
-/*!40000 ALTER TABLE `atendimentos` DISABLE KEYS */;
-INSERT INTO `atendimentos` VALUES (1,1,3,'S',100,'2013-05-01 09:20:58',NULL),(2,2,2,'S',90,'2013-05-01 09:20:58',NULL),(3,3,3,'N',87,'2013-05-01 09:20:58',NULL),(4,4,4,'S',42,'2013-05-01 09:20:58',NULL),(5,5,5,'N',88,'2013-05-01 09:20:58',NULL),(6,6,6,'N',69,'2013-05-01 09:20:58',NULL),(7,7,7,'N',37,'2013-05-01 09:20:58',NULL);
-/*!40000 ALTER TABLE `atendimentos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `leitos`
 --
 
@@ -155,7 +91,7 @@ CREATE TABLE `pessoas` (
   `especialidade` varchar(40) DEFAULT NULL,
   `data_nascimento` date NOT NULL,
   `tipo_sanguineo` char(2) NOT NULL,
-  `usuario` varchar(200) NOT NULL,adapter
+  `usuario` varchar(200) NOT NULL,
   `senha` varchar(32) NOT NULL,
   `alergias` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`idpessoa`)
@@ -170,6 +106,70 @@ LOCK TABLES `pessoas` WRITE;
 /*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
 INSERT INTO `pessoas` VALUES (1,'Gabriel','01243444029','aff','12','Sapiranga','Rs','Brasil','0','M',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(2,'Jose','12345679','aff','12','Sapiranga','Rs','Brasil','0','E',NULL,'1990-03-12','a','molter','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(3,'Pedro','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(4,'Carlos','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(5,'Thomas','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(6,'Pafuncio','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(7,'Beltrano','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(8,'Ciclano','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol'),(9,'Jose joao','12345679','aff','12','Sapiranga','Rs','Brasil','0','P',NULL,'1990-03-12','a','edvar','edvar','Arroz, Leite, Lactose, Mosquito, Paracetalmol');
 /*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `aplicacoes`
+--
+
+DROP TABLE IF EXISTS `aplicacoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `aplicacoes` (
+  `idaplicacao` int(11) NOT NULL AUTO_INCREMENT,
+  `idEnfermeiro` int(11) DEFAULT NULL,
+  `idprescricao` int(11) NOT NULL,
+  `hora_previsto` datetime NOT NULL,
+  `hora_aplicado` datetime DEFAULT NULL,
+  PRIMARY KEY (`idaplicacao`),
+  KEY `idEnfermeiro` (`idEnfermeiro`),
+  KEY `idprescricao` (`idprescricao`),
+  CONSTRAINT `aplicacoes_ibfk_1` FOREIGN KEY (`idEnfermeiro`) REFERENCES `pessoas` (`idpessoa`),
+  CONSTRAINT `aplicacoes_ibfk_2` FOREIGN KEY (`idprescricao`) REFERENCES `prescricoes` (`idprescricao`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aplicacoes`
+--
+
+LOCK TABLES `aplicacoes` WRITE;
+/*!40000 ALTER TABLE `aplicacoes` DISABLE KEYS */;
+INSERT INTO `aplicacoes` VALUES (1,2,1,'2013-02-12 20:00:00',NULL);
+/*!40000 ALTER TABLE `aplicacoes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `atendimentos`
+--
+
+DROP TABLE IF EXISTS `atendimentos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `atendimentos` (
+  `idatendimento` int(11) NOT NULL AUTO_INCREMENT,
+  `idleito` int(11) NOT NULL,
+  `idpaciente` int(11) NOT NULL,
+  `fuma` char(1) NOT NULL DEFAULT 'N',
+  `peso` decimal(10,0) NOT NULL DEFAULT '0',
+  `data_entrada` datetime NOT NULL,
+  `data_saida` datetime DEFAULT NULL,
+  PRIMARY KEY (`idatendimento`),
+  KEY `idleito` (`idleito`),
+  KEY `idpaciente` (`idpaciente`),
+  CONSTRAINT `atendimentos_ibfk_1` FOREIGN KEY (`idleito`) REFERENCES `leitos` (`idleito`),
+  CONSTRAINT `atendimentos_ibfk_2` FOREIGN KEY (`idpaciente`) REFERENCES `pessoas` (`idpessoa`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `atendimentos`
+--
+
+LOCK TABLES `atendimentos` WRITE;
+/*!40000 ALTER TABLE `atendimentos` DISABLE KEYS */;
+INSERT INTO `atendimentos` VALUES (1,1,3,'S',100,'2013-05-01 09:20:58',NULL),(2,2,2,'S',90,'2013-05-01 09:20:58',NULL),(3,3,3,'N',87,'2013-05-01 09:20:58',NULL),(4,4,4,'S',42,'2013-05-01 09:20:58',NULL),(5,5,5,'N',88,'2013-05-01 09:20:58',NULL),(6,6,6,'N',69,'2013-05-01 09:20:58',NULL),(7,7,7,'N',37,'2013-05-01 09:20:58',NULL);
+/*!40000 ALTER TABLE `atendimentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

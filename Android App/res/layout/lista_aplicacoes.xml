@@ -45,7 +45,7 @@
         android:textColor="@color/Green" />
 
     <ImageView
-        android:id="@+id/aplicacao_injection"
+        android:id="@+id/descricao_aplicacao_injection"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/injection"

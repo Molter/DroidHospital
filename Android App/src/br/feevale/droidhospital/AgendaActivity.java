@@ -40,13 +40,17 @@ public class AgendaActivity extends Activity implements OnItemClickListener {
 		StrictMode.setThreadPolicy(policy);
 
 		setUpDadosSocket();
+		
+		for (int i = 0; i < aplicacoes.size(); i++) {
+			Log.d(MainActivity.DROID_HOSPITAL_LOG_TAG, "idAplicacao: "+aplicacoes.get(i).getIdAplicacao());
+		}
 
 		AgendaAplicacoesAdapter pacienteAplicacoesAdapter = new AgendaAplicacoesAdapter(
 				getApplicationContext(), aplicacoes);
 
 		aplicacaoListView.setAdapter(pacienteAplicacoesAdapter);
 
-		aplicacaoListView.setOnItemClickListener(this);
+		//aplicacaoListView.setOnItemClickListener(this);
 
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getApplicationContext());

@@ -3,7 +3,6 @@ package br.feevale.droidhospital.db;
 import java.io.Serializable;
 
 public class Interpretador implements Serializable {
-	
 	private static final long serialVersionUID = -6029962071947699788L;
 
 	public final static int VALIDA_LOGIN = 1;
@@ -17,7 +16,6 @@ public class Interpretador implements Serializable {
 	public final static int LISTA_APLICACOES = 9;
 	public final static int ENVIA_APLICACAO = 10;
 	public final static int AGENDA_APLICACOES = 11;
-	
 	private Integer cdTransacao;
 	
 	public void setCdTransacao(Integer cdTransacao) {

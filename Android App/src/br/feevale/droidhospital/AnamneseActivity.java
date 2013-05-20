@@ -97,7 +97,7 @@ public class AnamneseActivity extends Activity {
 		Interpretador interpretador = new DadosId(String.valueOf(idPaciente));
 		interpretador.setCdTransacao(Interpretador.DADOS_PACIENTE);
 		EnviaTransacao enviador = new EnviaTransacao(interpretador);
-		
+
 		try {
 			enviador.envia();
 			dadosPaciente = (PacienteDescription) enviador.recebe();
@@ -125,7 +125,7 @@ public class AnamneseActivity extends Activity {
 	}
 
 	public void novaPrescricao(View v) {
-		
+
 		Intent novaPrecricaoIntent = new Intent(getApplicationContext(), NovaPrescricaoActivity.class);
 		novaPrecricaoIntent.putExtra(ID_PACIENTE, idPaciente);
 		novaPrecricaoIntent.putExtra(NOME_PACIENTE, dadosPaciente.getNome());

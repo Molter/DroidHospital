@@ -6,8 +6,10 @@ import java.util.Calendar;
 import java.util.Formatter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +29,7 @@ import br.feevale.droidhospital.db.Interpretador;
 
 public class PacienteAplicacoesAdapter extends BaseAdapter {
 
-	long idEnfermeiro;
+	Integer idEnfermeiro;
 	Context context;
 	ArrayList<Aplicacao> aplicacoes;
 	TextView dataAplicacaoTextView;
@@ -66,7 +68,7 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 		dataAplicacaoTextView = (TextView) layout.findViewById(R.id.descricao_data_textView);
 		medicamentoTextView   = (TextView) layout.findViewById(R.id.descricao_medicamento_textView);
 		horaAplicacaoTextView = (TextView) layout.findViewById(R.id.descricao_horario_textView);
-		injection 			  = (ImageView) layout.findViewById(R.id.aplicacao_injection);
+		injection 			  = (ImageView) layout.findViewById(R.id.descricao_aplicacao_injection);
 
 		String myDate = DateFormat.getDateInstance().format(aplicacao.getHoraPrevisto());
 		dataAplicacaoTextView.setText(myDate);
@@ -92,7 +94,6 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 		if(aplicacao.isAplicada()){
 			medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			
-			injection = (ImageView)layout.findViewById(R.id.aplicacao_injection);
 			injection.setVisibility(View.GONE);
 		}
 		
@@ -105,26 +106,32 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
 			layout.setBackgroundColor(Color.WHITE);
 		}
 		
-		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		idEnfermeiro = prefs.getInt(MainActivity.USER_ID_PREFERENCE, 0);
+
 		injection.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View viewClicked) {
 				if(enviaAplicacao(aplicacao.getIdAplicacao())) {
-					medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-					medicamentoTextView.invalidate();
-					
-					injection.setVisibility(View.GONE);
-					
-					Toast.makeText(context, context.getString(R.string.application_mande), Toast.LENGTH_LONG).show();
+					if (!aplicacao.isAplicada()){
+						medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() & Paint.STRIKE_THRU_TEXT_FLAG);
+						
+						injection.setVisibility(View.GONE);
+						Log.d(MainActivity.DROID_HOSPITAL_LOG_TAG, "onClick "+aplicacao.getIdAplicacao()+" "+medicamentoTextView.getText().toString());
+						
+						Toast.makeText(context, context.getString(R.string.application_mande), Toast.LENGTH_LONG).show();
+						
+						aplicacao.setAplicada(true);
+					} else {
+						Toast.makeText(context, context.getString(R.string.application_not_possible), Toast.LENGTH_LONG).show();
+					}
 					
 				}else {
-					Toast.makeText(context, ((PacienteAplicacoesActivity) context).getString(R.string.not_connected), Toast.LENGTH_LONG).show();
+					Toast.makeText(context, context.getString(R.string.not_connected), Toast.LENGTH_LONG).show();
 				}
 
 			}
 		});
-		
-		aplicacao.getIdAplicacao();
 		
 		return layout;
 
@@ -137,6 +144,7 @@ public class PacienteAplicacoesAdapter extends BaseAdapter {
  		try {
  			AplicacaoEfetuada interpretador = new AplicacaoEfetuada(String.valueOf(id));
 
+ 			interpretador.setIdEnfermeiro(idEnfermeiro);
 			interpretador.setCdTransacao(Interpretador.ENVIA_APLICACAO);
 
 			EnviaTransacao enviador = new EnviaTransacao(interpretador);

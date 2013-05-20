@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
+
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -17,7 +18,6 @@ import br.feevale.droidhospital.R;
 import br.feevale.droidhospital.db.Aplicacao;
 import br.feevale.droidhospital.db.PacienteDescription;
 import br.feevale.droidhospital.pojos.AnamneseParent;
-import br.feevale.droidhospital.pojos.Aplicacoes;
 
 public class AnamneseAdapter implements ExpandableListAdapter {
 
@@ -26,23 +26,23 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	ArrayList<AnamneseParent> parents;
 	private ArrayList<Aplicacao> aplicacoesEfetuadas;
 	private ArrayList<Aplicacao> aplicacoesFuturas;
-	
+
 	LayoutInflater inflater;
 
 	private PacienteDescription pacientDescription;
 
 	public AnamneseAdapter(Context context, PacienteDescription pacientDescription) {
 		this.context = context;
-		
+
 		parents = new ArrayList<AnamneseParent>();
 		parents.add(new AnamneseParent(1, context.getString(R.string.general_info), R.layout.dados_gerais));
 		parents.add(new AnamneseParent(2, context.getString(R.string.applications_made), R.layout.dados_gerais));
 		parents.add(new AnamneseParent(3, context.getString(R.string.applications_todo), R.layout.dados_gerais));
-		
+
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		this.pacientDescription = pacientDescription;
-		
+
 		aplicacoesFuturas = pacientDescription.getAplicacoesFuturas();
 		aplicacoesEfetuadas = pacientDescription.getAplicacoesEfetuadas();
 	}
@@ -94,9 +94,9 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 
 	private View aplicacoesView(int childPosition, boolean futura) {
 		Aplicacao aplicacao;
-		
+
 		View layout = inflater.inflate(R.layout.aplicacoes, null);
-		
+
 		Date dataAplicacao;
 		if(futura){
 			aplicacao = aplicacoesFuturas.get( childPosition );
@@ -105,30 +105,30 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 			aplicacao = aplicacoesEfetuadas.get( childPosition );
 			dataAplicacao = aplicacao.getHoraAplicado();
 		}
-		
+
 		String myDateString = DateFormat.getDateInstance().format(dataAplicacao);
-		
+
 		TextView data = (TextView) layout.findViewById(R.id.aplicacaoes_data);
 		data.setText(myDateString);
-		
+
 		TextView horaTextView = (TextView) layout.findViewById(R.id.aplicacaoes_horario);
-		
+
 		StringBuilder horaString = new StringBuilder();
 		Calendar c = Calendar.getInstance();
 		c.setTime(dataAplicacao);
-		
+
 		Formatter hourFormatter = new Formatter();
 		//Toast.makeText(context, String.valueOf(c.get(Calendar.HOUR_OF_DAY)), Toast.LENGTH_LONG).show();
-		
+
 		hourFormatter.format("%02d", c.get(Calendar.HOUR_OF_DAY));
 		horaString.append(hourFormatter.toString());
-		
+
 		horaString.append(":");
-		
+
 		Formatter minuteFormatter = new Formatter();
 		minuteFormatter.format("%02d", c.get(Calendar.MINUTE));
 		horaString.append(minuteFormatter.toString());
-		
+
 		horaTextView.setText(horaString.toString());
 
 		TextView nome = (TextView) layout.findViewById(R.id.aplicacoes_nome);
@@ -140,7 +140,7 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		}else {
 			layout.setBackgroundColor(Color.WHITE);
 		}
-		
+
 		return layout;
 	}
 
@@ -157,7 +157,7 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		idadeExtensoTextView.setText(pacientDescription.getIdade());
 
 		TextView pesoTextView = (TextView) layout.findViewById(R.id.dados_gerais_peso);
-		
+
 		String pesoString = String.valueOf(pacientDescription.getPeso())+ context.getString(R.string.wheight_measure);
 		pesoTextView.setText(pesoString);
 
@@ -166,7 +166,7 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 
 		TextView fumanteTextView = (TextView) layout.findViewById(R.id.dados_gerais_fumante);
 		String isSmoker;
-		
+
 		if (pacientDescription.getFumante().equalsIgnoreCase("S")) {
 			isSmoker = context.getString(R.string.yes);
 		} else {
@@ -244,24 +244,24 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 	@Override
 	public void onGroupCollapsed(int groupPosition) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onGroupExpanded(int groupPosition) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void registerDataSetObserver(DataSetObserver observer) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void unregisterDataSetObserver(DataSetObserver observer) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

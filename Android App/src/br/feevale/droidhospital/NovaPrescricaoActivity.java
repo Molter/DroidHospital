@@ -166,7 +166,6 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 
 		prescricao.setHoraIntervaloAplicacoes(horaIntervalo);
 		prescricao.setMinutoIntervaloAplicacoes(minutoIntervalo);
-
 		prescricao.setIdAtendimento(idAtendimento);
 
 		prescricao.setQuantidadeAplicacoes(qtdAplicacoes);

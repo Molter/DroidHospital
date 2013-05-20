@@ -8,20 +8,36 @@ import java.util.Formatter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import br.feevale.comunicacao.EnviaTransacao;
+import br.feevale.droidhospital.MainActivity;
+import br.feevale.droidhospital.PacienteAplicacoesActivity;
 import br.feevale.droidhospital.R;
 import br.feevale.droidhospital.db.Aplicacao;
+import br.feevale.droidhospital.db.AplicacaoEfetuada;
+import br.feevale.droidhospital.db.ConfirmaTransacao;
+import br.feevale.droidhospital.db.Interpretador;
 
 public class AgendaAplicacoesAdapter extends BaseAdapter {
 
-	long idEnfermeiro;
+	Integer idEnfermeiro;
 	Context context;
+	Aplicacao aplicacao;
 	ArrayList<Aplicacao> aplicacoes;
+	TextView medicamentoTextView   ;
+	ImageView injection ;
+	TextView dataAplicacaoTextView;
+	TextView horaAplicacaoTextView;
+	TextView nomePacienteTextView;
+	TextView quartoTextView;
+
 	
 	public AgendaAplicacoesAdapter (Context context, ArrayList<Aplicacao> aplicacoes) {
 		this.aplicacoes = aplicacoes;
@@ -49,13 +65,14 @@ public class AgendaAplicacoesAdapter extends BaseAdapter {
 		LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View layout =  inflater.inflate(R.layout.item_agenda_aplicacoes, null);
 		
-		Aplicacao aplicacao = aplicacoes.get(position);
+		aplicacao = aplicacoes.get(position);
 		
-		TextView dataAplicacaoTextView = (TextView)layout.findViewById(R.id.agenda_data_textView);
-		TextView medicamentoTextView   = (TextView)layout.findViewById(R.id.agenda_medicamento_textView);
-		TextView horaAplicacaoTextView = (TextView)layout.findViewById(R.id.agenda_horario_textView);
-		TextView nomePacienteTextView = (TextView)layout.findViewById(R.id.agenda_paciente_textView);
-		TextView quartoTextView = (TextView)layout.findViewById(R.id.agenda_quarto_e_leito);
+		dataAplicacaoTextView = (TextView)layout.findViewById(R.id.agenda_data_textView);
+		medicamentoTextView   = (TextView)layout.findViewById(R.id.agenda_medicamento_textView);
+		horaAplicacaoTextView = (TextView)layout.findViewById(R.id.agenda_horario_textView);
+		nomePacienteTextView = (TextView)layout.findViewById(R.id.agenda_paciente_textView);
+		quartoTextView = (TextView)layout.findViewById(R.id.agenda_quarto_e_leito);
+		injection = (ImageView)layout.findViewById(R.id.agenda_aplicacao_injection);
 		
 		nomePacienteTextView.setText(aplicacao.getNomePaciente());
 		quartoTextView.setText(aplicacao.getQuartoELeito());
@@ -83,8 +100,7 @@ public class AgendaAplicacoesAdapter extends BaseAdapter {
 		if(aplicacao.isAplicada()){
 			medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			
-			ImageView image = (ImageView)layout.findViewById(R.id.agenda_aplicacao_injection);
-			image.setVisibility(View.GONE);
+			injection.setVisibility(View.GONE);
 			
 			
 			dataAplicacaoTextView.setPaintFlags(dataAplicacaoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -103,9 +119,73 @@ public class AgendaAplicacoesAdapter extends BaseAdapter {
 			layout.setBackgroundColor(Color.WHITE);
 		}
 		
+		injection.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View viewClicked) {
+				if(enviaAplicacao(aplicacao.getIdAplicacao())) {
+					if (!aplicacao.isAplicada()){
+						dataAplicacaoTextView.setPaintFlags(dataAplicacaoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+						medicamentoTextView.setPaintFlags(medicamentoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+						horaAplicacaoTextView.setPaintFlags(horaAplicacaoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+						nomePacienteTextView.setPaintFlags(nomePacienteTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+						quartoTextView.setPaintFlags(quartoTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+						
+						injection.setVisibility(View.GONE);
+						Log.d(MainActivity.DROID_HOSPITAL_LOG_TAG, "onClick "+aplicacao.getIdAplicacao()+" "+medicamentoTextView.getText().toString());
+						
+						Toast.makeText(context, context.getString(R.string.application_mande), Toast.LENGTH_LONG).show();
+						
+						aplicacao.setAplicada(true);
+					} else {
+						Toast.makeText(context, context.getString(R.string.application_not_possible), Toast.LENGTH_LONG).show();
+					}
+
+				}else {
+					Toast.makeText(context, context.getString(R.string.not_connected), Toast.LENGTH_LONG).show();
+				}
+
+			}
+		});
+		
 		return layout;
 
 	}
 	
+
+	
+	private boolean enviaAplicacao(long id) {
+		ConfirmaTransacao retorno = new ConfirmaTransacao();
+		
+ 		try {
+ 			AplicacaoEfetuada interpretador = new AplicacaoEfetuada(String.valueOf(id));
+ 			interpretador.setIdEnfermeiro(idEnfermeiro);
+ 			
+			interpretador.setCdTransacao(Interpretador.ENVIA_APLICACAO);
+
+			EnviaTransacao enviador = new EnviaTransacao(interpretador);
+
+			try {
+
+				enviador.envia();
+				
+				retorno = (ConfirmaTransacao) enviador.recebe();
+				
+
+			} finally {
+				enviador.fechaSocket();
+			}
+
+		} catch (Exception e) {
+			Log.e(MainActivity.DROID_HOSPITAL_LOG_TAG, e.getMessage());
+			Toast.makeText(context, ((PacienteAplicacoesActivity) context).getString(R.string.not_connected), Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
+ 		if(retorno.getResult() == ConfirmaTransacao.RESULT_OK) {
+ 			return true;
+ 		}else {
+ 			return false;
+ 		}
+	}
+
 
 }

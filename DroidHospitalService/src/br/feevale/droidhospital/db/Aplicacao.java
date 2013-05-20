@@ -21,7 +21,6 @@ public class Aplicacao extends Interpretador {
 	private String nomePaciente;
 	private String QuartoELeito;
 	
-
 	public Integer getIdAplicacao() {
 		return idAplicacao;
 	}

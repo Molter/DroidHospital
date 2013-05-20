@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import br.feevale.comunicacao.EnviaTransacao;
 import br.feevale.droidhospital.R;
-import br.feevale.droidhospital.db.Interpretador;
 import br.feevale.droidhospital.db.Quarto;
 
 public class ListaQuartosAdapter extends BaseAdapter {
