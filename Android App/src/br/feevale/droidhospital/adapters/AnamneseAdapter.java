@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import br.feevale.droidhospital.R;
 import br.feevale.droidhospital.db.Aplicacao;
 import br.feevale.droidhospital.db.PacienteDescription;
@@ -98,13 +99,21 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		View layout = inflater.inflate(R.layout.aplicacoes, null);
 
 		Date dataAplicacao;
+		Integer horaAplicado, minutoAplicado;
 		if(futura){
 			aplicacao = aplicacoesFuturas.get( childPosition );
+			
 			dataAplicacao = aplicacao.getHoraPrevisto();
+			horaAplicado = aplicacao.getAnamneseHoraPrevisto();
+			minutoAplicado = aplicacao.getAnamneseMinutoPrevisto();
+			
 		}else{
 			aplicacao = aplicacoesEfetuadas.get( childPosition );
 			dataAplicacao = aplicacao.getHoraAplicado();
+			horaAplicado = aplicacao.getAnamneseHoraAplicado();
+			minutoAplicado = aplicacao.getAnamneseMinutoAplicado();
 		}
+		//Toast.makeText(context, horaAplicado.toString(), Toast.LENGTH_LONG).show();
 
 		String myDateString = DateFormat.getDateInstance().format(dataAplicacao);
 
@@ -114,21 +123,19 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		TextView horaTextView = (TextView) layout.findViewById(R.id.aplicacaoes_horario);
 
 		StringBuilder horaString = new StringBuilder();
-		Calendar c = Calendar.getInstance();
-		c.setTime(dataAplicacao);
 
 		Formatter hourFormatter = new Formatter();
-		//Toast.makeText(context, String.valueOf(c.get(Calendar.HOUR_OF_DAY)), Toast.LENGTH_LONG).show();
-
-		hourFormatter.format("%02d", c.get(Calendar.HOUR_OF_DAY));
+		hourFormatter.format("%02d", horaAplicado);
 		horaString.append(hourFormatter.toString());
 
 		horaString.append(":");
 
 		Formatter minuteFormatter = new Formatter();
-		minuteFormatter.format("%02d", c.get(Calendar.MINUTE));
+		minuteFormatter.format("%02d", minutoAplicado);
 		horaString.append(minuteFormatter.toString());
 
+		
+		
 		horaTextView.setText(horaString.toString());
 
 		TextView nome = (TextView) layout.findViewById(R.id.aplicacoes_nome);

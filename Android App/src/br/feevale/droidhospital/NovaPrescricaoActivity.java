@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
@@ -74,6 +75,7 @@ public class NovaPrescricaoActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nova_prescricao);
+		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		Intent intent = getIntent();
 		long id = intent.getLongExtra(AnamneseActivity.ID_PACIENTE, 0);

@@ -12,6 +12,9 @@ public class Aplicacao extends Interpretador {
 	private Date horaPrevisto;
 	private Date horaAplicado;
 	
+	private Integer anamneseHoraPrevisto, anamneseMinutoPrevisto;
+	private Integer anamneseHoraAplicado, anamneseMinutoAplicado;
+	
 	private String concentracaoMedicamento;
 	private String nomeMedicamento;
 	private String principioAtivo;
@@ -110,5 +113,37 @@ public class Aplicacao extends Interpretador {
 
 	public void setQuartoELeito(String quartoELeito) {
 		QuartoELeito = quartoELeito;
+	}
+
+	public Integer getAnamneseHoraPrevisto() {
+		return anamneseHoraPrevisto;
+	}
+
+	public void setAnamneseHoraPrevisto(Integer anamneseHoraPrevisto) {
+		this.anamneseHoraPrevisto = anamneseHoraPrevisto;
+	}
+
+	public Integer getAnamneseHoraAplicado() {
+		return anamneseHoraAplicado;
+	}
+
+	public void setAnamneseHoraAplicado(Integer anamneseHoraAplico) {
+		this.anamneseHoraAplicado = anamneseHoraAplico;
+	}
+
+	public Integer getAnamneseMinutoPrevisto() {
+		return anamneseMinutoPrevisto;
+	}
+
+	public void setAnamneseMinutoPrevisto(Integer anamneseMinutoPrevisto) {
+		this.anamneseMinutoPrevisto = anamneseMinutoPrevisto;
+	}
+
+	public Integer getAnamneseMinutoAplicado() {
+		return anamneseMinutoAplicado;
+	}
+
+	public void setAnamneseMinutoAplicado(Integer anamneseMinutoAplicado) {
+		this.anamneseMinutoAplicado = anamneseMinutoAplicado;
 	}
 }

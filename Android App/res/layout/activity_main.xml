@@ -18,7 +18,7 @@
         android:ems="10"
         android:hint="@string/login_field"
         android:inputType="textEmailAddress" 
-        android:text="molter"
+        android:text="edvar"
         >
 
         <requestFocus />

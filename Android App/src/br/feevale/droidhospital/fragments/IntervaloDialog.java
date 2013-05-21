@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 import br.feevale.droidhospital.R;
 import br.feevale.droidhospital.interfaces.OnDialogFinished;
 
@@ -40,8 +41,15 @@ public class IntervaloDialog extends DialogFragment {
 	        
 	               .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 	                   public void onClick(DialogInterface dialog, int id) {
+	                	   TextView qtdAplicacoesTextEdit = (TextView) getActivity().findViewById(R.id.qtd_aplicacoes_picker);
+	                	   Integer qtdAplicacoes = Integer.valueOf(qtdAplicacoesTextEdit.getText().toString());
+	                	   
 	                	   TextView number = (TextView) getActivity().findViewById(R.id.intervalo_edit_text);
 	                	   
+	                	   if(mHourPicker.getValue() == 0 && mMinutePicker.getValue() == 0 && qtdAplicacoes > 1) {
+	                		   mMinutePicker.setValue(1);
+	                		   Toast.makeText(getActivity(),getString(R.string.minimum_one_minute), Toast.LENGTH_LONG).show();
+	                	   }
 	                	   
 	                	   //monta String ex. 1 hora e 25 minutos 
 	                	   StringBuilder text = new StringBuilder();

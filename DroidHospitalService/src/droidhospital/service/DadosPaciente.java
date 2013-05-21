@@ -34,6 +34,7 @@ public class DadosPaciente extends Transacao {
 		createPacientDescription();
 		System.out.println("setUpAplicacoesEfetuadas...");
 		setUpAplicacoesEfetuadas();
+		
 		System.out.println("setUpAplicacoesFuturas ...");
 		setUpAplicacoesFuturas();
 	}
@@ -143,18 +144,13 @@ public class DadosPaciente extends Transacao {
 	}
 	
 	private void setUpAplicacoesFuturas() {
-
-		
-		ArrayList<Aplicacao> aplicacoesEfetuadas = getAplicacoes( true );
-		
-		pacienteDescription.setAplicacoesEfetuadas(aplicacoesEfetuadas);
+		pacienteDescription.setAplicacoesFuturas(getAplicacoes( false ));
+		System.out.println("found :" + String.valueOf(pacienteDescription.getAplicacoesFuturas().size()));
 	}
 
 	private void setUpAplicacoesEfetuadas() {
-		
-		ArrayList<Aplicacao> aplicacoesFuturas = getAplicacoes( false );
-		
-		pacienteDescription.setAplicacoesFuturas(aplicacoesFuturas);
+		pacienteDescription.setAplicacoesEfetuadas(getAplicacoes( true ));
+		System.out.println("found :" + String.valueOf(pacienteDescription.getAplicacoesEfetuadas().size()));
 	}
 	
 	private ArrayList<Aplicacao> getAplicacoes(boolean efetuadas) {
@@ -166,17 +162,30 @@ public class DadosPaciente extends Transacao {
 			StringBuilder sbQuery = new StringBuilder();
 			
 			sbQuery.append("select ap.*, me.*, ap.hora_aplicado as date_aplicado, ap.hora_previsto as date_previsto ");
-			sbQuery.append(" , hour(hora_previsto) as hora_previsto, minute(hora_previsto) as minuto_previsto, hour(hora_aplicado) as hora_aplicado, minute(hora_aplicado) as minute_aplicado ");
+			sbQuery.append(" , hour(hora_previsto) as an_hora_previsto, minute(hora_previsto) as an_minuto_previsto, hour(hora_aplicado) as an_hora_aplicado, minute(hora_aplicado) as an_minuto_aplicado ");
 			sbQuery.append(" from atendimentos at, prescricoes pr, aplicacoes ap, medicamentos me ");
 			sbQuery.append(" where me.idmedicamento = pr.idmedicamento and pr.idatendimento = at.idatendimento and ap.idprescricao = pr.idprescricao and at.idpaciente = ");
+			
+			//id recebido 
 			sbQuery.append(idPaciente);
+			
 			sbQuery.append(" and ap.hora_aplicado is ");
 			
 			if( efetuadas ) {
 				sbQuery.append(" not ");
 			}
 			
-			sbQuery.append(" null order by ap.idaplicacao desc limit 5;");
+			sbQuery.append(" null ");
+			sbQuery.append(" order by ");
+			
+			
+			if( efetuadas ) {
+				sbQuery.append(" date_aplicado desc ");
+			}else{
+				sbQuery.append(" date_previsto asc ");
+			}
+			
+			sbQuery.append(" limit 5; ");
 			
 			System.out.println(sbQuery.toString());
 			
@@ -203,18 +212,24 @@ public class DadosPaciente extends Transacao {
 					Date dateAplicado = resultSet.getDate( "date_aplicado" );
 					if(dateAplicado != null) {
 						calendar.setTime(dateAplicado);
-						calendar.set(Calendar.HOUR_OF_DAY, resultSet.getInt("hora_aplicado"));
-						//calendar.set(Calendar.MINUTE, resultSet.getInt("minuto_aplicado"));
+						calendar.set(Calendar.HOUR_OF_DAY, resultSet.getInt("an_hora_aplicado"));
+						calendar.set(Calendar.MINUTE, resultSet.getInt("an_minuto_aplicado"));
 						aplicacao.setHoraAplicado(calendar.getTime());
+						
+						aplicacao.setAnamneseHoraAplicado(resultSet.getInt("an_hora_aplicado"));
+						aplicacao.setAnamneseMinutoAplicado(resultSet.getInt("an_minuto_aplicado"));
+						
 					}
 					
 					//hora previsto
 					Date dataPrevisto = resultSet.getDate( "date_previsto" );
 					if(dataPrevisto != null) {
-						calendar.setTime(dataPrevisto);
-						calendar.set(Calendar.HOUR_OF_DAY, resultSet.getInt("hora_previsto"));
-						//calendar.set(Calendar.MINUTE, resultSet.getInt("minuto_previsto"));
+						calendar.set(Calendar.HOUR_OF_DAY, resultSet.getInt("an_hora_previsto"));
+						calendar.set(Calendar.MINUTE, resultSet.getInt("an_minuto_previsto"));
 						aplicacao.setHoraPrevisto(calendar.getTime());
+						
+						aplicacao.setAnamneseHoraPrevisto(resultSet.getInt("an_hora_previsto"));
+						aplicacao.setAnamneseMinutoPrevisto(resultSet.getInt("an_minuto_previsto"));
 					}
 					
 					
