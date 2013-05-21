@@ -45,14 +45,14 @@
 
             <TextView
                 android:id="@+id/descricao_leito_textView"
-                android:layout_width="65dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/leito"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/descricao_paciente_textView"
-                android:layout_width="232dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/paciente"
                 android:textAppearance="?android:attr/textAppearanceMedium" />

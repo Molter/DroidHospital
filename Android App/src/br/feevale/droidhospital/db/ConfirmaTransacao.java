@@ -8,7 +8,7 @@ public class ConfirmaTransacao extends Interpretador {
 	public static final int RESULT_OK = 1;
 	public static final int RESULT_DENIED = 2;
 	
-	private int result;
+	private int result = RESULT_FAIL;
 
 	public int getResult() {
 		return result;

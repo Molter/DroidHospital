@@ -26,7 +26,9 @@ public class GetAplicacoes extends Transacao {
 
 			StringBuilder sbQuery = new StringBuilder();
 			
-			sbQuery.append("SELECT * FROM aplicacoes a ");
+			sbQuery.append("SELECT *  ");
+			sbQuery.append(" , HOUR(hora_previsto) as an_hora_previsto, MINUTE(hora_previsto) as an_minuto_previsto ");
+			sbQuery.append(" FROM aplicacoes a ");
 			sbQuery.append(" INNER JOIN prescricoes p on a.idprescricao = p.idprescricao ");
 			sbQuery.append(" INNER JOIN medicamentos m on p.idmedicamento = p.idmedicamento ");
 			sbQuery.append(" INNER JOIN atendimentos atd on p.idatendimento = atd.idatendimento  ");
@@ -62,6 +64,9 @@ public class GetAplicacoes extends Transacao {
 					aplicacao.setNomeMedicamento(resultSet.getString("farmaco"));
 					aplicacao.setPrincipioAtivo("medicamento_referencia");
 					aplicacao.setHoraPrevisto(resultSet.getDate("hora_previsto"));
+					
+					aplicacao.setAnamneseHoraPrevisto(resultSet.getInt("an_hora_previsto"));
+					aplicacao.setAnamneseMinutoPrevisto(resultSet.getInt("an_minuto_previsto"));
 					
 					aplicacoes.add(aplicacao);
 				}

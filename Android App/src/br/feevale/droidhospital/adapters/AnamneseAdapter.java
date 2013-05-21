@@ -110,6 +110,7 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		}else{
 			aplicacao = aplicacoesEfetuadas.get( childPosition );
 			dataAplicacao = aplicacao.getHoraAplicado();
+			
 			horaAplicado = aplicacao.getAnamneseHoraAplicado();
 			minutoAplicado = aplicacao.getAnamneseMinutoAplicado();
 		}
@@ -139,8 +140,13 @@ public class AnamneseAdapter implements ExpandableListAdapter {
 		horaTextView.setText(horaString.toString());
 
 		TextView nome = (TextView) layout.findViewById(R.id.aplicacoes_nome);
-		String nomeMedicamento = aplicacoesFuturas.get( childPosition ).getNomeMedicamento() + " " + aplicacoesFuturas.get( childPosition ).getConcentracaoMedicamento();
-		nome.setText(nomeMedicamento);
+		StringBuilder nomeMedicamento = new  StringBuilder();
+		
+		nomeMedicamento.append(aplicacao.getNomeMedicamento());
+		nomeMedicamento.append(" ");
+		nomeMedicamento.append(aplicacao.getConcentracaoMedicamento());
+		
+		nome.setText(nomeMedicamento.toString());
 
 		if(childPosition % 2 == 0) {
 			layout.setBackgroundColor(Color.GRAY);

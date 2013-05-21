@@ -58,10 +58,11 @@ public class PacienteAplicacoesActivity extends Activity implements OnItemClickL
 
 
 		TextView leitoPaciente = (TextView)findViewById(R.id.descricao_leito_textView);
-		leitoPaciente.setText(intent.getStringExtra(ListaPacientesActivity.NOME_PACIENTE));
-
+		leitoPaciente.setText(intent.getStringExtra(ListaPacientesActivity.LEITO_PACIENTE));
+		
+		
 		TextView nomePaciente = (TextView)findViewById(R.id.descricao_paciente_textView);
-		nomePaciente.setText(intent.getStringExtra(ListaPacientesActivity.LEITO_PACIENTE));
+		nomePaciente.setText(intent.getStringExtra(ListaPacientesActivity.NOME_PACIENTE));
 
 
 		setUpDadosSocket(id);
