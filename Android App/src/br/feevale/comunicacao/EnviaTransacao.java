@@ -12,7 +12,7 @@ import br.feevale.util.Serializador;
 
 public class EnviaTransacao {
 	
-	private String ipServidor = "192.168.0.112";
+	private String ipServidor = "10.40.5.46";
 	private int nrPorta = 1444;
 	private Interpretador interpretador;
 	private Socket socket;
