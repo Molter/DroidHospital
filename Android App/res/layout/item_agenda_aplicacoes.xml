@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="103B"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+    
             android:textColor="@color/Green" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:text="@string/name"
              android:textColor="@color/Green" 
              android:layout_marginLeft="15dp"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+         />
 
     </LinearLayout>
 
@@ -54,18 +54,18 @@
 
         <TextView
             android:id="@+id/agenda_data_textView"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/data_demo"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/Black" />
 
         <TextView
             android:id="@+id/agenda_horario_textView"
-            android:layout_width="65dp"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/hora_demo"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            
              android:textColor="@color/Green" 
             />
     </LinearLayout>
@@ -79,10 +79,10 @@
         <TextView
             android:id="@+id/agenda_medicamento_textView"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:layout_weight="0.89"
             android:text="@string/medicamento"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+          
             android:textColor="@color/Black" 
             
             />
