@@ -5,7 +5,8 @@
 + Instal Mysql database Docs/droid.sql
 + Run DroidHospitalService
 + Install Android APP
-++ the default ip adders is set to use emulador, to change check Android App\src\br\feevale\comunicacao\EnviaTransacao.java
+<br>
+the default ip adders is set to use emulador, to change check Android App\src\br\feevale\comunicacao\EnviaTransacao.java
 
 ##about
 Desenvolvido por
