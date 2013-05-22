@@ -2,14 +2,14 @@
 
 ##install
 + Download
-+ Instal Mysql database Docs/droid.sql
-+ Run DroidHospitalService
++ Instal Mysql database "Docs/droid.sql"
++ Run DroidHospitalService executing "Chamador.java"
 + Install Android APP
 <br>
-the default ip adders is set to use emulador, to change check Android App\src\br\feevale\comunicacao\EnviaTransacao.java
+The service server ip address must be set on "Android App\src\br\feevale\comunicacao\EnviaTransacao.java" in the variable "ipServidor".
 
 ##about
-Desenvolvido por
+Developed by
 + Gabriel Molter
 + Maicon Srey
 + Cássio Fernandes Maciel
